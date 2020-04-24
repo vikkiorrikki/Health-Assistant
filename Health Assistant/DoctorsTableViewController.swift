@@ -8,12 +8,26 @@
 
 import UIKit
 
+struct Doctor {
+    var id: UUID
+    var name: String
+    var appointments: [Appointment]
+}
+
+struct Appointment {
+    var name: String
+}
+
 class DoctorsTableViewController: UITableViewController {
 
-    var doctorsArray = ["Therapist", "Dantist"]
-    
+    var doctorsArray: [Doctor] = [
+        Doctor(id: UUID(), name: "Name", appointments: [Appointment(name: "today"), Appointment(name: "tomorrow")]),
+        Doctor(id: UUID(), name: "Name11", appointments: [Appointment(name: "hello"), Appointment(name: "goodbye")])
+    ]
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
     }
 
     // MARK: - Table view data source
@@ -27,7 +41,7 @@ class DoctorsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DoctorCell", for: indexPath)
 
-        cell.textLabel?.text = doctorsArray[indexPath.row]
+        cell.textLabel?.text = doctorsArray[indexPath.row].name
 
         return cell
     }
@@ -44,7 +58,12 @@ class DoctorsTableViewController: UITableViewController {
     //MARK: - TableView Delegate Methods
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "goToAppointments", sender: self)
+        let doctor = doctorsArray[indexPath.row]
+        
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AppointmentVC") as! AppointmentTableViewController
+        controller.doctor = doctor
+        
+        navigationController?.pushViewController(controller, animated: true)
     }
 
     //MARK: - Add New Doctor
@@ -57,7 +76,7 @@ class DoctorsTableViewController: UITableViewController {
         let action = UIAlertAction(title: "Add Doctor", style: .default) { (action) in
             //what will happen once the user clicks the Add Doctor button on UIAlert
             if let newTextOfDoctor = textField.text {
-                self.doctorsArray.append(newTextOfDoctor)
+                self.doctorsArray.append(Doctor(id: UUID(), name: newTextOfDoctor, appointments: []))
                 self.tableView.reloadData()
             } else {
                 //how to do when nothing happens by clicking on button

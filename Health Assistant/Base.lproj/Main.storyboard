@@ -80,7 +80,7 @@
         <!--Appointment Table View Controller-->
         <scene sceneID="22j-dK-g2u">
             <objects>
-                <tableViewController id="wBg-zz-Boy" customClass="AppointmentTableViewController" customModule="Health_Assistant" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="AppointmentVC" id="wBg-zz-Boy" customClass="AppointmentTableViewController" customModule="Health_Assistant" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="0sw-qP-f41">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -136,9 +136,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <segue destination="wBg-zz-Boy" kind="show" identifier="goToAppointments" id="TBH-qA-Bh9"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sNP-5Y-DxC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
