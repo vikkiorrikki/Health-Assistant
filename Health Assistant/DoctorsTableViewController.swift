@@ -27,7 +27,7 @@ class DoctorsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        tableView.tableFooterView = UIView()
     }
 
     // MARK: - Table view data source
@@ -60,7 +60,7 @@ class DoctorsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let doctor = doctorsArray[indexPath.row]
         
-        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AppointmentVC") as! AppointmentTableViewController
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EventVC") as! EventTableViewController
         controller.doctor = doctor
         
         navigationController?.pushViewController(controller, animated: true)
@@ -76,10 +76,10 @@ class DoctorsTableViewController: UITableViewController {
         let action = UIAlertAction(title: "Add Doctor", style: .default) { (action) in
             //what will happen once the user clicks the Add Doctor button on UIAlert
             if let newTextOfDoctor = textField.text {
+                if !newTextOfDoctor.isEmpty {
                 self.doctorsArray.append(Doctor(id: UUID(), name: newTextOfDoctor, appointments: []))
                 self.tableView.reloadData()
-            } else {
-                //how to do when nothing happens by clicking on button
+                }
             }
         }
         
@@ -87,6 +87,7 @@ class DoctorsTableViewController: UITableViewController {
             alertTextField.placeholder = "Create new Doctor"
             textField = alertTextField
         }
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }

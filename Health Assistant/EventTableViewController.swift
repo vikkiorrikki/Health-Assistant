@@ -8,13 +8,13 @@
 
 import UIKit
 
-class AppointmentTableViewController: UITableViewController {
+class EventTableViewController: UITableViewController {
 
     var doctor: Doctor?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        tableView.tableFooterView = UIView()
     }
 
     // MARK: - Table view data source
@@ -24,9 +24,10 @@ class AppointmentTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AppointmentCell", for: indexPath)
-
-        cell.textLabel?.text = doctor!.appointments[indexPath.row].name
+        let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell", for: indexPath) as! EventTableViewCell
+        cell.eventTitleCellLabel.text = doctor!.appointments[indexPath.row].name
+        cell.eventDateCellLabel.text = "23 September 2020"
+        cell.eventLocationCellLabel.text = "21 centure centure"
 
         return cell
     }

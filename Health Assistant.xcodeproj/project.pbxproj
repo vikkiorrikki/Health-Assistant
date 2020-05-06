@@ -7,16 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F5C99E7C246354D900191585 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C99E7B246354D900191585 /* EventTableViewCell.swift */; };
 		F5ECF7BB244B301E009A55ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ECF7BA244B301E009A55ED /* AppDelegate.swift */; };
 		F5ECF7BD244B301E009A55ED /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ECF7BC244B301E009A55ED /* SceneDelegate.swift */; };
 		F5ECF7C4244B301E009A55ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5ECF7C2244B301E009A55ED /* Main.storyboard */; };
 		F5ECF7C6244B3021009A55ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5ECF7C5244B3021009A55ED /* Assets.xcassets */; };
 		F5ECF7C9244B3021009A55ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5ECF7C7244B3021009A55ED /* LaunchScreen.storyboard */; };
 		F5ECF7D1244B32CB009A55ED /* DoctorsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ECF7D0244B32CB009A55ED /* DoctorsTableViewController.swift */; };
-		F5ECF7D3244B3FAB009A55ED /* AppointmentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ECF7D2244B3FAB009A55ED /* AppointmentTableViewController.swift */; };
+		F5ECF7D3244B3FAB009A55ED /* EventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ECF7D2244B3FAB009A55ED /* EventTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F5C99E7B246354D900191585 /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		F5ECF7B7244B301E009A55ED /* Health Assistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Health Assistant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5ECF7BA244B301E009A55ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F5ECF7BC244B301E009A55ED /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -25,7 +27,7 @@
 		F5ECF7C8244B3021009A55ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F5ECF7CA244B3021009A55ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F5ECF7D0244B32CB009A55ED /* DoctorsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsTableViewController.swift; sourceTree = "<group>"; };
-		F5ECF7D2244B3FAB009A55ED /* AppointmentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentTableViewController.swift; sourceTree = "<group>"; };
+		F5ECF7D2244B3FAB009A55ED /* EventTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,9 +62,10 @@
 			children = (
 				F5ECF7BA244B301E009A55ED /* AppDelegate.swift */,
 				F5ECF7BC244B301E009A55ED /* SceneDelegate.swift */,
+				F5C99E7B246354D900191585 /* EventTableViewCell.swift */,
 				F5ECF7C2244B301E009A55ED /* Main.storyboard */,
-				F5ECF7D2244B3FAB009A55ED /* AppointmentTableViewController.swift */,
 				F5ECF7D0244B32CB009A55ED /* DoctorsTableViewController.swift */,
+				F5ECF7D2244B3FAB009A55ED /* EventTableViewController.swift */,
 				F5ECF7C5244B3021009A55ED /* Assets.xcassets */,
 				F5ECF7C7244B3021009A55ED /* LaunchScreen.storyboard */,
 				F5ECF7CA244B3021009A55ED /* Info.plist */,
@@ -142,8 +145,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5ECF7BB244B301E009A55ED /* AppDelegate.swift in Sources */,
-				F5ECF7D3244B3FAB009A55ED /* AppointmentTableViewController.swift in Sources */,
+				F5ECF7D3244B3FAB009A55ED /* EventTableViewController.swift in Sources */,
 				F5ECF7D1244B32CB009A55ED /* DoctorsTableViewController.swift in Sources */,
+				F5C99E7C246354D900191585 /* EventTableViewCell.swift in Sources */,
 				F5ECF7BD244B301E009A55ED /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
