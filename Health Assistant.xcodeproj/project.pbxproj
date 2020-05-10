@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F5021CC824648E6900E5DD08 /* DoctorsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5021CC724648E6900E5DD08 /* DoctorsPresenter.swift */; };
+		F56334952465F11900D7C68A /* Doctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56334942465F11900D7C68A /* Doctor.swift */; };
+		F56334972465F1C900D7C68A /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56334962465F1C900D7C68A /* Event.swift */; };
+		F56334992465F2B100D7C68A /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56334982465F2B100D7C68A /* Location.swift */; };
+		F563349D2465FD3900D7C68A /* DoctorsPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563349C2465FD3900D7C68A /* DoctorsPresenterProtocol.swift */; };
+		F563349F2465FD6700D7C68A /* DoctorViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563349E2465FD6700D7C68A /* DoctorViewControllerProtocol.swift */; };
+		F56334A12465FDF700D7C68A /* EventPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56334A02465FDF700D7C68A /* EventPresenter.swift */; };
 		F5C99E7C246354D900191585 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C99E7B246354D900191585 /* EventTableViewCell.swift */; };
 		F5ECF7BB244B301E009A55ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ECF7BA244B301E009A55ED /* AppDelegate.swift */; };
 		F5ECF7BD244B301E009A55ED /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ECF7BC244B301E009A55ED /* SceneDelegate.swift */; };
@@ -18,6 +25,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F5021CC724648E6900E5DD08 /* DoctorsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsPresenter.swift; sourceTree = "<group>"; };
+		F56334942465F11900D7C68A /* Doctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doctor.swift; sourceTree = "<group>"; };
+		F56334962465F1C900D7C68A /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		F56334982465F2B100D7C68A /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		F563349C2465FD3900D7C68A /* DoctorsPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsPresenterProtocol.swift; sourceTree = "<group>"; };
+		F563349E2465FD6700D7C68A /* DoctorViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorViewControllerProtocol.swift; sourceTree = "<group>"; };
+		F56334A02465FDF700D7C68A /* EventPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPresenter.swift; sourceTree = "<group>"; };
 		F5C99E7B246354D900191585 /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		F5ECF7B7244B301E009A55ED /* Health Assistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Health Assistant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5ECF7BA244B301E009A55ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +55,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F56334922465EFE300D7C68A /* EventModule */ = {
+			isa = PBXGroup;
+			children = (
+				F5ECF7D2244B3FAB009A55ED /* EventTableViewController.swift */,
+				F56334A02465FDF700D7C68A /* EventPresenter.swift */,
+				F5C99E7B246354D900191585 /* EventTableViewCell.swift */,
+			);
+			path = EventModule;
+			sourceTree = "<group>";
+		};
+		F56334932465F07E00D7C68A /* DoctorsModule */ = {
+			isa = PBXGroup;
+			children = (
+				F5ECF7D0244B32CB009A55ED /* DoctorsTableViewController.swift */,
+				F5021CC724648E6900E5DD08 /* DoctorsPresenter.swift */,
+				F563349E2465FD6700D7C68A /* DoctorViewControllerProtocol.swift */,
+				F563349C2465FD3900D7C68A /* DoctorsPresenterProtocol.swift */,
+			);
+			path = DoctorsModule;
+			sourceTree = "<group>";
+		};
+		F563349B2465F38300D7C68A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F56334942465F11900D7C68A /* Doctor.swift */,
+				F56334962465F1C900D7C68A /* Event.swift */,
+				F56334982465F2B100D7C68A /* Location.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		F5ECF7AE244B301E009A55ED = {
 			isa = PBXGroup;
 			children = (
@@ -62,10 +107,10 @@
 			children = (
 				F5ECF7BA244B301E009A55ED /* AppDelegate.swift */,
 				F5ECF7BC244B301E009A55ED /* SceneDelegate.swift */,
-				F5C99E7B246354D900191585 /* EventTableViewCell.swift */,
+				F563349B2465F38300D7C68A /* Model */,
+				F56334932465F07E00D7C68A /* DoctorsModule */,
+				F56334922465EFE300D7C68A /* EventModule */,
 				F5ECF7C2244B301E009A55ED /* Main.storyboard */,
-				F5ECF7D0244B32CB009A55ED /* DoctorsTableViewController.swift */,
-				F5ECF7D2244B3FAB009A55ED /* EventTableViewController.swift */,
 				F5ECF7C5244B3021009A55ED /* Assets.xcassets */,
 				F5ECF7C7244B3021009A55ED /* LaunchScreen.storyboard */,
 				F5ECF7CA244B3021009A55ED /* Info.plist */,
@@ -144,11 +189,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F56334972465F1C900D7C68A /* Event.swift in Sources */,
 				F5ECF7BB244B301E009A55ED /* AppDelegate.swift in Sources */,
+				F5021CC824648E6900E5DD08 /* DoctorsPresenter.swift in Sources */,
+				F563349F2465FD6700D7C68A /* DoctorViewControllerProtocol.swift in Sources */,
 				F5ECF7D3244B3FAB009A55ED /* EventTableViewController.swift in Sources */,
+				F56334A12465FDF700D7C68A /* EventPresenter.swift in Sources */,
+				F56334992465F2B100D7C68A /* Location.swift in Sources */,
 				F5ECF7D1244B32CB009A55ED /* DoctorsTableViewController.swift in Sources */,
 				F5C99E7C246354D900191585 /* EventTableViewCell.swift in Sources */,
+				F563349D2465FD3900D7C68A /* DoctorsPresenterProtocol.swift in Sources */,
 				F5ECF7BD244B301E009A55ED /* SceneDelegate.swift in Sources */,
+				F56334952465F11900D7C68A /* Doctor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

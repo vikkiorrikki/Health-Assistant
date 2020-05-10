@@ -137,10 +137,10 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="eventDateCellLabel" destination="1u1-05-Lu5" id="X4O-B0-GJ0"/>
-                                    <outlet property="eventIconCellLabel" destination="RTz-hD-JeF" id="qz6-xh-9ja"/>
-                                    <outlet property="eventLocationCellLabel" destination="RYq-xb-y29" id="thS-2M-vUv"/>
-                                    <outlet property="eventTitleCellLabel" destination="G4k-sE-Wch" id="pXF-TG-Pye"/>
+                                    <outlet property="dateLabel" destination="1u1-05-Lu5" id="X4O-B0-GJ0"/>
+                                    <outlet property="icon" destination="RTz-hD-JeF" id="qz6-xh-9ja"/>
+                                    <outlet property="locationLabel" destination="RYq-xb-y29" id="thS-2M-vUv"/>
+                                    <outlet property="titleLabel" destination="G4k-sE-Wch" id="pXF-TG-Pye"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

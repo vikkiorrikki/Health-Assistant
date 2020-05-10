@@ -10,7 +10,7 @@ import UIKit
 
 class EventTableViewController: UITableViewController {
 
-    var doctor: Doctor?
+    let presenter = EventPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,14 +20,16 @@ class EventTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return doctor!.appointments.count
+        return presenter.doctor?.events.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let event = presenter.doctor?.events[indexPath.row] else {
+            return UITableViewCell()
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell", for: indexPath) as! EventTableViewCell
-        cell.eventTitleCellLabel.text = doctor!.appointments[indexPath.row].name
-        cell.eventDateCellLabel.text = "23 September 2020"
-        cell.eventLocationCellLabel.text = "21 centure centure"
+        cell.setupCell(with: event)
 
         return cell
     }
