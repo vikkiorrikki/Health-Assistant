@@ -14,6 +14,7 @@ class EventTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.delegate = self
         tableView.tableFooterView = UIView()
     }
 
@@ -34,4 +35,12 @@ class EventTableViewController: UITableViewController {
         return cell
     }
 
+    //MARK: - Add New Event
+    
+    @IBAction func addEventButtonPressed(_ sender: Any) {
+        let navBar = UINavigationController()
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddEventVC") as! AddEventViewController
+        navBar.pushViewController(controller, animated: true)
+        present(navBar, animated: true)
+    }
 }

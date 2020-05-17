@@ -12,6 +12,5 @@ protocol DoctorViewControllerProtocol: class {
     func showNewDoctorAlert()
     func reloadTableView()
     func deleteRow(index: IndexPath)
-    func createEventController() -> EventTableViewController
-    func pushViewControllerToNavigationController(with controller: UITableViewController)
+    func openEvents(of doctor: Doctor)
 }

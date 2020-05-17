@@ -9,6 +9,9 @@
 import Foundation
 
 class EventPresenter {
+    
+    weak var delegate: EventTableViewController?
+    
     var doctor: Doctor?
 
 }

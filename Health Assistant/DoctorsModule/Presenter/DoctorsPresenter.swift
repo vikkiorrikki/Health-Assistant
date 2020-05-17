@@ -12,10 +12,25 @@ class DoctorsPresenter: DoctorsPresenterProtocol {
     
     weak var delegate: DoctorViewControllerProtocol?
     
-    
-    var doctorsArray: [Doctor] = [
-        Doctor(id: UUID(), specialization: "Name", events: [Event(title: "today", status: .planned), Event(title: "tomorrow", status: .completed)]),
-        Doctor(id: UUID(), specialization: "Name11", events: [Event(title: "hello", status: .canceled), Event(title: "goodbye", status: .planned)])
+    var doctorsArray = [
+        Doctor(
+            id: UUID(),
+            specialization: "Name",
+            events:
+            [
+                Event(title: "today", doctorsName: "Name", startDate: Date(), endDate: Date(), location: "", status: .planned),
+                Event(title: "tomorrow", doctorsName: "Name", startDate: Date(), endDate: Date(), location: "", status: .completed)
+            ]
+        ),
+        Doctor(
+            id: UUID(),
+            specialization: "Name11",
+            events:
+            [
+                Event(title: "hello", doctorsName: "Name", startDate: Date(), endDate: Date(), location: "", status: .canceled),
+                Event(title: "goodbye", doctorsName: "Name", startDate: Date(), endDate: Date(), location: "", status: .planned)
+            ]
+        )
     ]
     
     func userDidPressAddButton() {
@@ -39,12 +54,8 @@ class DoctorsPresenter: DoctorsPresenterProtocol {
         delegate?.deleteRow(index: index)
     }
     
-    func userOpenedEvents(with index: IndexPath) {
+    func userDidSelectDoctorCell(with index: IndexPath) {
         let doctor = doctorsArray[index.row]
-        
-        if let controller = delegate?.createEventController() {
-            controller.presenter.doctor = doctor
-            delegate?.pushViewControllerToNavigationController(with: controller)
-        }
+        delegate?.openEvents(of: doctor) 
     }
 }

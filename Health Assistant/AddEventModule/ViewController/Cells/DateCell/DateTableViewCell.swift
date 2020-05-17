@@ -1,0 +1,40 @@
+//
+//  DateTableViewCell.swift
+//  Health Assistant
+//
+//  Created by Виктория Саклакова on 14.05.2020.
+//  Copyright © 2020 Viktoriia Saklakova. All rights reserved.
+//
+
+import UIKit
+
+class DateTableViewCell: UITableViewCell {
+
+    @IBOutlet weak var momentLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var datePickerView: UIView! {
+        didSet {
+            datePickerView.isHidden = true
+        }
+    }
+
+    @IBOutlet weak var datePicker: UIDatePicker!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        datePicker.addTarget(self, action: #selector(dateDidChange), for: .valueChanged)
+    }
+    
+    @objc func dateDidChange(_ sender: UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "d MMM y  HH:mm"
+        dateLabel.text = dateFormatter.string(from: sender.date)
+    }
+    
+    func updateCell(text: String, date: Date) {
+        momentLabel.text = text
+        let formatter4 = DateFormatter()
+        formatter4.dateFormat = "d MMM y  HH:mm"
+        dateLabel.text = "\(formatter4.string(from: date))"
+    }
+}

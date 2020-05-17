@@ -15,5 +15,5 @@ protocol DoctorsPresenterProtocol: class {
     func userDidPressAddButton()
     func userDidCreateDoctor(name: String?)
     func userDidDeleteCell(index: IndexPath)
-    func userOpenedEvents(with index: IndexPath)
+    func userDidSelectDoctorCell(with index: IndexPath)
 }

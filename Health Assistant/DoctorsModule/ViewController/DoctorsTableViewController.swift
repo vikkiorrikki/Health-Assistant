@@ -11,7 +11,7 @@ import UIKit
 class DoctorsTableViewController: UITableViewController, DoctorViewControllerProtocol {
 
     let presenter: DoctorsPresenterProtocol = DoctorsPresenter()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,18 +50,16 @@ class DoctorsTableViewController: UITableViewController, DoctorViewControllerPro
         tableView.deleteRows(at: [index], with: .fade)
     }
     
-    func createEventController() -> EventTableViewController {
-        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EventVC") as! EventTableViewController
-    }
-    
-    func pushViewControllerToNavigationController(with controller: UITableViewController) {
+    func openEvents(of doctor: Doctor) {
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EventVC") as! EventTableViewController
+        controller.presenter.doctor = doctor
+        
         navigationController?.pushViewController(controller, animated: true)
     }
     
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return presenter.doctorsArray.count
     }
 
@@ -92,7 +90,7 @@ class DoctorsTableViewController: UITableViewController, DoctorViewControllerPro
     //MARK: - TableView Delegate Methods
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter.userOpenedEvents(with: indexPath)
+        presenter.userDidSelectDoctorCell(with: indexPath)
     }
 
     //MARK: - Add New Doctor

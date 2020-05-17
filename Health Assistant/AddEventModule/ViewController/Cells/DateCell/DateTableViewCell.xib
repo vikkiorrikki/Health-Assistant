@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DateCell" rowHeight="206" id="KGk-i7-Jjw" customClass="DateTableViewCell" customModule="Health_Assistant" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="206"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="206"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="zTh-ue-EZY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="206"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="38z-Fi-7qw">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ovE-gT-q1a">
+                                        <rect key="frame" x="10" y="12.5" width="42" height="19"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rgj-GF-g98">
+                                        <rect key="frame" x="252" y="12.5" width="58" height="19"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="rgj-GF-g98" firstAttribute="top" secondItem="38z-Fi-7qw" secondAttribute="top" constant="12.5" id="EJj-30-q7L"/>
+                                    <constraint firstItem="ovE-gT-q1a" firstAttribute="top" secondItem="38z-Fi-7qw" secondAttribute="top" constant="12.5" id="GuK-QS-ACa"/>
+                                    <constraint firstItem="rgj-GF-g98" firstAttribute="leading" relation="lessThanOrEqual" secondItem="ovE-gT-q1a" secondAttribute="trailing" constant="200" id="JTG-DL-HZC"/>
+                                    <constraint firstAttribute="height" constant="44" id="SlP-Ld-jzX"/>
+                                    <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="rgj-GF-g98" secondAttribute="trailing" constant="10" id="ZBa-Ly-AXE"/>
+                                    <constraint firstItem="ovE-gT-q1a" firstAttribute="leading" secondItem="38z-Fi-7qw" secondAttribute="leading" constant="10" id="duL-LC-DAx"/>
+                                    <constraint firstItem="ovE-gT-q1a" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="rgj-GF-g98" secondAttribute="leading" constant="-200" id="nop-I3-MUJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="ovE-gT-q1a" secondAttribute="bottom" constant="12.5" id="svc-RX-fLQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="rgj-GF-g98" secondAttribute="bottom" constant="12.5" id="uPf-uW-3Yg"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4w3-FE-hbJ">
+                                <rect key="frame" x="0.0" y="44" width="320" height="162"/>
+                                <subviews>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="gc8-mP-lyl">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="162"/>
+                                        <locale key="locale" localeIdentifier="en_GB"/>
+                                    </datePicker>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="gc8-mP-lyl" firstAttribute="top" secondItem="4w3-FE-hbJ" secondAttribute="top" id="4aA-Z5-rpk"/>
+                                    <constraint firstAttribute="bottom" secondItem="gc8-mP-lyl" secondAttribute="bottom" id="Xfn-Px-Loy"/>
+                                    <constraint firstItem="gc8-mP-lyl" firstAttribute="leading" secondItem="4w3-FE-hbJ" secondAttribute="leading" id="YUd-HH-oZp"/>
+                                    <constraint firstAttribute="trailing" secondItem="gc8-mP-lyl" secondAttribute="trailing" id="xu8-0g-Y2Y"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="zTh-ue-EZY" secondAttribute="bottom" id="RAN-xE-ZQc"/>
+                    <constraint firstAttribute="trailing" secondItem="zTh-ue-EZY" secondAttribute="trailing" id="Ycw-ra-YFo"/>
+                    <constraint firstItem="zTh-ue-EZY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="eIn-oe-TaS"/>
+                    <constraint firstItem="zTh-ue-EZY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="mE8-xB-gaH"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="dateLabel" destination="rgj-GF-g98" id="FWS-L4-szI"/>
+                <outlet property="datePicker" destination="gc8-mP-lyl" id="zO9-nH-a3o"/>
+                <outlet property="datePickerView" destination="4w3-FE-hbJ" id="tQv-fs-8aL"/>
+                <outlet property="momentLabel" destination="ovE-gT-q1a" id="PKM-lh-TvW"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="184.82142857142856"/>
+        </tableViewCell>
+    </objects>
+</document>

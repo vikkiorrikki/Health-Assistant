@@ -28,8 +28,6 @@ class EventTableViewCell: UITableViewCell {
             icon.image = UIImage(systemName: "checkmark.circle")
         case .canceled:
             icon.image = UIImage(systemName: "multiply.circle")
-        default:
-            icon.image = UIImage()
         }
     }
 }

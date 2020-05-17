@@ -150,12 +150,88 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Events" id="dQy-eb-x2W">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Pc3-qw-w3l"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Pc3-qw-w3l">
+                            <connections>
+                                <action selector="addEventButtonPressed:" destination="wBg-zz-Boy" id="qsQ-ns-BkU"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mkQ-LO-TGs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2473.913043478261" y="401.78571428571428"/>
+        </scene>
+        <!--New Event-->
+        <scene sceneID="EhA-yJ-RZB">
+            <objects>
+                <viewController storyboardIdentifier="AddEventVC" id="fpF-yK-UdQ" customClass="AddEventViewController" customModule="Health_Assistant" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Kf2-t7-Rib">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Qpg-xi-zjC">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="separatorColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Qpg-xi-zjC" firstAttribute="bottom" secondItem="TJU-A4-bCR" secondAttribute="bottom" id="1Xm-hh-ARS"/>
+                            <constraint firstItem="Qpg-xi-zjC" firstAttribute="top" secondItem="TJU-A4-bCR" secondAttribute="top" id="QD2-ja-42q"/>
+                            <constraint firstItem="Qpg-xi-zjC" firstAttribute="leading" secondItem="TJU-A4-bCR" secondAttribute="leading" id="Qqg-Kn-oBQ"/>
+                            <constraint firstItem="Qpg-xi-zjC" firstAttribute="trailing" secondItem="TJU-A4-bCR" secondAttribute="trailing" id="n1i-7p-XAK"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="TJU-A4-bCR"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="New Event" id="30g-Ka-LnH">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="09S-ds-DBa">
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="fpF-yK-UdQ" id="Emo-jd-OXb"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="7ls-1t-oUu">
+                            <connections>
+                                <action selector="addEventButtonPressed:" destination="fpF-yK-UdQ" id="cxC-mi-Tfg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="Qpg-xi-zjC" id="y21-Xz-gzc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oq3-WZ-hK7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4255.072463768116" y="401.78571428571428"/>
+        </scene>
+        <!--List Table View Controller-->
+        <scene sceneID="uAe-l3-laB">
+            <objects>
+                <tableViewController storyboardIdentifier="ListVC" id="gcY-Lx-Hoe" customClass="ListTableViewController" customModule="Health_Assistant" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="FKl-11-myJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="wX0-a9-1Qx">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wX0-a9-1Qx" id="WF6-HR-UL0">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="gcY-Lx-Hoe" id="Zk7-eS-Z3r"/>
+                            <outlet property="delegate" destination="gcY-Lx-Hoe" id="8So-XT-VJE"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3yv-AG-m69" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5076.811594202899" y="401.78571428571428"/>
         </scene>
         <!--Doctors-->
         <scene sceneID="mlX-tZ-YWI">
@@ -267,6 +343,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="chf-xd-JLT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="749" y="402"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="iXP-26-ZrZ">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mfb-W2-9kx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <navigationController storyboardIdentifier="navBarNewEvent" automaticallyAdjustsScrollViewInsets="NO" id="Ldl-fm-dOj" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Eoi-MO-hUC">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="fpF-yK-UdQ" kind="relationship" relationship="rootViewController" id="hsz-v6-jmH"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="3344.9275362318845" y="401.78571428571428"/>
         </scene>
     </scenes>
     <resources>

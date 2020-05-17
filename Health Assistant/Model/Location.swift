@@ -13,3 +13,9 @@ struct Location {
     let street: String
     let houseNumber: Int
 }
+
+extension Location: ListTableViewControllerElement {
+    var elementName: String {
+        return "\(clinicName), \(street), \(houseNumber)"
+    }
+}

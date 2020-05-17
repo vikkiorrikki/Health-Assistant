@@ -6,21 +6,28 @@
 //  Copyright © 2020 Viktoriia Saklakova. All rights reserved.
 //
 
-import Foundation
+import  Foundation
 
 struct Event {
     let title: String
-//    let doctorsName: String? //can be several dostors for one title
+    let doctorsName: String //can be several dostors for one title
 //    let specialization: String?
 //    let note: String?
-//    let startDate: Date?
-//    let endDate: Date?
-//    let location: Location?
+    let startDate: Date?
+    let endDate: Date?
+    let location: String
     let status: EventStatus
 }
 
-enum EventStatus {
+enum EventStatus: String, CaseIterable {
     case planned
     case completed
     case canceled
 }
+
+extension EventStatus: ListTableViewControllerElement {
+    var elementName: String {
+        return self.rawValue.capitalized
+    }
+}
+
