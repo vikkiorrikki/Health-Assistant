@@ -8,56 +8,20 @@
 
 import UIKit
 
-enum SectionType: Int {
-    case main
-    case dates
-    case listPickers
-    case note
-}
-
-enum CellType {
-    case textField(String)
-    case date(text: String, date:Date)
-    case listPicker(text: String, value: String)
-    case textView
-}
-
-class AddEventViewController: UIViewController, AddEventViewControllerDelegate {
+class AddEventViewController: UIViewController {
     
     //MARK: - Properties
     
-    let data: [SectionType: [CellType]] =
-        [
-            .main: [.textField("Title"), .textField("Doctors Name")],
-            .dates:
-                [.date(text: "Starts", date: Date()),
-                .date(text: "Ends", date: Date())],
-            .listPickers:
-                [.listPicker(text: "Location", value: "Selected"),
-                 .listPicker(text: "Status", value: "Selected")],
-            .note: [.textView]
-        ]
+    let presenter = AddEventPresenter()
     
-    let locations = [Location(clinicName: "Saint Petersburg", street: "Nevskiy", houseNumber: 1),
-                    Location(clinicName: "Moscow", street: "Nevskiy", houseNumber: 2),
-                    Location(clinicName: "Abakan", street: "Nevskiy", houseNumber: 3)
-    ]
-    var statuses: [EventStatus] = [.planned, .completed, .canceled]
-    
-    var selectedLocation: Location?
-    var selectedStatus: EventStatus?
-
     @IBOutlet weak var tableView: UITableView!
     
     //MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.delegate = self
         setupTableView()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        tableView.reloadData()
     }
     
     //MARK: - Actions
@@ -81,15 +45,35 @@ class AddEventViewController: UIViewController, AddEventViewControllerDelegate {
         tableView.register(UINib(nibName: "ListTableViewCell", bundle: nil), forCellReuseIdentifier: "ListCell")
         tableView.register(UINib(nibName: "TextViewCell", bundle: nil), forCellReuseIdentifier: "TextViewCell")
     }
+    //MARK: - Input Methods
     
-    //MARK: - Delegate methods
-    
-    func userDidSelectElement(_ element: ListTableViewControllerElement) {
-        if let element = element as? Location {
-            selectedLocation = element
-        } else if let element = element as? EventStatus {
-            selectedStatus = element
+    func setupVisibleDatePicker(in indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? DateTableViewCell {
+            cell.datePickerView.isHidden = !cell.datePickerView.isHidden
+            tableView.beginUpdates()
+
+            tableView.endUpdates()
+            tableView.deselectRow(at: indexPath, animated: true)
         }
+    }
+    
+    func setupListPicker(in indexPath: IndexPath) {
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ListVC") as! ListTableViewController
+        controller.presenter.delegate = self
+        
+        if indexPath.row == 0 {
+            controller.presenter.arrayData = presenter.locations
+            controller.presenter.listCellIndexPath = indexPath
+        } else {
+            controller.presenter.arrayData = presenter.statuses
+            controller.presenter.listCellIndexPath = indexPath
+        }
+        
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func reloadRow(indexPath: IndexPath) {
+        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }
 
@@ -97,7 +81,7 @@ class AddEventViewController: UIViewController, AddEventViewControllerDelegate {
 
 extension AddEventViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return data.count
+        return presenter.data.count
     }
     
     //MARK: - numberOfRowsInSection
@@ -106,22 +90,23 @@ extension AddEventViewController: UITableViewDataSource {
         guard let section = SectionType.init(rawValue: section) else {
             return 0
         }
-        return data[section]?.count ?? 0
+        return presenter.data[section]?.count ?? 0
     }
     
     //MARK: - cellForRowAt
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let section = SectionType.init(rawValue: indexPath.section),
-            let cell = data[section]?[indexPath.row] else {
+            let cell = presenter.data[section]?[indexPath.row] else {
             return UITableViewCell()
         }
         
         switch cell {
         case .textField(let text):
             let cell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell", for: indexPath) as! TextFieldTableViewCell
-            cell.textField.placeholder = text
+            cell.updateCell(with: text)
             return cell
+            
         case .date(let text, let date):
             let cell = tableView.dequeueReusableCell(withIdentifier: "DateCell", for: indexPath) as! DateTableViewCell
             cell.updateCell(text: text, date: date)
@@ -132,11 +117,12 @@ extension AddEventViewController: UITableViewDataSource {
             cell.nameLabel.text = text
             cell.valueLabel.text = value
             if indexPath.row == 0 {
-                cell.valueLabel.text = selectedLocation?.clinicName ?? "Select"
+                cell.valueLabel.text = presenter.selectedLocation?.clinicName ?? "Select"
             } else {
-                cell.valueLabel.text = selectedStatus?.rawValue.capitalized ?? EventStatus.planned.rawValue.capitalized
+                cell.valueLabel.text = presenter.selectedStatus?.rawValue.capitalized ?? EventStatus.planned.rawValue.capitalized
             }
             return cell
+            
         case .textView:
             let cell = tableView.dequeueReusableCell(withIdentifier: "TextViewCell", for: indexPath) as! TextViewCell
             return cell
@@ -148,30 +134,6 @@ extension AddEventViewController: UITableViewDataSource {
 
 extension AddEventViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let section = SectionType.init(rawValue: indexPath.section)
-        
-        switch section {
-        case .dates:
-            if let cell = tableView.cellForRow(at: indexPath) as? DateTableViewCell {
-                cell.datePickerView.isHidden = !cell.datePickerView.isHidden
-                tableView.beginUpdates()
-
-                tableView.endUpdates()
-                tableView.deselectRow(at: indexPath, animated: true)
-            }
-        case .listPickers:
-            let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ListVC") as! ListTableViewController
-            controller.delegate = self
-            
-            if indexPath.row == 0 {
-                controller.arrayData = locations
-            } else {
-                controller.arrayData = statuses
-            }
-            navigationController?.pushViewController(controller, animated: true)
-        default:
-            return
-        }
+        presenter.userDidSelectCell(with: indexPath)
     }
 }

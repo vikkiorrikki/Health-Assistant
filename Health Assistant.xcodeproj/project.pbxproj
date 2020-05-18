@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		F5021CC824648E6900E5DD08 /* DoctorsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5021CC724648E6900E5DD08 /* DoctorsPresenter.swift */; };
 		F5093444246C977600E33163 /* AddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5093443246C977600E33163 /* AddEventViewController.swift */; };
-		F55DEF8B24705382003052C0 /* AddEventViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55DEF8A24705382003052C0 /* AddEventViewControllerDelegate.swift */; };
+		F55DEF8B24705382003052C0 /* AddEventPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55DEF8A24705382003052C0 /* AddEventPresenterProtocol.swift */; };
 		F55DEF8E2470565F003052C0 /* TextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55DEF8C2470565F003052C0 /* TextViewCell.swift */; };
 		F55DEF8F2470565F003052C0 /* TextViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F55DEF8D2470565F003052C0 /* TextViewCell.xib */; };
 		F56334952465F11900D7C68A /* Doctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56334942465F11900D7C68A /* Doctor.swift */; };
@@ -20,6 +20,8 @@
 		F56334A12465FDF700D7C68A /* EventPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56334A02465FDF700D7C68A /* EventPresenter.swift */; };
 		F5C99E7C246354D900191585 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C99E7B246354D900191585 /* EventTableViewCell.swift */; };
 		F5E914182471BCF8007CF322 /* AddEventPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E914172471BCF8007CF322 /* AddEventPresenter.swift */; };
+		F5E9141B2471BE69007CF322 /* SectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E9141A2471BE69007CF322 /* SectionType.swift */; };
+		F5E9141D2471BE77007CF322 /* CellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E9141C2471BE77007CF322 /* CellType.swift */; };
 		F5ECF7BB244B301E009A55ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ECF7BA244B301E009A55ED /* AppDelegate.swift */; };
 		F5ECF7BD244B301E009A55ED /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ECF7BC244B301E009A55ED /* SceneDelegate.swift */; };
 		F5ECF7C4244B301E009A55ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5ECF7C2244B301E009A55ED /* Main.storyboard */; };
@@ -27,6 +29,7 @@
 		F5ECF7C9244B3021009A55ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5ECF7C7244B3021009A55ED /* LaunchScreen.storyboard */; };
 		F5ECF7D1244B32CB009A55ED /* DoctorsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ECF7D0244B32CB009A55ED /* DoctorsTableViewController.swift */; };
 		F5ECF7D3244B3FAB009A55ED /* EventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ECF7D2244B3FAB009A55ED /* EventTableViewController.swift */; };
+		F5EDDB32247338950085B352 /* ListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EDDB31247338950085B352 /* ListPresenter.swift */; };
 		F5FDC099246DC316006484D4 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FDC097246DC316006484D4 /* TextFieldTableViewCell.swift */; };
 		F5FDC09A246DC316006484D4 /* TextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5FDC098246DC316006484D4 /* TextFieldTableViewCell.xib */; };
 		F5FDC09D246DC32D006484D4 /* DateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FDC09B246DC32D006484D4 /* DateTableViewCell.swift */; };
@@ -39,7 +42,7 @@
 /* Begin PBXFileReference section */
 		F5021CC724648E6900E5DD08 /* DoctorsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsPresenter.swift; sourceTree = "<group>"; };
 		F5093443246C977600E33163 /* AddEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventViewController.swift; sourceTree = "<group>"; };
-		F55DEF8A24705382003052C0 /* AddEventViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventViewControllerDelegate.swift; sourceTree = "<group>"; };
+		F55DEF8A24705382003052C0 /* AddEventPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventPresenterProtocol.swift; sourceTree = "<group>"; };
 		F55DEF8C2470565F003052C0 /* TextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
 		F55DEF8D2470565F003052C0 /* TextViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextViewCell.xib; sourceTree = "<group>"; };
 		F56334942465F11900D7C68A /* Doctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doctor.swift; sourceTree = "<group>"; };
@@ -50,6 +53,8 @@
 		F56334A02465FDF700D7C68A /* EventPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPresenter.swift; sourceTree = "<group>"; };
 		F5C99E7B246354D900191585 /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		F5E914172471BCF8007CF322 /* AddEventPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventPresenter.swift; sourceTree = "<group>"; };
+		F5E9141A2471BE69007CF322 /* SectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionType.swift; sourceTree = "<group>"; };
+		F5E9141C2471BE77007CF322 /* CellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellType.swift; sourceTree = "<group>"; };
 		F5ECF7B7244B301E009A55ED /* Health Assistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Health Assistant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5ECF7BA244B301E009A55ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F5ECF7BC244B301E009A55ED /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +64,7 @@
 		F5ECF7CA244B3021009A55ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F5ECF7D0244B32CB009A55ED /* DoctorsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsTableViewController.swift; sourceTree = "<group>"; };
 		F5ECF7D2244B3FAB009A55ED /* EventTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewController.swift; sourceTree = "<group>"; };
+		F5EDDB31247338950085B352 /* ListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPresenter.swift; sourceTree = "<group>"; };
 		F5FDC097246DC316006484D4 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		F5FDC098246DC316006484D4 /* TextFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldTableViewCell.xib; sourceTree = "<group>"; };
 		F5FDC09B246DC32D006484D4 /* DateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableViewCell.swift; sourceTree = "<group>"; };
@@ -153,7 +159,8 @@
 		F55DEF942471A393003052C0 /* ListTableModule */ = {
 			isa = PBXGroup;
 			children = (
-				F5FDC0A5246DE201006484D4 /* ListTableViewController.swift */,
+				F5EDDB33247338D20085B352 /* ViewController */,
+				F5EDDB34247338D90085B352 /* Presenter */,
 			);
 			path = ListTableModule;
 			sourceTree = "<group>";
@@ -210,7 +217,6 @@
 			isa = PBXGroup;
 			children = (
 				F5093443246C977600E33163 /* AddEventViewController.swift */,
-				F55DEF8A24705382003052C0 /* AddEventViewControllerDelegate.swift */,
 				F5833762246CADCA000E7569 /* Cells */,
 			);
 			path = ViewController;
@@ -220,6 +226,9 @@
 			isa = PBXGroup;
 			children = (
 				F5E914172471BCF8007CF322 /* AddEventPresenter.swift */,
+				F55DEF8A24705382003052C0 /* AddEventPresenterProtocol.swift */,
+				F5E9141A2471BE69007CF322 /* SectionType.swift */,
+				F5E9141C2471BE77007CF322 /* CellType.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -256,6 +265,22 @@
 				F5ECF7CA244B3021009A55ED /* Info.plist */,
 			);
 			path = "Health Assistant";
+			sourceTree = "<group>";
+		};
+		F5EDDB33247338D20085B352 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F5FDC0A5246DE201006484D4 /* ListTableViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		F5EDDB34247338D90085B352 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				F5EDDB31247338950085B352 /* ListPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -336,8 +361,9 @@
 				F5FDC09D246DC32D006484D4 /* DateTableViewCell.swift in Sources */,
 				F5FDC0A1246DC34B006484D4 /* ListTableViewCell.swift in Sources */,
 				F56334972465F1C900D7C68A /* Event.swift in Sources */,
-				F55DEF8B24705382003052C0 /* AddEventViewControllerDelegate.swift in Sources */,
+				F55DEF8B24705382003052C0 /* AddEventPresenterProtocol.swift in Sources */,
 				F5093444246C977600E33163 /* AddEventViewController.swift in Sources */,
+				F5E9141B2471BE69007CF322 /* SectionType.swift in Sources */,
 				F5FDC0A7246DE201006484D4 /* ListTableViewController.swift in Sources */,
 				F5ECF7BB244B301E009A55ED /* AppDelegate.swift in Sources */,
 				F5021CC824648E6900E5DD08 /* DoctorsPresenter.swift in Sources */,
@@ -349,6 +375,8 @@
 				F5ECF7D1244B32CB009A55ED /* DoctorsTableViewController.swift in Sources */,
 				F5FDC099246DC316006484D4 /* TextFieldTableViewCell.swift in Sources */,
 				F5C99E7C246354D900191585 /* EventTableViewCell.swift in Sources */,
+				F5EDDB32247338950085B352 /* ListPresenter.swift in Sources */,
+				F5E9141D2471BE77007CF322 /* CellType.swift in Sources */,
 				F563349D2465FD3900D7C68A /* DoctorsPresenterProtocol.swift in Sources */,
 				F5ECF7BD244B301E009A55ED /* SceneDelegate.swift in Sources */,
 				F55DEF8E2470565F003052C0 /* TextViewCell.swift in Sources */,

@@ -11,7 +11,7 @@ import UIKit
 class TextViewCell: UITableViewCell, UITextViewDelegate {
 
     @IBOutlet weak var textView: UITextView!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         textView.delegate = self

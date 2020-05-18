@@ -15,6 +15,8 @@ class TextFieldTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }    
-    @IBAction func textChanged(_ sender: Any) {
+    
+    func updateCell(with text: String) {
+        textField.placeholder = text
     }
 }
