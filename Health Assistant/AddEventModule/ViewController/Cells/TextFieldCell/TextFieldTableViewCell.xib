@@ -25,7 +25,7 @@
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <textInputTraits key="textInputTraits"/>
                         <connections>
-                            <action selector="textChanged:" destination="KGk-i7-Jjw" eventType="editingChanged" id="Fcg-yj-iQ4"/>
+                            <action selector="textFieldDidChange:" destination="KGk-i7-Jjw" eventType="editingDidEnd" id="fld-vj-6HZ"/>
                         </connections>
                     </textField>
                 </subviews>

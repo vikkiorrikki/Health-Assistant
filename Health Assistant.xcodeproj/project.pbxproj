@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		F5021CC824648E6900E5DD08 /* DoctorsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5021CC724648E6900E5DD08 /* DoctorsPresenter.swift */; };
 		F5093444246C977600E33163 /* AddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5093443246C977600E33163 /* AddEventViewController.swift */; };
-		F55DEF8B24705382003052C0 /* AddEventPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55DEF8A24705382003052C0 /* AddEventPresenterProtocol.swift */; };
+		F55DEF8B24705382003052C0 /* AddEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55DEF8A24705382003052C0 /* AddEventDelegate.swift */; };
 		F55DEF8E2470565F003052C0 /* TextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55DEF8C2470565F003052C0 /* TextViewCell.swift */; };
 		F55DEF8F2470565F003052C0 /* TextViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F55DEF8D2470565F003052C0 /* TextViewCell.xib */; };
 		F56334952465F11900D7C68A /* Doctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56334942465F11900D7C68A /* Doctor.swift */; };
@@ -42,7 +42,7 @@
 /* Begin PBXFileReference section */
 		F5021CC724648E6900E5DD08 /* DoctorsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsPresenter.swift; sourceTree = "<group>"; };
 		F5093443246C977600E33163 /* AddEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventViewController.swift; sourceTree = "<group>"; };
-		F55DEF8A24705382003052C0 /* AddEventPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventPresenterProtocol.swift; sourceTree = "<group>"; };
+		F55DEF8A24705382003052C0 /* AddEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventDelegate.swift; sourceTree = "<group>"; };
 		F55DEF8C2470565F003052C0 /* TextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
 		F55DEF8D2470565F003052C0 /* TextViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextViewCell.xib; sourceTree = "<group>"; };
 		F56334942465F11900D7C68A /* Doctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doctor.swift; sourceTree = "<group>"; };
@@ -217,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				F5093443246C977600E33163 /* AddEventViewController.swift */,
+				F55DEF8A24705382003052C0 /* AddEventDelegate.swift */,
 				F5833762246CADCA000E7569 /* Cells */,
 			);
 			path = ViewController;
@@ -226,7 +227,6 @@
 			isa = PBXGroup;
 			children = (
 				F5E914172471BCF8007CF322 /* AddEventPresenter.swift */,
-				F55DEF8A24705382003052C0 /* AddEventPresenterProtocol.swift */,
 				F5E9141A2471BE69007CF322 /* SectionType.swift */,
 				F5E9141C2471BE77007CF322 /* CellType.swift */,
 			);
@@ -361,7 +361,7 @@
 				F5FDC09D246DC32D006484D4 /* DateTableViewCell.swift in Sources */,
 				F5FDC0A1246DC34B006484D4 /* ListTableViewCell.swift in Sources */,
 				F56334972465F1C900D7C68A /* Event.swift in Sources */,
-				F55DEF8B24705382003052C0 /* AddEventPresenterProtocol.swift in Sources */,
+				F55DEF8B24705382003052C0 /* AddEventDelegate.swift in Sources */,
 				F5093444246C977600E33163 /* AddEventViewController.swift in Sources */,
 				F5E9141B2471BE69007CF322 /* SectionType.swift in Sources */,
 				F5FDC0A7246DE201006484D4 /* ListTableViewController.swift in Sources */,

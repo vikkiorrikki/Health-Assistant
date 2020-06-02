@@ -8,8 +8,15 @@
 
 import UIKit
 
+protocol DateCellDelegate: class {
+    func userDidChangeDate(with date: Date, tag: DateCellTag)
+}
+
 class DateTableViewCell: UITableViewCell {
 
+    weak var delegate: DateCellDelegate?
+    var dateTag: DateCellTag?
+    
     @IBOutlet weak var momentLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var datePickerView: UIView! {
@@ -29,9 +36,12 @@ class DateTableViewCell: UITableViewCell {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "d MMM y  HH:mm"
         dateLabel.text = dateFormatter.string(from: sender.date)
+        
+        delegate?.userDidChangeDate(with: sender.date, tag: dateTag!)
     }
     
-    func updateCell(text: String, date: Date) {
+    func updateCell(text: String, date: Date, tag: DateCellTag) {
+        dateTag = tag
         momentLabel.text = text
         let formatter4 = DateFormatter()
         formatter4.dateFormat = "d MMM y  HH:mm"

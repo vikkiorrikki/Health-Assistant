@@ -14,12 +14,22 @@ protocol ListTableViewControllerElement {
 
 class ListTableViewController: UITableViewController {
     
+    weak var delegate: AddEventDelegate?
     let presenter = ListPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.delegate = self
     }
 
+    func setupListVC(with data: [ListTableViewControllerElement], in indexPath: IndexPath) {
+        presenter.setupData(with: data, in: indexPath)
+    }
+    
+    func userDidSelectElement(with element: ListTableViewControllerElement, in index: IndexPath) {
+        delegate?.userDidSelectElement(with: element, in: index)
+    }
+    
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

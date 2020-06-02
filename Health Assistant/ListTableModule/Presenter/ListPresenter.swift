@@ -10,13 +10,17 @@ import Foundation
 
 class ListPresenter {
     
-    weak var delegate: AddEventViewController?
+    weak var delegate: ListTableViewController?
     var arrayData: [ListTableViewControllerElement] = []
     var listCellIndexPath: IndexPath = []
     
+    func setupData(with array: [ListTableViewControllerElement], in index: IndexPath) {
+        arrayData = array
+        listCellIndexPath = index
+    }
+    
+    
     func userDidSelectListCell(with indexPath: IndexPath) {
-        delegate?.presenter.userDidSelectElement(arrayData[indexPath.row])
-        delegate?.reloadRow(indexPath: listCellIndexPath)
-        
+        delegate?.userDidSelectElement(with: arrayData[indexPath.row], in: listCellIndexPath)
     }
 }

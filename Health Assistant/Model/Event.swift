@@ -12,11 +12,11 @@ struct Event {
     let title: String
     let doctorsName: String //can be several dostors for one title
 //    let specialization: String?
-//    let note: String?
     let startDate: Date?
     let endDate: Date?
-    let location: String
+    let location: Location?
     let status: EventStatus
+    let note: String?
 }
 
 enum EventStatus: String, CaseIterable {

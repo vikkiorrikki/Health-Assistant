@@ -9,8 +9,18 @@
 import Foundation
 
 enum CellType {
-    case textField(String)
-    case date(text: String, date:Date)
+    case textField(text: String, tag: TextFieldTag)
+    case date(text: String, date:Date, tag: DateCellTag)
     case listPicker(text: String, value: String)
-    case textView
+    case textView(String)
+}
+
+enum DateCellTag {
+    case Start
+    case End
+}
+
+enum TextFieldTag {
+    case title
+    case doctorsName
 }

@@ -21,22 +21,22 @@ class AddEventViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.delegate = self
-        setupTableView()
+        presenter.setupUI()
     }
     
     //MARK: - Actions
     
     @IBAction func addEventButtonPressed(_ sender: UIBarButtonItem) {
-//        let newEvent = Event(title: , doctorsName: , startDate: inputDates[], endDate: inputDates[], location: location, status: status)
+        presenter.userDidPressSaveButton()
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true)
     }
     
-    //MARK: - Methods
+    //MARK: - Input Methods
     
-    func setupTableView() {
+    func setupUI() {
         tableView.dataSource = self
         tableView.delegate = self
 
@@ -45,29 +45,31 @@ class AddEventViewController: UIViewController {
         tableView.register(UINib(nibName: "ListTableViewCell", bundle: nil), forCellReuseIdentifier: "ListCell")
         tableView.register(UINib(nibName: "TextViewCell", bundle: nil), forCellReuseIdentifier: "TextViewCell")
     }
-    //MARK: - Input Methods
     
-    func setupVisibleDatePicker(in indexPath: IndexPath) {
+    func showDatePicker(in indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? DateTableViewCell {
-            cell.datePickerView.isHidden = !cell.datePickerView.isHidden
+            UIView.setAnimationsEnabled(false)
             tableView.beginUpdates()
-
+            cell.datePickerView.isHidden = !cell.datePickerView.isHidden
+            
             tableView.endUpdates()
             tableView.deselectRow(at: indexPath, animated: true)
+            UIView.setAnimationsEnabled(true)
         }
     }
     
-    func setupListPicker(in indexPath: IndexPath) {
+    func showLocationPicker(with locations: [Location], in indexPath: IndexPath) {
         let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ListVC") as! ListTableViewController
-        controller.presenter.delegate = self
+        controller.delegate = self
+        controller.setupListVC(with: locations, in: indexPath)
         
-        if indexPath.row == 0 {
-            controller.presenter.arrayData = presenter.locations
-            controller.presenter.listCellIndexPath = indexPath
-        } else {
-            controller.presenter.arrayData = presenter.statuses
-            controller.presenter.listCellIndexPath = indexPath
-        }
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func showStatusPicker(with statuses: [EventStatus], in indexPath: IndexPath) {
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ListVC") as! ListTableViewController
+        controller.delegate = self
+        controller.setupListVC(with: statuses, in: indexPath)
         
         navigationController?.pushViewController(controller, animated: true)
     }
@@ -75,6 +77,7 @@ class AddEventViewController: UIViewController {
     func reloadRow(indexPath: IndexPath) {
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
+
 }
 
     //MARK: - UITableViewDataSource
@@ -97,34 +100,33 @@ extension AddEventViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let section = SectionType.init(rawValue: indexPath.section),
-            let cell = presenter.data[section]?[indexPath.row] else {
+            let cellType = presenter.data[section]?[indexPath.row] else {
             return UITableViewCell()
         }
         
-        switch cell {
-        case .textField(let text):
+        switch cellType {
+        case .textField(let text, let tag):
             let cell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell", for: indexPath) as! TextFieldTableViewCell
-            cell.updateCell(with: text)
+            cell.delegate = self
+            cell.updateCell(with: text, tag: tag)
             return cell
             
-        case .date(let text, let date):
+        case .date(let text, let date, let tag):
             let cell = tableView.dequeueReusableCell(withIdentifier: "DateCell", for: indexPath) as! DateTableViewCell
-            cell.updateCell(text: text, date: date)
+            cell.delegate = self
+            cell.updateCell(text: text, date: date, tag: tag)
             return cell
             
         case .listPicker(let text, let value):
             let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath) as! ListTableViewCell
             cell.nameLabel.text = text
             cell.valueLabel.text = value
-            if indexPath.row == 0 {
-                cell.valueLabel.text = presenter.selectedLocation?.clinicName ?? "Select"
-            } else {
-                cell.valueLabel.text = presenter.selectedStatus?.rawValue.capitalized ?? EventStatus.planned.rawValue.capitalized
-            }
             return cell
             
-        case .textView:
+        case .textView(let text):
             let cell = tableView.dequeueReusableCell(withIdentifier: "TextViewCell", for: indexPath) as! TextViewCell
+            cell.delegate = self
+            cell.updateCell(with: text)
             return cell
         }
     }
@@ -134,6 +136,35 @@ extension AddEventViewController: UITableViewDataSource {
 
 extension AddEventViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter.userDidSelectCell(with: indexPath)
+        presenter.userDidSelectCell(at: indexPath)
+    }
+}
+//MARK: - AddEventDelegate
+
+extension AddEventViewController: AddEventDelegate {
+    func userDidSelectElement(with element: ListTableViewControllerElement, in index: IndexPath) {
+        presenter.userDidSelectElement(with: element, in: index)
+    }
+}
+//MARK: - TextFieldDelegate
+
+extension AddEventViewController: TextFieldDelegate {
+    func userDidChangeTextField(with text: String, tag: TextFieldTag) {
+        presenter.userDidChangeTextField(with: text, tag: tag)
+    }
+
+}
+//MARK: - DateCellDelegate
+
+extension AddEventViewController: DateCellDelegate {
+    func userDidChangeDate(with date: Date, tag: DateCellTag) {
+        presenter.userDidChangeDate(with: date, tag: tag)
+    }
+}
+//MARK: - TextViewDelegate
+
+extension AddEventViewController: TextViewDelegate {
+    func userDidChangeTextView(with text: String) {
+        presenter.userDidChangeTextView(with: text)
     }
 }

@@ -8,15 +8,29 @@
 
 import UIKit
 
+protocol TextFieldDelegate: class {
+    func userDidChangeTextField(with text: String, tag: TextFieldTag)
+}
+
 class TextFieldTableViewCell: UITableViewCell {
 
+    weak var delegate: TextFieldDelegate?
+    var textFieldTag: TextFieldTag?
+    
     @IBOutlet weak var textField: UITextField!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+//        textField.addTarget(self, action: #selector(textFieldDidChange), for: .valueChanged)
     }    
     
-    func updateCell(with text: String) {
+    func updateCell(with text: String, tag: TextFieldTag) {
         textField.placeholder = text
+        textFieldTag = tag
     }
+    
+    @IBAction func textFieldDidChange(_ sender: Any) {
+        delegate?.userDidChangeTextField(with: (sender as AnyObject).text ?? "", tag: textFieldTag!)
+    }
+
 }

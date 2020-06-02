@@ -8,15 +8,23 @@
 
 import UIKit
 
+protocol TextViewDelegate: class {
+    func userDidChangeTextView(with text: String)
+}
+
 class TextViewCell: UITableViewCell, UITextViewDelegate {
 
+    weak var delegate: TextViewDelegate?
     @IBOutlet weak var textView: UITextView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         textView.delegate = self
-        textView.text = "Notes"
         textView.textColor = UIColor.lightGray
+    }
+    
+    func updateCell(with text: String) {
+        textView.text = text
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -30,6 +38,9 @@ class TextViewCell: UITableViewCell, UITextViewDelegate {
         if textView.text.isEmpty {
             textView.text = "Notes"
             textView.textColor = UIColor.lightGray
+        } else {
+            delegate?.userDidChangeTextView(with: textView.text)
         }
     }
+
 }
