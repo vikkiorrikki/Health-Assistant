@@ -44,11 +44,11 @@ class AddEventPresenter {
         delegate?.setupUI()
     }
     
-    func userDidPressSaveButton() {
+    func userDidPressSaveButton() -> Event {
         guard let titleEvent = title, let doctor = doctorsName, let location = selectedLocation, let status = selectedStatus, let note = notes
             else {
                 print("Not all field are filled")
-                return
+                return Event(title: "", doctorsName: "", startDate: Date(), endDate: Date(), location: Location(clinicName: "", street: "", houseNumber: 0), status: .planned, note: "")
         }
 
         let newEvent = Event(
@@ -63,6 +63,7 @@ class AddEventPresenter {
         
 //        let newEvent = Event(title: title, doctorsName: doctorsName, startDate: startDate, endDate: endDate, location: selectedLocation, status: selectedStatus, note: notes)
         print(newEvent)
+        return newEvent
         
     }
     

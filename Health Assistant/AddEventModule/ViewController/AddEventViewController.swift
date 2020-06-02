@@ -13,6 +13,7 @@ class AddEventViewController: UIViewController {
     //MARK: - Properties
     
     let presenter = AddEventPresenter()
+    weak var delegate: EventTableDelegate?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -27,7 +28,9 @@ class AddEventViewController: UIViewController {
     //MARK: - Actions
     
     @IBAction func addEventButtonPressed(_ sender: UIBarButtonItem) {
-        presenter.userDidPressSaveButton()
+        let newEvent = presenter.userDidPressSaveButton()
+        delegate?.userCreatedNewEvent(with: newEvent)
+        self.dismiss(animated: true)
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {

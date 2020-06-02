@@ -17,8 +17,8 @@ class EventTableViewCell: UITableViewCell {
     
     func setupCell(with model: Event) {
         titleLabel.text = model.title
-        dateLabel.text = "23 September 2020"
-        locationLabel.text = "21 centure centure"
+        dateLabel.text = String(describing: model.startDate)
+        locationLabel.text = model.location?.clinicName
         
         let status = model.status
         switch status {

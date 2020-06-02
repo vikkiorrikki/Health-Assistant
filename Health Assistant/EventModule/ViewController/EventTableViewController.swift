@@ -11,11 +11,18 @@ import UIKit
 class EventTableViewController: UITableViewController {
 
     let presenter = EventPresenter()
+    weak var delegate: DoctorsTableViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.delegate = self
         tableView.tableFooterView = UIView()
+    }
+    
+    //MARK: - Input methods
+    
+    func reloadTeble() {
+        tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -40,7 +47,17 @@ class EventTableViewController: UITableViewController {
     @IBAction func addEventButtonPressed(_ sender: Any) {
         let navBar = UINavigationController()
         let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddEventVC") as! AddEventViewController
+        controller.delegate = self
         navBar.pushViewController(controller, animated: true)
         present(navBar, animated: true)
+    }
+    
+}
+
+//MARK: - EventTableDelegate
+
+extension EventTableViewController: EventTableDelegate {
+    func userCreatedNewEvent(with newEvent: Event) {
+        presenter.userCreatedNewEvent(with: newEvent)
     }
 }

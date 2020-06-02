@@ -13,5 +13,10 @@ class EventPresenter {
     weak var delegate: EventTableViewController?
     
     var doctor: Doctor?
+    
+    func userCreatedNewEvent(with newEvent: Event) {
+        doctor?.events.append(newEvent)
+        delegate?.reloadTeble()
+    }
 
 }
