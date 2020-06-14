@@ -20,6 +20,10 @@ class DoctorsTableViewController: UITableViewController, DoctorViewControllerPro
         tableView.tableFooterView = UIView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        print(presenter.doctorsArray)
+    }
+    
     // MARK: - Input methods
     
     func showNewDoctorAlert() {
@@ -92,6 +96,7 @@ class DoctorsTableViewController: UITableViewController, DoctorViewControllerPro
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.userDidSelectDoctorCell(with: indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
     //MARK: - Add New Doctor

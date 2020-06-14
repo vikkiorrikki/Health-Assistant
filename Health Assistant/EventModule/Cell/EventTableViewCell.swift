@@ -4,7 +4,7 @@
 //
 //  Created by Виктория Саклакова on 06.05.2020.
 //  Copyright © 2020 Viktoriia Saklakova. All rights reserved.
-//
+// nsdateformatter.com
 
 import UIKit
 
@@ -17,7 +17,7 @@ class EventTableViewCell: UITableViewCell {
     
     func setupCell(with model: Event) {
         titleLabel.text = model.title
-        dateLabel.text = String(describing: model.startDate)
+        dateLabel.text = model.startDate.toStringFormat()
         locationLabel.text = model.location?.clinicName
         
         let status = model.status

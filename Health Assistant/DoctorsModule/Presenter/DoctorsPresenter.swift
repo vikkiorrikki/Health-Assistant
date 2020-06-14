@@ -18,8 +18,8 @@ class DoctorsPresenter: DoctorsPresenterProtocol {
             specialization: "Name",
             events:
             [
-                Event(title: "today", doctorsName: "Name", startDate: Date(), endDate: Date(), location: Location(clinicName: "", street: "", houseNumber: 1), status: .planned, note: "Notes"),
-                Event(title: "tomorrow", doctorsName: "Name", startDate: Date(), endDate: Date(), location: Location(clinicName: "", street: "", houseNumber: 1), status: .completed, note: "Notes")
+                Event(title: "today", doctorsName: "doctorsName", startDate: Date(), endDate: Date(), location: Location(clinicName: "DentaDenta+", street: "Kondratevskii Kondratevskii Kondratevskii", houseNumber: 1), status: .planned, note: "Notes, Notes"),
+                Event(title: "tomorrow", doctorsName: "Name", startDate: Date(), endDate: Date(), location: Location(clinicName: "", street: "", houseNumber: 1), status: .completed, note: nil)
             ]
         ),
         Doctor(

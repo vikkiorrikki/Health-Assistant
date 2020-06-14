@@ -14,9 +14,17 @@ class EventPresenter {
     
     var doctor: Doctor?
     
+    func userDidPressAddEventButton() {
+        delegate?.userDidPressAddEventButton()
+    }
+    
     func userCreatedNewEvent(with newEvent: Event) {
         doctor?.events.append(newEvent)
-        delegate?.reloadTeble()
+        delegate?.reloadTable()
+    }
+    
+    func userDidSelectEventCell(index: IndexPath) {
+        delegate?.userDidSelectEventCell(with: index)
     }
 
 }

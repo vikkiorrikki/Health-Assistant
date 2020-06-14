@@ -43,8 +43,6 @@ class DateTableViewCell: UITableViewCell {
     func updateCell(text: String, date: Date, tag: DateCellTag) {
         dateTag = tag
         momentLabel.text = text
-        let formatter4 = DateFormatter()
-        formatter4.dateFormat = "d MMM y  HH:mm"
-        dateLabel.text = "\(formatter4.string(from: date))"
+        dateLabel.text = date.toStringFormat()
     }
 }

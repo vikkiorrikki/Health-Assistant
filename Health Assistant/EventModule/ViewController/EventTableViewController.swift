@@ -21,11 +21,27 @@ class EventTableViewController: UITableViewController {
     
     //MARK: - Input methods
     
-    func reloadTeble() {
+    func reloadTable() {
         tableView.reloadData()
     }
+    
+    func userDidPressAddEventButton() {
+        let navBar = UINavigationController()
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddEventVC") as! AddEventViewController
+        controller.delegate = self
+        navBar.pushViewController(controller, animated: true)
+        present(navBar, animated: true)
+    }
+    
+    func userDidSelectEventCell(with index: IndexPath) {
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EventDetailsVC") as! EventDetailsViewController
+        controller.delegate = self
+        controller.event = presenter.doctor?.events[index.row]
+        navigationController?.pushViewController(controller, animated: true)
+    }
 
-    // MARK: - Table view data source
+
+    // MARK: - TableView Data Source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.doctor?.events.count ?? 0
@@ -41,15 +57,17 @@ class EventTableViewController: UITableViewController {
 
         return cell
     }
+    
+    // MARK: - TableView Delegate Methods
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter.userDidSelectEventCell(index: indexPath)
+    }
 
     //MARK: - Add New Event
     
     @IBAction func addEventButtonPressed(_ sender: Any) {
-        let navBar = UINavigationController()
-        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddEventVC") as! AddEventViewController
-        controller.delegate = self
-        navBar.pushViewController(controller, animated: true)
-        present(navBar, animated: true)
+        presenter.userDidPressAddEventButton()
     }
     
 }

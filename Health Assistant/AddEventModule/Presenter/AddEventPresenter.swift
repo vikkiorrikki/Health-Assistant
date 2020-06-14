@@ -10,6 +10,8 @@ import Foundation
 
 class AddEventPresenter {
     
+    //MARK: - Data
+    
     weak var delegate: AddEventViewController?
     
     var data: [SectionType: [CellType]] {
@@ -40,33 +42,32 @@ class AddEventPresenter {
     var selectedLocation: Location?
     var selectedStatus: EventStatus?
     
+    //MARK: - Methods
+    
     func setupUI(){
         delegate?.setupUI()
     }
     
-    func userDidPressSaveButton() -> Event {
-        guard let titleEvent = title, let doctor = doctorsName, let location = selectedLocation, let status = selectedStatus, let note = notes
-            else {
-                print("Not all field are filled")
-                return Event(title: "", doctorsName: "", startDate: Date(), endDate: Date(), location: Location(clinicName: "", street: "", houseNumber: 0), status: .planned, note: "")
-        }
-
-        let newEvent = Event(
-            title: titleEvent,
-            doctorsName: doctor,
-            startDate: startDate,
-            endDate: endDate,
-            location: location,
-            status: status,
-            note: note
-        )
-        
-//        let newEvent = Event(title: title, doctorsName: doctorsName, startDate: startDate, endDate: endDate, location: selectedLocation, status: selectedStatus, note: notes)
-        print(newEvent)
-        return newEvent
-        
+    //MARK: - Create Event
+    
+    func userDidPressSaveButton() {
+        delegate?.checkRequiredFields(title: title, doctorsName: doctorsName)
     }
     
+    func createNewEvent(title: String, doctorsName: String) {
+        let newEvent = Event(
+            title: title,
+            doctorsName: doctorsName,
+            startDate: startDate,
+            endDate: endDate,
+            location: selectedLocation,
+            status: selectedStatus ?? EventStatus.planned,
+            note: notes)
+        
+        delegate?.eventIsCreated(with: newEvent)
+    }
+    
+    //MARK: - Open List Cells
     func userDidSelectCell(at indexPath: IndexPath) {
         let section = SectionType.init(rawValue: indexPath.section)
         
@@ -92,6 +93,8 @@ class AddEventPresenter {
         }
         delegate?.reloadRow(indexPath: index)
     }
+    
+    //MARK: - Change Fields
     
     func userDidChangeTextField(with text: String, tag: TextFieldTag) {
         if tag == .title {

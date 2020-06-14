@@ -16,6 +16,7 @@ class AddEventViewController: UIViewController {
     weak var delegate: EventTableDelegate?
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var errorMessage: UILabel!
     
     //MARK: - Life Cycle
     
@@ -28,9 +29,24 @@ class AddEventViewController: UIViewController {
     //MARK: - Actions
     
     @IBAction func addEventButtonPressed(_ sender: UIBarButtonItem) {
-        let newEvent = presenter.userDidPressSaveButton()
-        delegate?.userCreatedNewEvent(with: newEvent)
+        presenter.userDidPressSaveButton()
+    }
+    
+    func checkRequiredFields(title: String?, doctorsName: String?) {
+        guard let titleEvent = title, let doctor = doctorsName
+            else {
+                errorMessage.isHidden = false
+                errorMessage.text = "Required fields: Title, Doctor's Name"
+                return
+        }
+        
+        presenter.createNewEvent(title: titleEvent, doctorsName: doctor)
+    }
+    
+    func eventIsCreated(with name: Event) {
+        delegate?.userCreatedNewEvent(with: name)
         self.dismiss(animated: true)
+        print(name)
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {

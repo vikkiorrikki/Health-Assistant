@@ -10,10 +10,9 @@ import  Foundation
 
 struct Event {
     let title: String
-    let doctorsName: String //can be several dostors for one title
-//    let specialization: String?
-    let startDate: Date?
-    let endDate: Date?
+    let doctorsName: String?
+    let startDate: Date
+    let endDate: Date
     let location: Location?
     let status: EventStatus
     let note: String?
@@ -28,6 +27,14 @@ enum EventStatus: String, CaseIterable {
 extension EventStatus: ListTableViewControllerElement {
     var elementName: String {
         return self.rawValue.capitalized
+    }
+}
+
+extension Date {
+    func toStringFormat() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d MMM y  HH:mm"
+        return "\(formatter.string(from: self))"
     }
 }
 
