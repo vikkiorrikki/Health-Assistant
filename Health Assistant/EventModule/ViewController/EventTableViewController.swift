@@ -27,8 +27,12 @@ class EventTableViewController: UITableViewController {
     
     func userDidPressAddEventButton() {
         let navBar = UINavigationController()
+        
         let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddEventVC") as! AddEventViewController
-        controller.delegate = self
+        controller.delegateForAddEvent = self
+        controller.eventControllerType = .create
+        controller.presenter = AddEventPresenter(event: nil)
+        
         navBar.pushViewController(controller, animated: true)
         present(navBar, animated: true)
     }
@@ -36,7 +40,7 @@ class EventTableViewController: UITableViewController {
     func userDidSelectEventCell(with index: IndexPath) {
         let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EventDetailsVC") as! EventDetailsViewController
         controller.delegate = self
-        controller.event = presenter.doctor?.events[index.row]
+        controller.presenter.event = presenter.doctor?.events[index.row]
         navigationController?.pushViewController(controller, animated: true)
     }
 
@@ -77,5 +81,9 @@ class EventTableViewController: UITableViewController {
 extension EventTableViewController: EventTableDelegate {
     func userCreatedNewEvent(with newEvent: Event) {
         presenter.userCreatedNewEvent(with: newEvent)
+    }
+    
+    func updateEventTable(with editedEvent: Event) {
+        presenter.updateEventTable(with: editedEvent)
     }
 }

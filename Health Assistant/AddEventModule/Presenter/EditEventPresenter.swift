@@ -1,14 +1,14 @@
 //
-//  AddEventPresenter.swift
+//  EditEventPresenter.swift
 //  Health Assistant
 //
-//  Created by Виктория Саклакова on 20.06.2020.
+//  Created by Виктория Саклакова on 15.06.2020.
 //  Copyright © 2020 Viktoriia Saklakova. All rights reserved.
 //
 
 import Foundation
 
-class AddEventPresenter: BaseEventPresenter {
+class EditEventPresenter: BaseEventPresenter {
     
     override func userDidPressSaveButton() {
         guard let title = title, let doctorName = doctorsName else {
@@ -16,7 +16,7 @@ class AddEventPresenter: BaseEventPresenter {
             return
         }
         
-        let newEvent = Event(
+        let editedEvent = Event(
             title: title,
             doctorsName: doctorName,
             startDate: startDate,
@@ -25,7 +25,9 @@ class AddEventPresenter: BaseEventPresenter {
             status: selectedStatus ?? EventStatus.planned,
             note: notes)
         
-        super.delegate?.eventIsCreated(with: newEvent)
+        super.delegate?.eventIsEdited(editedEvent)
     }
+    
+    
     
 }

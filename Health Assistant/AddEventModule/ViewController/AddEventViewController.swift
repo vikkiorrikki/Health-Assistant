@@ -8,12 +8,19 @@
 
 import UIKit
 
+enum EventControllerType {
+    case create, edit
+}
+
 class AddEventViewController: UIViewController {
     
     //MARK: - Properties
     
-    let presenter = AddEventPresenter()
-    weak var delegate: EventTableDelegate?
+    var presenter: BaseEventPresenter!
+    var eventControllerType: EventControllerType?
+    
+    weak var delegateForAddEvent: EventTableDelegate? //should be 2 delegates for table and event details
+    weak var delegateForEditEvent: EventDetailsViewController?
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var errorMessage: UILabel!
@@ -23,6 +30,7 @@ class AddEventViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.delegate = self
+//        presenter.setupData()
         presenter.setupUI()
     }
     
@@ -32,21 +40,21 @@ class AddEventViewController: UIViewController {
         presenter.userDidPressSaveButton()
     }
     
-    func checkRequiredFields(title: String?, doctorsName: String?) {
-        guard let titleEvent = title, let doctor = doctorsName
-            else {
-                errorMessage.isHidden = false
-                errorMessage.text = "Required fields: Title, Doctor's Name"
-                return
-        }
-        
-        presenter.createNewEvent(title: titleEvent, doctorsName: doctor)
+    func showValidationError() {
+        errorMessage.isHidden = false
+        errorMessage.text = "Required fields: Title, Doctor's Name"
     }
     
     func eventIsCreated(with name: Event) {
-        delegate?.userCreatedNewEvent(with: name)
+        delegateForAddEvent?.userCreatedNewEvent(with: name)
         self.dismiss(animated: true)
         print(name)
+    }
+    
+    func eventIsEdited(_ event: Event) {
+        delegateForEditEvent?.userEditedEvent(event)
+        self.dismiss(animated: true)
+        print(event)
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
@@ -56,8 +64,8 @@ class AddEventViewController: UIViewController {
     //MARK: - Input Methods
     
     func setupUI() {
-        tableView.dataSource = self
         tableView.delegate = self
+        tableView.dataSource = self
 
         tableView.register(UINib(nibName: "TextFieldTableViewCell", bundle: nil), forCellReuseIdentifier: "TextFieldCell")
         tableView.register(UINib(nibName: "DateTableViewCell", bundle: nil), forCellReuseIdentifier: "DateCell")
@@ -103,7 +111,7 @@ class AddEventViewController: UIViewController {
 
 extension AddEventViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return presenter.data.count
+        return (presenter.data.count)
     }
     
     //MARK: - numberOfRowsInSection
@@ -127,7 +135,12 @@ extension AddEventViewController: UITableViewDataSource {
         case .textField(let text, let tag):
             let cell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell", for: indexPath) as! TextFieldTableViewCell
             cell.delegate = self
-            cell.updateCell(with: text, tag: tag)
+            if eventControllerType == .create {
+                cell.updateCell(with: text, tag: tag)
+            } else if eventControllerType == .edit {
+                cell.updateCell(text: text, tag: tag)
+            }
+            
             return cell
             
         case .date(let text, let date, let tag):
@@ -183,7 +196,7 @@ extension AddEventViewController: DateCellDelegate {
 //MARK: - TextViewDelegate
 
 extension AddEventViewController: TextViewDelegate {
-    func userDidChangeTextView(with text: String) {
+    @objc func userDidChangeTextView(with text: String) {
         presenter.userDidChangeTextView(with: text)
     }
 }

@@ -8,7 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		F5021CC824648E6900E5DD08 /* DoctorsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5021CC724648E6900E5DD08 /* DoctorsPresenter.swift */; };
+		F5046449249E29E70067F8D9 /* AddEventPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5046448249E29E70067F8D9 /* AddEventPresenter.swift */; };
 		F5093444246C977600E33163 /* AddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5093443246C977600E33163 /* AddEventViewController.swift */; };
+		F5261FDA24A2BBAE00A85F49 /* EventDetailsViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5261FD924A2BBAE00A85F49 /* EventDetailsViewDelegate.swift */; };
+		F54437A92498151B00FB354E /* EditEventPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54437A82498151B00FB354E /* EditEventPresenter.swift */; };
 		F558DDE72486D666006004F9 /* EventTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F558DDE62486D666006004F9 /* EventTableDelegate.swift */; };
 		F55DEF8B24705382003052C0 /* AddEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55DEF8A24705382003052C0 /* AddEventDelegate.swift */; };
 		F55DEF8E2470565F003052C0 /* TextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55DEF8C2470565F003052C0 /* TextViewCell.swift */; };
@@ -16,13 +19,13 @@
 		F56334952465F11900D7C68A /* Doctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56334942465F11900D7C68A /* Doctor.swift */; };
 		F56334972465F1C900D7C68A /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56334962465F1C900D7C68A /* Event.swift */; };
 		F56334992465F2B100D7C68A /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56334982465F2B100D7C68A /* Location.swift */; };
-		F563349D2465FD3900D7C68A /* DoctorsPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563349C2465FD3900D7C68A /* DoctorsPresenterProtocol.swift */; };
-		F563349F2465FD6700D7C68A /* DoctorViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563349E2465FD6700D7C68A /* DoctorViewControllerProtocol.swift */; };
+		F563349D2465FD3900D7C68A /* DoctorsPresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563349C2465FD3900D7C68A /* DoctorsPresenterDelegate.swift */; };
+		F563349F2465FD6700D7C68A /* DoctorViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563349E2465FD6700D7C68A /* DoctorViewControllerDelegate.swift */; };
 		F56334A12465FDF700D7C68A /* EventPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56334A02465FDF700D7C68A /* EventPresenter.swift */; };
 		F5A653FC249531DD00E65F2E /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A653FB249531DD00E65F2E /* EventDetailsViewController.swift */; };
-		F5A653FF2496BF5300E65F2E /* EditEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A653FE2496BF5300E65F2E /* EditEventViewController.swift */; };
+		F5C706B624A2B03C00735597 /* EventDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C706B524A2B03C00735597 /* EventDetailsPresenter.swift */; };
 		F5C99E7C246354D900191585 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C99E7B246354D900191585 /* EventTableViewCell.swift */; };
-		F5E914182471BCF8007CF322 /* AddEventPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E914172471BCF8007CF322 /* AddEventPresenter.swift */; };
+		F5E914182471BCF8007CF322 /* BaseEventPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E914172471BCF8007CF322 /* BaseEventPresenter.swift */; };
 		F5E9141B2471BE69007CF322 /* SectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E9141A2471BE69007CF322 /* SectionType.swift */; };
 		F5E9141D2471BE77007CF322 /* CellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E9141C2471BE77007CF322 /* CellType.swift */; };
 		F5ECF7BB244B301E009A55ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ECF7BA244B301E009A55ED /* AppDelegate.swift */; };
@@ -44,7 +47,10 @@
 
 /* Begin PBXFileReference section */
 		F5021CC724648E6900E5DD08 /* DoctorsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsPresenter.swift; sourceTree = "<group>"; };
+		F5046448249E29E70067F8D9 /* AddEventPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventPresenter.swift; sourceTree = "<group>"; };
 		F5093443246C977600E33163 /* AddEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventViewController.swift; sourceTree = "<group>"; };
+		F5261FD924A2BBAE00A85F49 /* EventDetailsViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewDelegate.swift; sourceTree = "<group>"; };
+		F54437A82498151B00FB354E /* EditEventPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEventPresenter.swift; sourceTree = "<group>"; };
 		F558DDE62486D666006004F9 /* EventTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableDelegate.swift; sourceTree = "<group>"; };
 		F55DEF8A24705382003052C0 /* AddEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventDelegate.swift; sourceTree = "<group>"; };
 		F55DEF8C2470565F003052C0 /* TextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
@@ -52,13 +58,13 @@
 		F56334942465F11900D7C68A /* Doctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doctor.swift; sourceTree = "<group>"; };
 		F56334962465F1C900D7C68A /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		F56334982465F2B100D7C68A /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		F563349C2465FD3900D7C68A /* DoctorsPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsPresenterProtocol.swift; sourceTree = "<group>"; };
-		F563349E2465FD6700D7C68A /* DoctorViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorViewControllerProtocol.swift; sourceTree = "<group>"; };
+		F563349C2465FD3900D7C68A /* DoctorsPresenterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsPresenterDelegate.swift; sourceTree = "<group>"; };
+		F563349E2465FD6700D7C68A /* DoctorViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorViewControllerDelegate.swift; sourceTree = "<group>"; };
 		F56334A02465FDF700D7C68A /* EventPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPresenter.swift; sourceTree = "<group>"; };
 		F5A653FB249531DD00E65F2E /* EventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
-		F5A653FE2496BF5300E65F2E /* EditEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEventViewController.swift; sourceTree = "<group>"; };
+		F5C706B524A2B03C00735597 /* EventDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsPresenter.swift; sourceTree = "<group>"; };
 		F5C99E7B246354D900191585 /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
-		F5E914172471BCF8007CF322 /* AddEventPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventPresenter.swift; sourceTree = "<group>"; };
+		F5E914172471BCF8007CF322 /* BaseEventPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEventPresenter.swift; sourceTree = "<group>"; };
 		F5E9141A2471BE69007CF322 /* SectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionType.swift; sourceTree = "<group>"; };
 		F5E9141C2471BE77007CF322 /* CellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellType.swift; sourceTree = "<group>"; };
 		F5ECF7B7244B301E009A55ED /* Health Assistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Health Assistant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,7 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				F5ECF7D0244B32CB009A55ED /* DoctorsTableViewController.swift */,
-				F563349E2465FD6700D7C68A /* DoctorViewControllerProtocol.swift */,
+				F563349E2465FD6700D7C68A /* DoctorViewControllerDelegate.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -104,7 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				F5021CC724648E6900E5DD08 /* DoctorsPresenter.swift */,
-				F563349C2465FD3900D7C68A /* DoctorsPresenterProtocol.swift */,
+				F563349C2465FD3900D7C68A /* DoctorsPresenterDelegate.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -242,23 +248,35 @@
 		F5A653FD2496BC3F00E65F2E /* EventDetailsModule */ = {
 			isa = PBXGroup;
 			children = (
-				F5A653FB249531DD00E65F2E /* EventDetailsViewController.swift */,
+				F5C706B424A2B00700735597 /* ViewController */,
+				F5C706B324A2AFFE00735597 /* Presenter */,
 			);
 			path = EventDetailsModule;
 			sourceTree = "<group>";
 		};
-		F5A654002496BF6E00E65F2E /* EditEventModule */ = {
+		F5C706B324A2AFFE00735597 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				F5A653FE2496BF5300E65F2E /* EditEventViewController.swift */,
+				F5C706B524A2B03C00735597 /* EventDetailsPresenter.swift */,
 			);
-			path = EditEventModule;
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		F5C706B424A2B00700735597 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F5A653FB249531DD00E65F2E /* EventDetailsViewController.swift */,
+				F5261FD924A2BBAE00A85F49 /* EventDetailsViewDelegate.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		F5E914192471BCFE007CF322 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				F5E914172471BCF8007CF322 /* AddEventPresenter.swift */,
+				F5E914172471BCF8007CF322 /* BaseEventPresenter.swift */,
+				F5046448249E29E70067F8D9 /* AddEventPresenter.swift */,
+				F54437A82498151B00FB354E /* EditEventPresenter.swift */,
 				F5E9141A2471BE69007CF322 /* SectionType.swift */,
 				F5E9141C2471BE77007CF322 /* CellType.swift */,
 			);
@@ -291,7 +309,6 @@
 				F56334922465EFE300D7C68A /* EventModule */,
 				F5833763246CADEC000E7569 /* AddEventModule */,
 				F5A653FD2496BC3F00E65F2E /* EventDetailsModule */,
-				F5A654002496BF6E00E65F2E /* EditEventModule */,
 				F5ECF7C2244B301E009A55ED /* Main.storyboard */,
 				F5ECF7C5244B3021009A55ED /* Assets.xcassets */,
 				F5ECF7C7244B3021009A55ED /* LaunchScreen.storyboard */,
@@ -392,28 +409,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				F558DDE72486D666006004F9 /* EventTableDelegate.swift in Sources */,
-				F5A653FF2496BF5300E65F2E /* EditEventViewController.swift in Sources */,
 				F5FDC09D246DC32D006484D4 /* DateTableViewCell.swift in Sources */,
+				F5C706B624A2B03C00735597 /* EventDetailsPresenter.swift in Sources */,
 				F5FDC0A1246DC34B006484D4 /* ListTableViewCell.swift in Sources */,
 				F56334972465F1C900D7C68A /* Event.swift in Sources */,
 				F55DEF8B24705382003052C0 /* AddEventDelegate.swift in Sources */,
 				F5093444246C977600E33163 /* AddEventViewController.swift in Sources */,
 				F5E9141B2471BE69007CF322 /* SectionType.swift in Sources */,
+				F5261FDA24A2BBAE00A85F49 /* EventDetailsViewDelegate.swift in Sources */,
 				F5FDC0A7246DE201006484D4 /* ListTableViewController.swift in Sources */,
 				F5ECF7BB244B301E009A55ED /* AppDelegate.swift in Sources */,
 				F5021CC824648E6900E5DD08 /* DoctorsPresenter.swift in Sources */,
-				F563349F2465FD6700D7C68A /* DoctorViewControllerProtocol.swift in Sources */,
+				F563349F2465FD6700D7C68A /* DoctorViewControllerDelegate.swift in Sources */,
 				F5A653FC249531DD00E65F2E /* EventDetailsViewController.swift in Sources */,
-				F5E914182471BCF8007CF322 /* AddEventPresenter.swift in Sources */,
+				F5046449249E29E70067F8D9 /* AddEventPresenter.swift in Sources */,
+				F5E914182471BCF8007CF322 /* BaseEventPresenter.swift in Sources */,
 				F5ECF7D3244B3FAB009A55ED /* EventTableViewController.swift in Sources */,
 				F56334A12465FDF700D7C68A /* EventPresenter.swift in Sources */,
+				F54437A92498151B00FB354E /* EditEventPresenter.swift in Sources */,
 				F56334992465F2B100D7C68A /* Location.swift in Sources */,
 				F5ECF7D1244B32CB009A55ED /* DoctorsTableViewController.swift in Sources */,
 				F5FDC099246DC316006484D4 /* TextFieldTableViewCell.swift in Sources */,
 				F5C99E7C246354D900191585 /* EventTableViewCell.swift in Sources */,
 				F5EDDB32247338950085B352 /* ListPresenter.swift in Sources */,
 				F5E9141D2471BE77007CF322 /* CellType.swift in Sources */,
-				F563349D2465FD3900D7C68A /* DoctorsPresenterProtocol.swift in Sources */,
+				F563349D2465FD3900D7C68A /* DoctorsPresenterDelegate.swift in Sources */,
 				F5ECF7BD244B301E009A55ED /* SceneDelegate.swift in Sources */,
 				F55DEF8E2470565F003052C0 /* TextViewCell.swift in Sources */,
 				F56334952465F11900D7C68A /* Doctor.swift in Sources */,

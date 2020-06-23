@@ -8,9 +8,9 @@
 
 import Foundation
 
-class DoctorsPresenter: DoctorsPresenterProtocol {
+class DoctorsPresenter: DoctorsPresenterDelegate {
     
-    weak var delegate: DoctorViewControllerProtocol?
+    weak var delegate: DoctorViewControllerDelegate?
     
     var doctorsArray = [
         Doctor(

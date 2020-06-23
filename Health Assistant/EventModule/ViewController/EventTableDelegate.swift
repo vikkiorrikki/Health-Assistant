@@ -10,4 +10,6 @@ import Foundation
 
 protocol EventTableDelegate: class {
     func userCreatedNewEvent(with newEvent: Event)
+    func updateEventTable(with editedEvent: Event)
+    func reloadTable()
 }

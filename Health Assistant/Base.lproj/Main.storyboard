@@ -337,7 +337,11 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Event Details" id="Rp7-h9-6fK">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="Jgh-eS-LdW"/>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="Jgh-eS-LdW">
+                            <connections>
+                                <action selector="editButtonPressed:" destination="vOI-up-yKZ" id="q68-CS-WdM"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>

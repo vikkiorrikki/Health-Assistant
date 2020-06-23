@@ -13,6 +13,7 @@ class EventPresenter {
     weak var delegate: EventTableViewController?
     
     var doctor: Doctor?
+    var event: Event?
     
     func userDidPressAddEventButton() {
         delegate?.userDidPressAddEventButton()
@@ -23,8 +24,14 @@ class EventPresenter {
         delegate?.reloadTable()
     }
     
+    func updateEventTable(with editedEvent: Event) {
+        event = editedEvent
+        delegate?.reloadTable()
+    }
+    
     func userDidSelectEventCell(index: IndexPath) {
         delegate?.userDidSelectEventCell(with: index)
+        event = doctor?.events[index.row]
     }
 
 }

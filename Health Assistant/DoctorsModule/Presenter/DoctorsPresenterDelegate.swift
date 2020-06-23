@@ -8,8 +8,8 @@
 
 import Foundation
 
-protocol DoctorsPresenterProtocol: class {
-    var delegate: DoctorViewControllerProtocol? { get set }
+protocol DoctorsPresenterDelegate: class {
+    var delegate: DoctorViewControllerDelegate? { get set }
     var doctorsArray: [Doctor] { get }
     
     func userDidPressAddButton()

@@ -8,9 +8,9 @@
 
 import UIKit
 
-class DoctorsTableViewController: UITableViewController, DoctorViewControllerProtocol {
+class DoctorsTableViewController: UITableViewController, DoctorViewControllerDelegate {
 
-    let presenter: DoctorsPresenterProtocol = DoctorsPresenter()
+    let presenter: DoctorsPresenterDelegate = DoctorsPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()

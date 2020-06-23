@@ -24,8 +24,13 @@ class TextFieldTableViewCell: UITableViewCell {
 //        textField.addTarget(self, action: #selector(textFieldDidChange), for: .valueChanged)
     }    
     
-    func updateCell(with text: String, tag: TextFieldTag) {
-        textField.placeholder = text
+    func updateCell(with placeholder: String, tag: TextFieldTag) {
+        textField.placeholder = placeholder
+        textFieldTag = tag
+    }
+    
+    func updateCell(text: String, tag: TextFieldTag) {
+        textField.text = text
         textFieldTag = tag
     }
     

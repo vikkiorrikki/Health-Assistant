@@ -20,11 +20,15 @@ class TextViewCell: UITableViewCell, UITextViewDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         textView.delegate = self
-        textView.textColor = UIColor.lightGray
+        
     }
     
     func updateCell(with text: String) {
         textView.text = text
+        if textView.text.isEmpty {
+            textView.textColor = UIColor.lightGray
+            textView.text = "Notes"
+        }
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
