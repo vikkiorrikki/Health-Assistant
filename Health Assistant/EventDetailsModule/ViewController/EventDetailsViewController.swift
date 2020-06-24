@@ -43,12 +43,15 @@ class EventDetailsViewController: UIViewController, EventDetailsViewDelegate {
         
         if let location = event.location {
             locationEvent.text = "\(location.elementName)"
+            locationEvent.isHidden = false
         } else {
             locationEvent.isHidden = true
         }
         
-        if let note = event.note {
-            notes.text = note
+        if event.note != nil && event.note != "" {
+            notes.text = event.note
+            notesTitle.isHidden = false
+            notes.isHidden = false
         } else {
             notesTitle.isHidden = true
             notes.isHidden = true

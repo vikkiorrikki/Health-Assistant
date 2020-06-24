@@ -11,21 +11,22 @@ import Foundation
 class AddEventPresenter: BaseEventPresenter {
     
     override func userDidPressSaveButton() {
-        guard let title = title, let doctorName = doctorsName else {
-            super.delegate?.showValidationError()
-            return
+        
+        if title == nil || title == "" || doctorsName == nil || doctorsName == "" {
+            addView?.showValidationError()
+            
+        } else {
+            let newEvent = Event(
+                title: title!,
+                doctorsName: doctorsName!,
+                startDate: startDate,
+                endDate: endDate,
+                location: selectedLocation,
+                status: selectedStatus ?? EventStatus.planned,
+                note: notes)
+            
+            addView?.eventIsCreated(with: newEvent)
         }
-        
-        let newEvent = Event(
-            title: title,
-            doctorsName: doctorName,
-            startDate: startDate,
-            endDate: endDate,
-            location: selectedLocation,
-            status: selectedStatus ?? EventStatus.planned,
-            note: notes)
-        
-        super.delegate?.eventIsCreated(with: newEvent)
     }
     
 }

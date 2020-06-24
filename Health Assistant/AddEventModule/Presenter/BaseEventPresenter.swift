@@ -25,7 +25,7 @@ class BaseEventPresenter {
         }
     }
     
-    weak var delegate: AddEventViewController?
+    weak var addView: AddEventViewController?
     var event: Event?
     
     var data: [SectionType: [CellType]] {
@@ -59,7 +59,7 @@ class BaseEventPresenter {
     //MARK: - Methods
     
     func setupUI() {
-        delegate?.setupUI()
+        addView?.setupUI()
     }
     
     //MARK: - Create Event
@@ -74,12 +74,12 @@ class BaseEventPresenter {
         
         switch section {
         case .dates:
-            delegate?.showDatePicker(in: indexPath)
+            addView?.showDatePicker(in: indexPath)
         case .listPickers:
             if indexPath.row == 0 {
-                delegate?.showLocationPicker(with: locations, in: indexPath)
+                addView?.showLocationPicker(with: locations, in: indexPath)
             } else if indexPath.row == 1 {
-                delegate?.showStatusPicker(with: statuses, in: indexPath)
+                addView?.showStatusPicker(with: statuses, in: indexPath)
             }
         default:
             return
@@ -92,7 +92,7 @@ class BaseEventPresenter {
         } else if let element = element as? EventStatus {
             selectedStatus = element
         }
-        delegate?.reloadRow(indexPath: index)
+        addView?.reloadRow(indexPath: index)
     }
     
     //MARK: - Change Fields
@@ -113,7 +113,7 @@ class BaseEventPresenter {
         }
     }
     
-    func userDidChangeTextView(with text: String) {
+    func userDidChangeTextView(with text: String?) {
         notes = text
     }
 }

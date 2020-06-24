@@ -10,7 +10,7 @@ import Foundation
 
 class DoctorsPresenter: DoctorsPresenterDelegate {
     
-    weak var delegate: DoctorViewControllerDelegate?
+    weak var doctorsView: DoctorViewControllerDelegate?
     
     var doctorsArray = [
         Doctor(
@@ -34,7 +34,7 @@ class DoctorsPresenter: DoctorsPresenterDelegate {
     ]
     
     func userDidPressAddButton() {
-        delegate?.showNewDoctorAlert()
+        doctorsView?.showNewDoctorAlert()
     }
     
     func userDidCreateDoctor(name: String?) {
@@ -45,17 +45,17 @@ class DoctorsPresenter: DoctorsPresenterDelegate {
                 events: []
             )
             doctorsArray.append(newDoctor)
-            delegate?.reloadTableView()
+            doctorsView?.reloadTableView()
         }
     }
     
     func userDidDeleteCell(index: IndexPath) {
         doctorsArray.remove(at: index.row)
-        delegate?.deleteRow(index: index)
+        doctorsView?.deleteRow(index: index)
     }
     
     func userDidSelectDoctorCell(with index: IndexPath) {
         let doctor = doctorsArray[index.row]
-        delegate?.openEvents(of: doctor) 
+        doctorsView?.openEvents(of: doctor) 
     }
 }

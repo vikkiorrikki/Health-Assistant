@@ -12,7 +12,7 @@ protocol TextFieldDelegate: class {
     func userDidChangeTextField(with text: String, tag: TextFieldTag)
 }
 
-class TextFieldTableViewCell: UITableViewCell {
+class TextFieldTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     weak var delegate: TextFieldDelegate?
     var textFieldTag: TextFieldTag?
@@ -21,10 +21,11 @@ class TextFieldTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        textField.delegate = self
 //        textField.addTarget(self, action: #selector(textFieldDidChange), for: .valueChanged)
     }    
     
-    func updateCell(with placeholder: String, tag: TextFieldTag) {
+    func updatePlaceholder(with placeholder: String, tag: TextFieldTag) {
         textField.placeholder = placeholder
         textFieldTag = tag
     }
@@ -34,8 +35,13 @@ class TextFieldTableViewCell: UITableViewCell {
         textFieldTag = tag
     }
     
-    @IBAction func textFieldDidChange(_ sender: Any) {
-        delegate?.userDidChangeTextField(with: (sender as AnyObject).text ?? "", tag: textFieldTag!)
+    @IBAction func textFieldDidChange(_ textField: UITextField) {
+        delegate?.userDidChangeTextField(with: textField.text ?? "", tag: textFieldTag!)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 
 }

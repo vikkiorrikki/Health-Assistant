@@ -15,7 +15,7 @@ class DoctorsTableViewController: UITableViewController, DoctorViewControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presenter.delegate = self
+        presenter.doctorsView = self
         
         tableView.tableFooterView = UIView()
     }

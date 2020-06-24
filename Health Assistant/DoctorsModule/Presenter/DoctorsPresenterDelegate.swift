@@ -9,7 +9,7 @@
 import Foundation
 
 protocol DoctorsPresenterDelegate: class {
-    var delegate: DoctorViewControllerDelegate? { get set }
+    var doctorsView: DoctorViewControllerDelegate? { get set }
     var doctorsArray: [Doctor] { get }
     
     func userDidPressAddButton()

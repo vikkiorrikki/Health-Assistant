@@ -10,27 +10,27 @@ import Foundation
 
 class EventPresenter {
     
-    weak var delegate: EventTableViewController?
+    weak var eventView: EventTableViewController?
     
     var doctor: Doctor?
     var event: Event?
     
     func userDidPressAddEventButton() {
-        delegate?.userDidPressAddEventButton()
+        eventView?.userDidPressAddEventButton()
     }
     
     func userCreatedNewEvent(with newEvent: Event) {
         doctor?.events.append(newEvent)
-        delegate?.reloadTable()
+        eventView?.reloadTable()
     }
     
     func updateEventTable(with editedEvent: Event) {
         event = editedEvent
-        delegate?.reloadTable()
+        eventView?.reloadTable()
     }
     
     func userDidSelectEventCell(index: IndexPath) {
-        delegate?.userDidSelectEventCell(with: index)
+        eventView?.userDidSelectEventCell(with: index)
         event = doctor?.events[index.row]
     }
 

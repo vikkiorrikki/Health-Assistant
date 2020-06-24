@@ -19,7 +19,7 @@ class ListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.delegate = self
+        presenter.listView = self
     }
 
     func setupListVC(with data: [ListTableViewControllerElement], in indexPath: IndexPath) {

@@ -29,10 +29,26 @@ class AddEventViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.delegate = self
-//        presenter.setupData()
+        presenter.addView = self
         presenter.setupUI()
+        
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+
+//    @objc func keyboardWillShow(notification: NSNotification) {
+//        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+//            if self.view.frame.origin.y == 0 {
+//                self.view.frame.origin.y -= keyboardSize.height
+//            }
+//        }
+//    }
+//
+//    @objc func keyboardWillHide(notification: NSNotification) {
+//        if self.view.frame.origin.y != 0 {
+//            self.view.frame.origin.y = 0
+//        }
+//    }
     
     //MARK: - Actions
     
@@ -136,7 +152,7 @@ extension AddEventViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell", for: indexPath) as! TextFieldTableViewCell
             cell.delegate = self
             if eventControllerType == .create {
-                cell.updateCell(with: text, tag: tag)
+                cell.updatePlaceholder(with: text, tag: tag)
             } else if eventControllerType == .edit {
                 cell.updateCell(text: text, tag: tag)
             }
@@ -158,7 +174,14 @@ extension AddEventViewController: UITableViewDataSource {
         case .textView(let text):
             let cell = tableView.dequeueReusableCell(withIdentifier: "TextViewCell", for: indexPath) as! TextViewCell
             cell.delegate = self
-            cell.updateCell(with: text)
+            if eventControllerType == .create {
+                cell.updatePlaceholder(with: text)
+            } else if eventControllerType == .edit && presenter.notes != nil {
+                cell.updateCell(with: text)
+            } else {
+                cell.updatePlaceholder(with: text)
+            }
+            
             return cell
         }
     }
@@ -196,7 +219,7 @@ extension AddEventViewController: DateCellDelegate {
 //MARK: - TextViewDelegate
 
 extension AddEventViewController: TextViewDelegate {
-    @objc func userDidChangeTextView(with text: String) {
+    func userDidChangeTextView(with text: String?) {
         presenter.userDidChangeTextView(with: text)
     }
 }

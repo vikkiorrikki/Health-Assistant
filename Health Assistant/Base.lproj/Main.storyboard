@@ -205,7 +205,7 @@
                                 <action selector="cancelButtonPressed:" destination="fpF-yK-UdQ" id="Emo-jd-OXb"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Add" id="7ls-1t-oUu">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="7ls-1t-oUu">
                             <connections>
                                 <action selector="addEventButtonPressed:" destination="fpF-yK-UdQ" id="cxC-mi-Tfg"/>
                             </connections>

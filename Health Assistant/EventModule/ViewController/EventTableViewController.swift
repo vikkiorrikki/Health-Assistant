@@ -15,7 +15,7 @@ class EventTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.delegate = self
+        presenter.eventView = self
         tableView.tableFooterView = UIView()
     }
     
