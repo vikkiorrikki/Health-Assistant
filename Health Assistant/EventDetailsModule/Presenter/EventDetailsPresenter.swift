@@ -12,30 +12,28 @@ class EventDetailsPresenter {
     
     //MARK: - Properties
     
-    weak var view: EventDetailsViewDelegate?
-    var event: Event?
+    weak var view: EventDetailsViewDelegateForPresenter?
+    private var event: Event
+    
+    init(event: Event) {
+        self.event = event
+    }
     
     //MARK: - Methods
     
-    func setUI(){
-        guard let event = self.event
-            else { return }
-        
+    func viewDidLoad(){
         view?.setTitleColor(for: event)
         view?.setUI(for: event)
     }
     
     func userPressedEditButton() {
-        guard let event = self.event
-            else { return }
-        
-        view?.userPressedEditButton(for: event)
+        view?.openEditEventPage(for: event)
     }
     
-    func userEditedEvent(_ event: Event) {
+    func updateValueForEditedEvent(_ event: Event) {
         self.event = event
-        setUI()
-        view?.updateEventTable(with: event)
+        viewDidLoad()
+        view?.editedEventIsSaved(with: event)
     }
     
 }

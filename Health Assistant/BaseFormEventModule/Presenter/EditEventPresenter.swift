@@ -10,10 +10,30 @@ import Foundation
 
 class EditEventPresenter: BaseEventPresenter {
     
+    init(event: Event) {
+        super.init()
+        
+        self.title = event.title
+        self.doctorsName = event.doctorsName
+        self.startDate = event.startDate
+        self.endDate = event.endDate
+        self.notes = event.note
+        self.selectedLocation = event.location
+        self.selectedStatus = event.status
+    }
+    
+    override func setButtonTitle() -> String? {
+        return "Save"
+    }
+    
+    override func setNavigationTitle() -> String? {
+        return "Edit Event"
+    }
+    
     override func userDidPressSaveButton() {
         
         if title == nil || title == "" || doctorsName == nil || doctorsName == "" {
-            addView?.showValidationError()
+            baseView?.showValidationError()
             
         } else {
             let editedEvent = Event(
@@ -25,7 +45,7 @@ class EditEventPresenter: BaseEventPresenter {
                 status: selectedStatus ?? EventStatus.planned,
                 note: notes)
             
-            addView?.eventIsEdited(editedEvent)
+            baseView?.eventIsEdited(editedEvent)
         }
     }
     

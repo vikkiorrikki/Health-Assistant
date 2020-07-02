@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol AddEventDelegate: class {
+protocol BaseEventDelegate: class {
     func userDidSelectElement(with element: ListTableViewControllerElement, in index: IndexPath)
 }

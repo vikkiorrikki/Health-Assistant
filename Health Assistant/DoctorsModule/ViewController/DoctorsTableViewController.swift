@@ -50,14 +50,14 @@ class DoctorsTableViewController: UITableViewController, DoctorViewControllerDel
         tableView.reloadData()
     }
     
-    func deleteRow(index: IndexPath) {
+    func deleteDoctor(index: IndexPath) {
         tableView.deleteRows(at: [index], with: .fade)
     }
     
     func openEvents(of doctor: Doctor) {
         let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EventVC") as! EventTableViewController
-        controller.presenter.doctor = doctor
         controller.delegate = self
+        controller.presenter = EventPresenter(doctor: doctor)
         
         navigationController?.pushViewController(controller, animated: true)
     }
@@ -76,7 +76,6 @@ class DoctorsTableViewController: UITableViewController, DoctorViewControllerDel
         return cell
     }
     
-    // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source

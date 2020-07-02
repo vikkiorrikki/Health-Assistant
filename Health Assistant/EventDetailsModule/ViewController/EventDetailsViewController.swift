@@ -8,12 +8,12 @@
 
 import UIKit
 
-class EventDetailsViewController: UIViewController, EventDetailsViewDelegate {
+class EventDetailsViewController: UIViewController, EventDetailsViewDelegateForPresenter, EventDetailsViewDelegate {
     
     //MARK: - Properties
     
     weak var delegate: EventTableDelegate?
-    let presenter = EventDetailsPresenter()
+    var presenter: EventDetailsPresenter!
 
     //MARK: - IBOutlets
     
@@ -30,7 +30,7 @@ class EventDetailsViewController: UIViewController, EventDetailsViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.view = self
-        presenter.setUI()
+        presenter.viewDidLoad()
     }
     
     //MARK: - Input Methods
@@ -67,12 +67,11 @@ class EventDetailsViewController: UIViewController, EventDetailsViewDelegate {
         }
     }
     
-    func userPressedEditButton(for event: Event) {
+    func openEditEventPage(for event: Event) {
         let navBar = UINavigationController()
-        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddEventVC") as! AddEventViewController
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddEventVC") as! BaseEventViewController
         controller.delegateForEditEvent = self
-        controller.eventControllerType = .edit
-        controller.presenter = EditEventPresenter(event: presenter.event)
+        controller.presenter = EditEventPresenter(event: event)
         
         navBar.pushViewController(controller, animated: true)
         present(navBar, animated: true)
@@ -84,13 +83,13 @@ class EventDetailsViewController: UIViewController, EventDetailsViewDelegate {
         presenter.userPressedEditButton()
     }
     
-    //MARK: - ???
+    //MARK: - Users Actions
     
     func userEditedEvent(_ event: Event) {
-        presenter.userEditedEvent(event)
+        presenter.updateValueForEditedEvent(event)
     }
 
-    func updateEventTable(with editedEvent: Event) {
+    func editedEventIsSaved(with editedEvent: Event) {
         delegate?.updateEventTable(with: editedEvent)
     }
 }

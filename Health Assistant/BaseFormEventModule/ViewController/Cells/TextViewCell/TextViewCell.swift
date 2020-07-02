@@ -40,13 +40,15 @@ class TextViewCell: UITableViewCell, UITextViewDelegate {
 //        }
 //    }
     
-    func updateCell(with text: String) {
-        textView.text = text
-    }
-    
-    func updatePlaceholder(with text: String) {
-        textView.textColor = UIColor.lightGray
-        textView.text = "Notes"
+    func updateCell(with text: String?, delegate: TextViewDelegate?) {
+        self.delegate = delegate
+        
+        if let text = text {
+            textView.text = text
+        } else {
+            textView.textColor = UIColor.lightGray
+            textView.text = "Notes"
+        }
     }
     
     func textViewDidChange(_ textView: UITextView) { //Handle the text changes here

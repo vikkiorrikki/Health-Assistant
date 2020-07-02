@@ -164,7 +164,7 @@
         <!--New Event-->
         <scene sceneID="EhA-yJ-RZB">
             <objects>
-                <viewController storyboardIdentifier="AddEventVC" id="fpF-yK-UdQ" customClass="AddEventViewController" customModule="Health_Assistant" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddEventVC" id="fpF-yK-UdQ" customClass="BaseEventViewController" customModule="Health_Assistant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kf2-t7-Rib">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -213,6 +213,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="errorMessage" destination="BRH-RE-r3t" id="ROZ-Cu-G7Z"/>
+                        <outlet property="navItem" destination="30g-Ka-LnH" id="EKq-gZ-fxt"/>
+                        <outlet property="saveButton" destination="7ls-1t-oUu" id="QtU-T3-QP9"/>
                         <outlet property="tableView" destination="Qpg-xi-zjC" id="y21-Xz-gzc"/>
                     </connections>
                 </viewController>

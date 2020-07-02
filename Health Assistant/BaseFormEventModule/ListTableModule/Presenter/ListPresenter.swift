@@ -10,7 +10,7 @@ import Foundation
 
 class ListPresenter {
     
-    weak var listView: ListTableViewController?
+    weak var listView: ListTableDelegate?
     var arrayData: [ListTableViewControllerElement] = []
     var listCellIndexPath: IndexPath = []
     
@@ -21,6 +21,6 @@ class ListPresenter {
     
     
     func userDidSelectListCell(with indexPath: IndexPath) {
-        listView?.userDidSelectElement(with: arrayData[indexPath.row], in: listCellIndexPath)
+        listView?.showSelectedElement(with: arrayData[indexPath.row], in: listCellIndexPath)
     }
 }

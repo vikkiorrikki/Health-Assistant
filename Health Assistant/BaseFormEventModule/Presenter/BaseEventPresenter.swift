@@ -12,32 +12,20 @@ class BaseEventPresenter {
     
     //MARK: - Data
     
-    init(event: Event?) {
-        if let editEvent = event {
-            self.event = editEvent
-            title = editEvent.title
-            doctorsName = editEvent.doctorsName
-            startDate = editEvent.startDate as! Date
-            endDate = editEvent.endDate as! Date
-            notes = editEvent.note
-            selectedLocation = editEvent.location
-            selectedStatus = editEvent.status
-        }
-    }
-    
-    weak var addView: AddEventViewController?
-    var event: Event?
+    weak var baseView: BaseEventViewController?
     
     var data: [SectionType: [CellType]] {
         [
-            .main: [.textField(text: title ?? "Title", tag: .title), .textField(text: doctorsName ?? "Doctors Name", tag: .doctorsName)],
+            .main:
+                [.textField(text: title, tag: .title),
+                 .textField(text: doctorsName, tag: .doctorsName)],
             .dates:
-                [.date(text: "Starts", date: startDate, tag: .Start),
-                 .date(text: "Ends", date: endDate, tag: .End)],
+                [.date(text: "Starts", date: startDate, tag: .start),
+                 .date(text: "Ends", date: endDate, tag: .end)],
             .listPickers:
                 [.listPicker(text: "Location", value: selectedLocation?.clinicName ?? "Select"),
                  .listPicker(text: "Status", value: selectedStatus?.rawValue.capitalized ?? EventStatus.planned.rawValue.capitalized)],
-            .note: [.textView(notes ?? "Notes")]
+            .note: [.textView(notes)]
         ]
     }
     
@@ -58,8 +46,14 @@ class BaseEventPresenter {
     
     //MARK: - Methods
     
-    func setupUI() {
-        addView?.setupUI()
+    final func viewDidLoad() {
+        guard let buttonTitle = setButtonTitle(), let navigationTitle = setNavigationTitle()
+            else {
+                return
+        }
+        
+        baseView?.setupUI(buttonTitle: buttonTitle, navigationTitle: navigationTitle)
+        baseView?.setupNotifications()
     }
     
     //MARK: - Create Event
@@ -68,36 +62,49 @@ class BaseEventPresenter {
         assert(false, "You must override this method!")
     }
     
+    // MARK: Private methods
+    
+    func setButtonTitle() -> String? {
+        assert(false, "You must override this method!")
+        return nil
+    }
+    
+    func setNavigationTitle() -> String? {
+        assert(false, "You must override this method!")
+        return nil
+    }
+    
     //MARK: - Open List Cells
-    func userDidSelectCell(at indexPath: IndexPath) {
+    
+    final func userDidSelectCell(at indexPath: IndexPath) {
         let section = SectionType.init(rawValue: indexPath.section)
         
         switch section {
         case .dates:
-            addView?.showDatePicker(in: indexPath)
+            baseView?.showDatePicker(in: indexPath)
         case .listPickers:
             if indexPath.row == 0 {
-                addView?.showLocationPicker(with: locations, in: indexPath)
+                baseView?.showLocationPicker(with: locations, in: indexPath)
             } else if indexPath.row == 1 {
-                addView?.showStatusPicker(with: statuses, in: indexPath)
+                baseView?.showStatusPicker(with: statuses, in: indexPath)
             }
         default:
             return
         }
     }
  
-    func userDidSelectElement(with element: ListTableViewControllerElement, in index: IndexPath) {
+    final func setSelectedElement(with element: ListTableViewControllerElement, in index: IndexPath) {
         if let element = element as? Location {
             selectedLocation = element
         } else if let element = element as? EventStatus {
             selectedStatus = element
         }
-        addView?.reloadRow(indexPath: index)
+        baseView?.reloadRow(indexPath: index)
     }
     
     //MARK: - Change Fields
     
-    func userDidChangeTextField(with text: String, tag: TextFieldTag) {
+    final func setNewValueToTextField(with text: String, tag: TextFieldTag) {
         if tag == .title {
             title = text
         } else if tag == .doctorsName {
@@ -105,15 +112,15 @@ class BaseEventPresenter {
         }
     }
     
-    func userDidChangeDate(with date: Date, tag: DateCellTag) {
-        if tag == .Start {
+    final func setNewDate(with date: Date, tag: DateCellTag) {
+        if tag == .start {
             startDate = date
-        } else if tag == .End {
+        } else if tag == .end {
             endDate = date
         }
     }
     
-    func userDidChangeTextView(with text: String?) {
+    final func setNewValueToTextView(with text: String?) {
         notes = text
     }
 }

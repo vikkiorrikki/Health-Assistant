@@ -11,5 +11,4 @@ import Foundation
 struct Doctor {
     let id: UUID
     let specialization: String
-    var events: [Event]
 }

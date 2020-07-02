@@ -11,6 +11,8 @@ import Foundation
 protocol DoctorViewControllerDelegate: class {
     func showNewDoctorAlert()
     func reloadTableView()
-    func deleteRow(index: IndexPath)
+    func deleteDoctor(index: IndexPath)
     func openEvents(of doctor: Doctor)
 }
+
+

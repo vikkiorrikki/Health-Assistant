@@ -8,14 +8,10 @@
 
 import UIKit
 
-protocol ListTableViewControllerElement {
-    var elementName: String { get }
-}
-
-class ListTableViewController: UITableViewController {
+class ListTableViewController: UITableViewController, ListTableDelegate {
     
-    weak var delegate: AddEventDelegate?
-    let presenter = ListPresenter()
+    weak var delegate: BaseEventDelegate?
+    var presenter: ListPresenter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +22,7 @@ class ListTableViewController: UITableViewController {
         presenter.setupData(with: data, in: indexPath)
     }
     
-    func userDidSelectElement(with element: ListTableViewControllerElement, in index: IndexPath) {
+    func showSelectedElement(with element: ListTableViewControllerElement, in index: IndexPath) {
         delegate?.userDidSelectElement(with: element, in: index)
     }
     

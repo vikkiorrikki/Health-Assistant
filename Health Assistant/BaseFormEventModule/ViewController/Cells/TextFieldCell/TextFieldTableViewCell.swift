@@ -14,29 +14,36 @@ protocol TextFieldDelegate: class {
 
 class TextFieldTableViewCell: UITableViewCell, UITextFieldDelegate {
 
-    weak var delegate: TextFieldDelegate?
-    var textFieldTag: TextFieldTag?
+    private weak var delegate: TextFieldDelegate?
+    private var textFieldTag: TextFieldTag?
     
     @IBOutlet weak var textField: UITextField!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         textField.delegate = self
-//        textField.addTarget(self, action: #selector(textFieldDidChange), for: .valueChanged)
-    }    
-    
-    func updatePlaceholder(with placeholder: String, tag: TextFieldTag) {
-        textField.placeholder = placeholder
-        textFieldTag = tag
     }
     
-    func updateCell(text: String, tag: TextFieldTag) {
+    func updateCell(text: String?, tag: TextFieldTag, delegate: TextFieldDelegate?) {
+        
+        self.delegate = delegate
+        
+        switch tag {
+        case .title:
+            textField.placeholder = "Title"
+        case .doctorsName:
+            textField.placeholder = "Doctors Name"
+        }
+        
         textField.text = text
         textFieldTag = tag
     }
     
     @IBAction func textFieldDidChange(_ textField: UITextField) {
-        delegate?.userDidChangeTextField(with: textField.text ?? "", tag: textFieldTag!)
+        guard let tag = textFieldTag else {
+            return
+        }
+        delegate?.userDidChangeTextField(with: textField.text ?? "", tag: tag)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

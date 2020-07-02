@@ -10,10 +10,18 @@ import Foundation
 
 class AddEventPresenter: BaseEventPresenter {
     
+    override func setButtonTitle() -> String? {
+        "Add"
+    }
+    
+    override func setNavigationTitle() -> String? {
+        return "New Event"
+    }
+    
     override func userDidPressSaveButton() {
         
         if title == nil || title == "" || doctorsName == nil || doctorsName == "" {
-            addView?.showValidationError()
+            baseView?.showValidationError()
             
         } else {
             let newEvent = Event(
@@ -25,7 +33,7 @@ class AddEventPresenter: BaseEventPresenter {
                 status: selectedStatus ?? EventStatus.planned,
                 note: notes)
             
-            addView?.eventIsCreated(with: newEvent)
+            baseView?.eventIsCreated(with: newEvent)
         }
     }
     

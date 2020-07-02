@@ -8,69 +8,36 @@
 
 import UIKit
 
-enum EventControllerType {
-    case create, edit
-}
-
-class AddEventViewController: UIViewController {
+class BaseEventViewController: UIViewController {
     
     //MARK: - Properties
     
     var presenter: BaseEventPresenter!
-    var eventControllerType: EventControllerType?
     
     weak var delegateForAddEvent: EventTableDelegate? //should be 2 delegates for table and event details
-    weak var delegateForEditEvent: EventDetailsViewController?
+    weak var delegateForEditEvent: EventDetailsViewDelegate?
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var errorMessage: UILabel!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var navItem: UINavigationItem!
     
     //MARK: - Life Cycle
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.addView = self
-        presenter.setupUI()
-        
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        presenter.baseView = self
+        presenter.viewDidLoad()
     }
-
-//    @objc func keyboardWillShow(notification: NSNotification) {
-//        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-//            if self.view.frame.origin.y == 0 {
-//                self.view.frame.origin.y -= keyboardSize.height
-//            }
-//        }
-//    }
-//
-//    @objc func keyboardWillHide(notification: NSNotification) {
-//        if self.view.frame.origin.y != 0 {
-//            self.view.frame.origin.y = 0
-//        }
-//    }
     
-    //MARK: - Actions
+    //MARK: - IBActions
     
     @IBAction func addEventButtonPressed(_ sender: UIBarButtonItem) {
         presenter.userDidPressSaveButton()
-    }
-    
-    func showValidationError() {
-        errorMessage.isHidden = false
-        errorMessage.text = "Required fields: Title, Doctor's Name"
-    }
-    
-    func eventIsCreated(with name: Event) {
-        delegateForAddEvent?.userCreatedNewEvent(with: name)
-        self.dismiss(animated: true)
-        print(name)
-    }
-    
-    func eventIsEdited(_ event: Event) {
-        delegateForEditEvent?.userEditedEvent(event)
-        self.dismiss(animated: true)
-        print(event)
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
@@ -79,7 +46,7 @@ class AddEventViewController: UIViewController {
     
     //MARK: - Input Methods
     
-    func setupUI() {
+    func setupUI(buttonTitle: String, navigationTitle: String) {
         tableView.delegate = self
         tableView.dataSource = self
 
@@ -87,6 +54,14 @@ class AddEventViewController: UIViewController {
         tableView.register(UINib(nibName: "DateTableViewCell", bundle: nil), forCellReuseIdentifier: "DateCell")
         tableView.register(UINib(nibName: "ListTableViewCell", bundle: nil), forCellReuseIdentifier: "ListCell")
         tableView.register(UINib(nibName: "TextViewCell", bundle: nil), forCellReuseIdentifier: "TextViewCell")
+        
+        saveButton.title = buttonTitle
+        navItem.title = navigationTitle
+    }
+    
+    func setupNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     func showDatePicker(in indexPath: IndexPath) {
@@ -113,6 +88,7 @@ class AddEventViewController: UIViewController {
         let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ListVC") as! ListTableViewController
         controller.delegate = self
         controller.setupListVC(with: statuses, in: indexPath)
+        controller.presenter = ListPresenter()
         
         navigationController?.pushViewController(controller, animated: true)
     }
@@ -120,12 +96,48 @@ class AddEventViewController: UIViewController {
     func reloadRow(indexPath: IndexPath) {
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
-
+    
+    //MARK: - Actions With Event
+    
+    func showValidationError() {
+        errorMessage.isHidden = false
+        errorMessage.text = "Required fields: Title, Doctor's Name"
+    }
+    
+    func eventIsCreated(with name: Event) {
+        delegateForAddEvent?.userCreatedNewEvent(name)
+        self.dismiss(animated: true)
+        print(name)
+    }
+    
+    func eventIsEdited(_ event: Event) {
+        delegateForEditEvent?.userEditedEvent(event)
+        self.dismiss(animated: true)
+        print(event)
+    }
+    
+    //MARK: - Keybords Methods
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        let userInfo = notification.userInfo!
+        if let keyboardScreenEndFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            tableView.contentInset = UIEdgeInsets(
+                            top: 0,
+                            left: 0,
+                            bottom: keyboardScreenEndFrame.height,
+                            right: 0
+            )
+        }
+    }
+    
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        tableView.contentInset = UIEdgeInsets()
+    }
 }
 
-    //MARK: - UITableViewDataSource
+//MARK: - UITableViewDataSource
 
-extension AddEventViewController: UITableViewDataSource {
+extension BaseEventViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return (presenter.data.count)
     }
@@ -150,13 +162,7 @@ extension AddEventViewController: UITableViewDataSource {
         switch cellType {
         case .textField(let text, let tag):
             let cell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell", for: indexPath) as! TextFieldTableViewCell
-            cell.delegate = self
-            if eventControllerType == .create {
-                cell.updatePlaceholder(with: text, tag: tag)
-            } else if eventControllerType == .edit {
-                cell.updateCell(text: text, tag: tag)
-            }
-            
+            cell.updateCell(text: text, tag: tag, delegate: self)
             return cell
             
         case .date(let text, let date, let tag):
@@ -173,15 +179,7 @@ extension AddEventViewController: UITableViewDataSource {
             
         case .textView(let text):
             let cell = tableView.dequeueReusableCell(withIdentifier: "TextViewCell", for: indexPath) as! TextViewCell
-            cell.delegate = self
-            if eventControllerType == .create {
-                cell.updatePlaceholder(with: text)
-            } else if eventControllerType == .edit && presenter.notes != nil {
-                cell.updateCell(with: text)
-            } else {
-                cell.updatePlaceholder(with: text)
-            }
-            
+            cell.updateCell(with: text, delegate: self)
             return cell
         }
     }
@@ -189,37 +187,37 @@ extension AddEventViewController: UITableViewDataSource {
 
 //MARK: - UITableViewDelegate
 
-extension AddEventViewController: UITableViewDelegate {
+extension BaseEventViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.userDidSelectCell(at: indexPath)
     }
 }
 //MARK: - AddEventDelegate
 
-extension AddEventViewController: AddEventDelegate {
+extension BaseEventViewController: BaseEventDelegate {
     func userDidSelectElement(with element: ListTableViewControllerElement, in index: IndexPath) {
-        presenter.userDidSelectElement(with: element, in: index)
+        presenter.setSelectedElement(with: element, in: index)
     }
 }
 //MARK: - TextFieldDelegate
 
-extension AddEventViewController: TextFieldDelegate {
+extension BaseEventViewController: TextFieldDelegate {
     func userDidChangeTextField(with text: String, tag: TextFieldTag) {
-        presenter.userDidChangeTextField(with: text, tag: tag)
+        presenter.setNewValueToTextField(with: text, tag: tag)
     }
 
 }
 //MARK: - DateCellDelegate
 
-extension AddEventViewController: DateCellDelegate {
+extension BaseEventViewController: DateCellDelegate {
     func userDidChangeDate(with date: Date, tag: DateCellTag) {
-        presenter.userDidChangeDate(with: date, tag: tag)
+        presenter.setNewDate(with: date, tag: tag)
     }
 }
 //MARK: - TextViewDelegate
 
-extension AddEventViewController: TextViewDelegate {
+extension BaseEventViewController: TextViewDelegate {
     func userDidChangeTextView(with text: String?) {
-        presenter.userDidChangeTextView(with: text)
+        presenter.setNewValueToTextView(with: text)
     }
 }

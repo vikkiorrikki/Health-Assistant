@@ -10,6 +10,7 @@ import  Foundation
 
 struct Event {
     let title: String
+    let doctorsID: UUID
     let doctorsName: String?
     let startDate: Date
     let endDate: Date

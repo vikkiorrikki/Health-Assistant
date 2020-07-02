@@ -51,7 +51,7 @@ class DoctorsPresenter: DoctorsPresenterDelegate {
     
     func userDidDeleteCell(index: IndexPath) {
         doctorsArray.remove(at: index.row)
-        doctorsView?.deleteRow(index: index)
+        doctorsView?.deleteDoctor(index: index)
     }
     
     func userDidSelectDoctorCell(with index: IndexPath) {
