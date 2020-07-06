@@ -8,13 +8,13 @@
 
 import UIKit
 
-class BaseEventViewController: UIViewController {
+class BaseEventViewController: UIViewController, BaseEventInput {
     
     //MARK: - Properties
     
     var presenter: BaseEventPresenter!
     
-    weak var delegateForAddEvent: EventTableDelegate? //should be 2 delegates for table and event details
+    weak var delegateForAddEvent: AddEventDelegate?
     weak var delegateForEditEvent: EventDetailsViewDelegate?
     
     @IBOutlet weak var tableView: UITableView!
@@ -105,7 +105,7 @@ class BaseEventViewController: UIViewController {
     }
     
     func eventIsCreated(with name: Event) {
-        delegateForAddEvent?.userCreatedNewEvent(name)
+        delegateForAddEvent?.userAddedNewEvent(name)
         self.dismiss(animated: true)
         print(name)
     }

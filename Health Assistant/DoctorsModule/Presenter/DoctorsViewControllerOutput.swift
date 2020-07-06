@@ -8,12 +8,13 @@
 
 import Foundation
 
-protocol DoctorsPresenterDelegate: class {
-    var doctorsView: DoctorViewControllerDelegate? { get set }
-    var doctorsArray: [Doctor] { get }
+protocol DoctorsViewControllerOutput: class {
+    var doctorsView: DoctorViewControllerInput? { get set }
+    var doctors: [Doctor] { get }
     
+    func viewIsReady()
     func userDidPressAddButton()
-    func userDidCreateDoctor(name: String?)
+    func userDidCreateDoctor(specialization: String?)
     func userDidDeleteCell(index: IndexPath)
     func userDidSelectDoctorCell(with index: IndexPath)
 }

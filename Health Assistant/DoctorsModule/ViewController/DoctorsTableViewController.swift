@@ -8,23 +8,26 @@
 
 import UIKit
 
-class DoctorsTableViewController: UITableViewController, DoctorViewControllerDelegate {
+class DoctorsTableViewController: UITableViewController, DoctorViewControllerInput {
 
-    let presenter: DoctorsPresenterDelegate = DoctorsPresenter()
+    let presenter: DoctorsViewControllerOutput = DoctorsPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         presenter.doctorsView = self
-        
-        tableView.tableFooterView = UIView()
+        presenter.viewIsReady()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print(presenter.doctorsArray)
+        print(presenter.doctors)
     }
     
     // MARK: - Input methods
+    
+    func setupUI() {
+        tableView.tableFooterView = UIView()
+    }
     
     func showNewDoctorAlert() {
         var textField = UITextField()
@@ -39,7 +42,7 @@ class DoctorsTableViewController: UITableViewController, DoctorViewControllerDel
         )
         alert.addAction(
             UIAlertAction(title: "Add Doctor", style: .default) { (action) in
-                self.presenter.userDidCreateDoctor(name: textField.text)
+                self.presenter.userDidCreateDoctor(specialization: textField.text)
             }
         )
         
@@ -65,13 +68,13 @@ class DoctorsTableViewController: UITableViewController, DoctorViewControllerDel
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.doctorsArray.count
+        return presenter.doctors.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DoctorCell", for: indexPath)
-        cell.textLabel?.text = presenter.doctorsArray[indexPath.row].specialization
+        cell.textLabel?.text = presenter.doctors[indexPath.row].specialization
 
         return cell
     }

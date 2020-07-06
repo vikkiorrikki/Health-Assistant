@@ -8,7 +8,8 @@
 
 import Foundation
 
-protocol DoctorViewControllerDelegate: class {
+protocol DoctorViewControllerInput: class {
+    func setupUI()
     func showNewDoctorAlert()
     func reloadTableView()
     func deleteDoctor(index: IndexPath)

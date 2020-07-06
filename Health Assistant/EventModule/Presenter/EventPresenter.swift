@@ -10,7 +10,7 @@ import Foundation
 
 class EventPresenter {
     
-    weak var eventView: EventTableDelegateForPresenter?
+    weak var eventView: EventTableInput?
     
     var doctor: Doctor
     

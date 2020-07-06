@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ListTableViewController: UITableViewController, ListTableDelegate {
+class ListTableViewController: UITableViewController, ListTableInput {
     
     weak var delegate: BaseEventDelegate?
     var presenter: ListPresenter!

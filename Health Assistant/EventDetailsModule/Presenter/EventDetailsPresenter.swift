@@ -12,7 +12,7 @@ class EventDetailsPresenter {
     
     //MARK: - Properties
     
-    weak var view: EventDetailsViewDelegateForPresenter?
+    weak var view: EventDetailsViewInput?
     private var event: Event
     
     init(event: Event) {

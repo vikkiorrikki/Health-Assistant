@@ -8,11 +8,11 @@
 
 import UIKit
 
-class EventDetailsViewController: UIViewController, EventDetailsViewDelegateForPresenter, EventDetailsViewDelegate {
+class EventDetailsViewController: UIViewController, EventDetailsViewInput, EventDetailsViewDelegate {
     
     //MARK: - Properties
     
-    weak var delegate: EventTableDelegate?
+    weak var delegate: EditEventDelegate?
     var presenter: EventDetailsPresenter!
 
     //MARK: - IBOutlets

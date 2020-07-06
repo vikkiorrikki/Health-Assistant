@@ -12,7 +12,7 @@ class BaseEventPresenter {
     
     //MARK: - Data
     
-    weak var baseView: BaseEventViewController?
+    weak var baseView: BaseEventInput?
     
     var data: [SectionType: [CellType]] {
         [

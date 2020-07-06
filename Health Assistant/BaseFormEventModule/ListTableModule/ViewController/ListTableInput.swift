@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol ListTableDelegate: class {
+protocol ListTableInput: class {
     func showSelectedElement(with element: ListTableViewControllerElement, in index: IndexPath)
 }

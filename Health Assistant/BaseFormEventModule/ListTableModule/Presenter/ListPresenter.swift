@@ -10,7 +10,7 @@ import Foundation
 
 class ListPresenter {
     
-    weak var listView: ListTableDelegate?
+    weak var listView: ListTableInput?
     var arrayData: [ListTableViewControllerElement] = []
     var listCellIndexPath: IndexPath = []
     

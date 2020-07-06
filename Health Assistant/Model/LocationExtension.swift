@@ -8,11 +8,11 @@
 
 import Foundation
 
-struct Location {
-    let clinicName: String
-    let street: String
-    let houseNumber: Int
-}
+//struct Location {
+//    let clinicName: String
+//    let street: String
+//    let houseNumber: Int
+//}
 
 extension Location: ListTableViewControllerElement {
     var elementName: String {

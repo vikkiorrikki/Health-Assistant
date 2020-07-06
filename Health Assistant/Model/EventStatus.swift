@@ -8,17 +8,6 @@
 
 import  Foundation
 
-struct Event {
-    let title: String
-    let doctorsID: UUID
-    let doctorsName: String?
-    let startDate: Date
-    let endDate: Date
-    let location: Location?
-    let status: EventStatus
-    let note: String?
-}
-
 enum EventStatus: String, CaseIterable {
     case planned
     case completed

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol EventTableDelegateForPresenter: class {
+protocol EventTableInput: class {
     func openAddEventPage()
     func reloadTable()
     func deleteEvent(index: IndexPath)

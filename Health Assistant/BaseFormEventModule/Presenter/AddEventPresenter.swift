@@ -15,7 +15,7 @@ class AddEventPresenter: BaseEventPresenter {
     }
     
     override func setNavigationTitle() -> String? {
-        return "New Event"
+        "New Event"
     }
     
     override func userDidPressSaveButton() {

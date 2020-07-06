@@ -8,7 +8,6 @@
 
 import Foundation
 
-protocol EventTableDelegate: class {
-    func userCreatedNewEvent(_ event: Event) //for BaseEventVC
+protocol EditEventDelegate: class {
     func updateEventTable(with editedEvent: Event) //for EventDetailsVC
 }

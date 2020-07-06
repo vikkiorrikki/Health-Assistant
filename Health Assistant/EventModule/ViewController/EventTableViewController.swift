@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventTableViewController: UITableViewController, EventTableDelegateForPresenter {
+class EventTableViewController: UITableViewController, EventTableInput {
 
     var presenter: EventPresenter!
     weak var delegate: DoctorsTableViewController?
@@ -99,8 +99,8 @@ class EventTableViewController: UITableViewController, EventTableDelegateForPres
 
 //MARK: - EventTableDelegate
 
-extension EventTableViewController: EventTableDelegate {
-    func userCreatedNewEvent(with newEvent: Event) {
+extension EventTableViewController: EditEventDelegate {
+    func userAddedNewEvent(_ newEvent: Event) {
         presenter.addNewEvent(with: newEvent)
     }
     

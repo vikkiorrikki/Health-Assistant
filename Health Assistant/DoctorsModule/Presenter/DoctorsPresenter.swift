@@ -8,54 +8,57 @@
 
 import Foundation
 
-class DoctorsPresenter: DoctorsPresenterDelegate {
+class DoctorsPresenter: DoctorsViewControllerOutput {
     
-    weak var doctorsView: DoctorViewControllerDelegate?
+    weak var doctorsView: DoctorViewControllerInput?
     
-    var doctorsArray = [
-        Doctor(
-            id: UUID(),
-            specialization: "Name",
-            events:
-            [
-                Event(title: "today", doctorsName: "doctorsName", startDate: Date(), endDate: Date(), location: Location(clinicName: "DentaDenta+", street: "Kondratevskii Kondratevskii Kondratevskii", houseNumber: 1), status: .planned, note: "Notes, Notes"),
-                Event(title: "tomorrow", doctorsName: "Name", startDate: Date(), endDate: Date(), location: Location(clinicName: "", street: "", houseNumber: 1), status: .completed, note: nil)
-            ]
-        ),
-        Doctor(
-            id: UUID(),
-            specialization: "Name11",
-            events:
-            [
-                Event(title: "hello", doctorsName: "Name", startDate: Date(), endDate: Date(), location: Location(clinicName: "", street: "", houseNumber: 1), status: .canceled, note: "Notes"),
-                Event(title: "goodbye", doctorsName: "Name", startDate: Date(), endDate: Date(), location: Location(clinicName: "", street: "", houseNumber: 1), status: .planned, note: "Notes")
-            ]
-        )
-    ]
+    let storageService = StorageService()
+    
+    
+    var doctors = [Doctor]() {
+        didSet {
+            doctorsView?.reloadTableView()
+        }
+    }
+//    var doctors: [Doctor] = [] what's difference?
+    
+    
+    func viewIsReady() {
+        doctorsView?.setupUI()
+        doctors = storageService.loadDoctors()
+    }
     
     func userDidPressAddButton() {
         doctorsView?.showNewDoctorAlert()
     }
     
-    func userDidCreateDoctor(name: String?) {
-        if let newTextOfDoctor = name, !newTextOfDoctor.isEmpty {
-            let newDoctor = Doctor(
-                id: UUID(),
-                specialization: newTextOfDoctor,
-                events: []
-            )
-            doctorsArray.append(newDoctor)
-            doctorsView?.reloadTableView()
+    func userDidCreateDoctor(specialization: String?) {
+        
+        storageService.addDoctor()
+        
+        if let newTextOfDoctor = specialization, !newTextOfDoctor.isEmpty {
+            let newDoctor = Doctor(context: storageService.context)
+            newDoctor.id = UUID()
+            newDoctor.specialization = newTextOfDoctor
+            
+            storageService.addDoctor()
+            doctors = storageService.loadDoctors()
+            
+            //doctors.append(newDoctor)
+            
+            
         }
     }
     
     func userDidDeleteCell(index: IndexPath) {
-        doctorsArray.remove(at: index.row)
+        //storageService.removeDoctor()
+        
+        doctors.remove(at: index.row)
         doctorsView?.deleteDoctor(index: index)
     }
     
     func userDidSelectDoctorCell(with index: IndexPath) {
-        let doctor = doctorsArray[index.row]
+        let doctor = doctors[index.row]
         doctorsView?.openEvents(of: doctor) 
     }
 }
