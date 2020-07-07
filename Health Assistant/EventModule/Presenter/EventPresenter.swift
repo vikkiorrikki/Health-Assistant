@@ -12,10 +12,10 @@ class EventPresenter {
     
     weak var eventView: EventTableInput?
     
-    var doctor: Doctor
+    var doctorID: UUID
     
-    init(doctor: Doctor) {
-        self.doctor = doctor
+    init(doctorID: UUID) {
+        self.doctorID = doctorID
     }
     
     func userDidPressAddEventButton() {

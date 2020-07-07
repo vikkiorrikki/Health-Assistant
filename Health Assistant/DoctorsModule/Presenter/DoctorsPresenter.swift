@@ -10,18 +10,18 @@ import Foundation
 
 class DoctorsPresenter: DoctorsViewControllerOutput {
     
+    //MARK: - Properties
+    
     weak var doctorsView: DoctorViewControllerInput?
-    
     let storageService = StorageService()
-    
     
     var doctors = [Doctor]() {
         didSet {
             doctorsView?.reloadTableView()
         }
     }
-//    var doctors: [Doctor] = [] what's difference?
     
+    //MARK: - Methods
     
     func viewIsReady() {
         doctorsView?.setupUI()
@@ -33,27 +33,16 @@ class DoctorsPresenter: DoctorsViewControllerOutput {
     }
     
     func userDidCreateDoctor(specialization: String?) {
+        guard let specialization = specialization else { return }
         
-        storageService.addDoctor()
-        
-        if let newTextOfDoctor = specialization, !newTextOfDoctor.isEmpty {
-            let newDoctor = Doctor(context: storageService.context)
-            newDoctor.id = UUID()
-            newDoctor.specialization = newTextOfDoctor
-            
-            storageService.addDoctor()
-            doctors = storageService.loadDoctors()
-            
-            //doctors.append(newDoctor)
-            
-            
-        }
+        storageService.addDoctor(with: specialization)
+        doctors = storageService.loadDoctors()
     }
     
     func userDidDeleteCell(index: IndexPath) {
-        //storageService.removeDoctor()
+        storageService.removeDoctor(doctors[index.row])
+        doctors = storageService.loadDoctors()
         
-        doctors.remove(at: index.row)
         doctorsView?.deleteDoctor(index: index)
     }
     

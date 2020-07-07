@@ -12,19 +12,9 @@ import CoreData
 class StorageService {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var doctors = [Doctor]()
     
-    func addDoctor() {
-        
-        let entity =
-            NSEntityDescription.entity(forEntityName: "Doctor",
-                                       in: context)!
-        
-//        let doctor = NSManagedObject(entity: entity,
-//                                      insertInto: context)
-        
-//        doctor.setValue(specialization, forKeyPath: "specialization") //should we add values in this methods or in DoctorPresenter?
-//        doctor.setValue(UUID(), forKey: "id")
-        
+    private func saveToContext() {
         do {
             try context.save()
         } catch let error as NSError {
@@ -32,12 +22,33 @@ class StorageService {
         }
     }
     
-    func loadDoctors() -> [Doctor] {
+    func addDoctor(with specialization: String) {
+        let entity =
+            NSEntityDescription.entity(forEntityName: "Doctor", in: context)!
+        let doctor = NSManagedObject(entity: entity, insertInto: context)
         
+        doctor.setValue(specialization, forKeyPath: "specialization")
+        doctor.setValue(UUID(), forKey: "id")
+        
+        saveToContext()
     }
     
-    func loadEvents(doctorID: Int) {
+    func loadDoctors() -> [Doctor] {
+        let fetchRequest: NSFetchRequest<Doctor> = Doctor.fetchRequest()
         
+        do {
+            doctors = try context.fetch(fetchRequest)
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+        
+        return doctors
+    }
+    
+    func removeDoctor(_ doctor: Doctor) {
+        context.delete(doctor)
+        
+        saveToContext()
     }
     
     func addEvent() {
@@ -48,5 +59,11 @@ class StorageService {
         
     }
     
-    //delete will be as remove -> save to context?
+    func loadEvents(doctorID: Int) {
+        
+    }
+    
+    func removeEvent() {
+        
+    }
 }

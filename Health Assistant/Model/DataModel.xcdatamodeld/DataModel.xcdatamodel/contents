@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Doctor" representedClassName=".Doctor" syncable="YES" codeGenerationType="class">
+    <entity name="Doctor" representedClassName="Doctor" syncable="YES" codeGenerationType="class">
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="specialization" attributeType="String"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="doctor" inverseEntity="Event"/>
     </entity>
-    <entity name="Event" representedClassName=".Event" syncable="YES" codeGenerationType="class">
+    <entity name="Event" representedClassName="Event" syncable="YES" codeGenerationType="class">
         <attribute name="doctordsName" attributeType="String"/>
         <attribute name="doctorsId" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="endDate" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="locationId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="note" optional="YES" attributeType="String"/>
-        <attribute name="rawStatus" attributeType="String"/>
         <attribute name="startDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="status" attributeType="Transformable"/>
         <attribute name="title" attributeType="String"/>
         <relationship name="doctor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Doctor" inverseName="events" inverseEntity="Doctor"/>
         <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="event" inverseEntity="Location"/>
     </entity>
-    <entity name="Location" representedClassName=".Location" syncable="YES" codeGenerationType="class">
+    <entity name="Location" representedClassName="Location" syncable="YES" codeGenerationType="class">
         <attribute name="clinicName" attributeType="String"/>
         <attribute name="houseNumber" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="street" attributeType="String"/>

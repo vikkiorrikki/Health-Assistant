@@ -28,7 +28,6 @@
 		F5A653FC249531DD00E65F2E /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A653FB249531DD00E65F2E /* EventDetailsViewController.swift */; };
 		F5C1D6F924AE2D0B00C32614 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F5C1D6F724AE2D0B00C32614 /* DataModel.xcdatamodeld */; };
 		F5C1D6FB24AE77F800C32614 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C1D6FA24AE77F800C32614 /* StorageService.swift */; };
-		F5C1D6FD24AE7A3000C32614 /* EventExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C1D6FC24AE7A3000C32614 /* EventExtension.swift */; };
 		F5C1D6FF24AE7B4500C32614 /* BaseEventInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C1D6FE24AE7B4500C32614 /* BaseEventInput.swift */; };
 		F5C1D70124AF431500C32614 /* AddEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C1D70024AF431500C32614 /* AddEventDelegate.swift */; };
 		F5C706B624A2B03C00735597 /* EventDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C706B524A2B03C00735597 /* EventDetailsPresenter.swift */; };
@@ -75,7 +74,6 @@
 		F5A653FB249531DD00E65F2E /* EventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
 		F5C1D6F824AE2D0B00C32614 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		F5C1D6FA24AE77F800C32614 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
-		F5C1D6FC24AE7A3000C32614 /* EventExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventExtension.swift; sourceTree = "<group>"; };
 		F5C1D6FE24AE7B4500C32614 /* BaseEventInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEventInput.swift; sourceTree = "<group>"; };
 		F5C1D70024AF431500C32614 /* AddEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventDelegate.swift; sourceTree = "<group>"; };
 		F5C706B524A2B03C00735597 /* EventDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsPresenter.swift; sourceTree = "<group>"; };
@@ -226,7 +224,6 @@
 			isa = PBXGroup;
 			children = (
 				F56334962465F1C900D7C68A /* EventStatus.swift */,
-				F5C1D6FC24AE7A3000C32614 /* EventExtension.swift */,
 				F56334982465F2B100D7C68A /* LocationExtension.swift */,
 				F5C1D6F724AE2D0B00C32614 /* DataModel.xcdatamodeld */,
 			);
@@ -282,6 +279,13 @@
 			path = EventDetailsModule;
 			sourceTree = "<group>";
 		};
+		F5AD139E24B4DFAA000FDD07 /* CoreData Entities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "CoreData Entities";
+			sourceTree = "<group>";
+		};
 		F5C706B324A2AFFE00735597 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -315,6 +319,7 @@
 		F5ECF7AE244B301E009A55ED = {
 			isa = PBXGroup;
 			children = (
+				F5AD139E24B4DFAA000FDD07 /* CoreData Entities */,
 				F5ECF7B9244B301E009A55ED /* Health Assistant */,
 				F5ECF7B8244B301E009A55ED /* Products */,
 			);
@@ -455,7 +460,6 @@
 				F5ECF7BB244B301E009A55ED /* AppDelegate.swift in Sources */,
 				F5021CC824648E6900E5DD08 /* DoctorsPresenter.swift in Sources */,
 				F563349F2465FD6700D7C68A /* DoctorViewControllerInput.swift in Sources */,
-				F5C1D6FD24AE7A3000C32614 /* EventExtension.swift in Sources */,
 				F5A653FC249531DD00E65F2E /* EventDetailsViewController.swift in Sources */,
 				F5046449249E29E70067F8D9 /* AddEventPresenter.swift in Sources */,
 				F5E914182471BCF8007CF322 /* BaseEventPresenter.swift in Sources */,
