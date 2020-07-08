@@ -10,6 +10,13 @@ import Foundation
 
 class AddEventPresenter: BaseEventPresenter {
     
+    var doctorsID: UUID
+    
+    init(doctorsID: UUID) {
+//        super.init()
+        self.doctorsID = doctorsID
+    }
+    
     override func setButtonTitle() -> String? {
         "Add"
     }
@@ -24,14 +31,24 @@ class AddEventPresenter: BaseEventPresenter {
             baseView?.showValidationError()
             
         } else {
-            let newEvent = Event(
+            let newEvent = EventDataTransferObject(
                 title: title!,
-                doctorsName: doctorsName!,
+                doctorsID: doctorsID,
+                doctorsName: doctorsName,
+                locationID: locationID!,
                 startDate: startDate,
                 endDate: endDate,
-                location: selectedLocation,
-                status: selectedStatus ?? EventStatus.planned,
+                status: selectedStatus!,
                 note: notes)
+
+//            let newEvent = Event(
+//                title: title!,
+//                doctorsName: doctorsName!,
+//                startDate: startDate,
+//                endDate: endDate,
+//                location: selectedLocation,
+//                status: selectedStatus ?? EventStatus.planned,
+//                note: notes)
             
             baseView?.eventIsCreated(with: newEvent)
         }

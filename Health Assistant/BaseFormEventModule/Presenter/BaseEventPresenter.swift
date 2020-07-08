@@ -13,6 +13,7 @@ class BaseEventPresenter {
     //MARK: - Data
     
     weak var baseView: BaseEventInput?
+    let storageService = StorageService()
     
     var data: [SectionType: [CellType]] {
         [
@@ -29,12 +30,8 @@ class BaseEventPresenter {
         ]
     }
     
-    let locations = [Location(clinicName: "Saint Petersburg", street: "Nevskiy", houseNumber: 1),
-                    Location(clinicName: "Moscow", street: "Nevskiy", houseNumber: 2),
-                    Location(clinicName: "Abakan", street: "Nevskiy", houseNumber: 3)
-    ]
+    var locations = [Location]()
     var statuses: [EventStatus] = [.planned, .completed, .canceled]
-    
     
     var title: String?
     var doctorsName: String?
@@ -43,6 +40,7 @@ class BaseEventPresenter {
     var notes: String?
     var selectedLocation: Location?
     var selectedStatus: EventStatus?
+    var locationID: UUID?
     
     //MARK: - Methods
     
@@ -54,6 +52,30 @@ class BaseEventPresenter {
         
         baseView?.setupUI(buttonTitle: buttonTitle, navigationTitle: navigationTitle)
         baseView?.setupNotifications()
+        
+        initLocation()
+    }
+    
+    private func initLocation() {
+        let location1 = Location()
+        location1.clinicName = "Saint Petersburg"
+        location1.street = "Nevskiy"
+        location1.houseNumber = 1
+        location1.id = UUID()
+        
+        let location2 = Location()
+        location2.clinicName = "Moscow"
+        location2.street = "Nevskiy"
+        location2.houseNumber = 2
+        location2.id = UUID()
+        
+        let location3 = Location()
+        location3.clinicName = "Abakan"
+        location3.street = "Nevskiy"
+        location3.houseNumber = 2
+        location3.id = UUID()
+        
+        locations = [location1, location2, location3]
     }
     
     //MARK: - Create Event
@@ -96,6 +118,7 @@ class BaseEventPresenter {
     final func setSelectedElement(with element: ListTableViewControllerElement, in index: IndexPath) {
         if let element = element as? Location {
             selectedLocation = element
+            locationID = element.id
         } else if let element = element as? EventStatus {
             selectedStatus = element
         }

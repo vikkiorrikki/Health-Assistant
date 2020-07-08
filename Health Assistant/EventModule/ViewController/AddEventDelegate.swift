@@ -9,5 +9,5 @@
 import Foundation
 
 protocol AddEventDelegate: class {
-    func userAddedNewEvent(_ event: Event) //for BaseEventVC
+    func userAddedNewEvent(_ event: EventDataTransferObject) //for BaseEventVC
 }

@@ -47,23 +47,36 @@ class StorageService {
     
     func removeDoctor(_ doctor: Doctor) {
         context.delete(doctor)
-        
         saveToContext()
     }
     
-    func addEvent() {
+    func addEvent(from transferEvent: EventDataTransferObject) {
+        let entity =
+            NSEntityDescription.entity(forEntityName: "Event", in: context)!
+        let event = NSManagedObject(entity: entity, insertInto: context)
         
+        event.setValue(transferEvent.title, forKeyPath: "title")
+        event.setValue(transferEvent.doctorsID, forKeyPath: "doctorsID")
+        event.setValue(transferEvent.doctorsName, forKeyPath: "doctorsName")
+        event.setValue(transferEvent.locationID, forKeyPath: "locationID")
+        event.setValue(transferEvent.startDate, forKeyPath: "startDate")
+        event.setValue(transferEvent.endDate, forKeyPath: "endDate")
+        event.setValue(transferEvent.status, forKeyPath: "status")
+        event.setValue(transferEvent.note, forKeyPath: "note")
+        
+        saveToContext()
     }
     
     func updateEvent() {
         
     }
     
-    func loadEvents(doctorID: Int) {
+    func loadEvents(with doctorID: UUID) -> [Event] {
         
     }
     
-    func removeEvent() {
-        
+    func removeEvent(_ event: Event) {
+        context.delete(event)
+        saveToContext()
     }
 }

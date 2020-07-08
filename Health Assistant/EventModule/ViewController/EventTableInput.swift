@@ -9,7 +9,8 @@
 import Foundation
 
 protocol EventTableInput: class {
-    func openAddEventPage()
+    func setupUI()
+    func openAddEventPage(with doctorsID: UUID)
     func reloadTable()
     func deleteEvent(index: IndexPath)
     func openEventDetails(with event: Event)

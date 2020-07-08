@@ -10,21 +10,36 @@ import Foundation
 
 class EventPresenter {
     
+    //MARK: - Properties
+    
     weak var eventView: EventTableInput?
+    let storageService = StorageService()
     
     var doctorID: UUID
+    var events = [Event]() {
+        didSet {
+            eventView?.reloadTable()
+        }
+    }
+    
+    //MARK: - Methods
     
     init(doctorID: UUID) {
         self.doctorID = doctorID
     }
     
-    func userDidPressAddEventButton() {
-        eventView?.openAddEventPage()
+    func viewIsReady() {
+        eventView?.setupUI()
+        events = storageService.loadEvents(with: doctorID)
     }
     
-    func addNewEvent(with newEvent: Event) {
-        doctor.events.append(newEvent)
-        eventView?.reloadTable()
+    func userDidPressAddEventButton() {
+        eventView?.openAddEventPage(with: doctorID)
+    }
+    
+    func addNewEvent(with newEvent: EventDataTransferObject) {
+        storageService.addEvent(from: newEvent)
+        events = storageService.loadEvents(with: doctorID)
     }
     
     func updateEventValue(with editedEvent: Event) {
@@ -33,12 +48,13 @@ class EventPresenter {
     }
     
     func userDidDeleteEvent(index: IndexPath) {
-        doctor.events.remove(at: index.row)
+        storageService.removeEvent(events[index.row])
+        events = storageService.loadEvents(with: doctorID)
         eventView?.deleteEvent(index: index)
     }
     
     func userDidSelectEventCell(index: IndexPath) {
-        let event = doctor.events[index.row]
+        let event = events[index.row]
         eventView?.openEventDetails(with: event)
     }
 

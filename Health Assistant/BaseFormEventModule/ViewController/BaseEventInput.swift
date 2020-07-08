@@ -16,6 +16,6 @@ protocol BaseEventInput: class {
     func showStatusPicker(with statuses: [EventStatus], in indexPath: IndexPath)
     func reloadRow(indexPath: IndexPath)
     func showValidationError()
-    func eventIsCreated(with name: Event)
+    func eventIsCreated(with name: EventDataTransferObject)
     func eventIsEdited(_ event: Event)
 }

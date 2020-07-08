@@ -8,15 +8,15 @@
 
 import UIKit
 
-class EventTableViewController: UITableViewController, EventTableInput {
-
+class EventTableViewController: UITableViewController, EventTableInput, AddEventDelegate {
+    
     var presenter: EventPresenter!
     weak var delegate: DoctorsTableViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.eventView = self
-        tableView.tableFooterView = UIView()
+        presenter.viewIsReady()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -25,16 +25,20 @@ class EventTableViewController: UITableViewController, EventTableInput {
     
     //MARK: - Input methods
     
+    func setupUI() {
+        tableView.tableFooterView = UIView()
+    }
+    
     func reloadTable() {
         tableView.reloadData()
     }
     
-    func openAddEventPage() {
+    func openAddEventPage(with doctorsID: UUID) {
         let navBar = UINavigationController()
         
         let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddEventVC") as! BaseEventViewController
         controller.delegateForAddEvent = self
-        controller.presenter = AddEventPresenter()
+        controller.presenter = AddEventPresenter(doctorsID: doctorsID)
         
         navBar.pushViewController(controller, animated: true)
         present(navBar, animated: true)
@@ -51,20 +55,20 @@ class EventTableViewController: UITableViewController, EventTableInput {
     func deleteEvent(index: IndexPath) {
         tableView.deleteRows(at: [index], with: .fade)
     }
-
-
+    
+    
     // MARK: - TableView Data Source
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.doctor.events.count
+        return presenter.events.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let event = presenter.doctor.events[indexPath.row]
+        let event = presenter.events[indexPath.row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell", for: indexPath) as! EventTableViewCell
         cell.setupCell(with: event)
-
+        
         return cell
     }
     
@@ -73,14 +77,14 @@ class EventTableViewController: UITableViewController, EventTableInput {
             // Delete the row from the data source
             let alert = UIAlertController(title: "Are you sure you want to remove Event?", message: nil, preferredStyle: .alert)
             
-                alert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { action in
-                    self.presenter.userDidDeleteEvent(index: indexPath)
-                }))
+            alert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { action in
+                self.presenter.userDidDeleteEvent(index: indexPath)
+            }))
             
-              alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-              self.present(alert, animated: true)
+            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
         }
-
+        
     }
     
     // MARK: - TableView Delegate Methods
@@ -88,7 +92,7 @@ class EventTableViewController: UITableViewController, EventTableInput {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.userDidSelectEventCell(index: indexPath)
     }
-
+    
     //MARK: - Add New Event
     
     @IBAction func addEventButtonPressed(_ sender: Any) {
@@ -100,7 +104,7 @@ class EventTableViewController: UITableViewController, EventTableInput {
 //MARK: - EventTableDelegate
 
 extension EventTableViewController: EditEventDelegate {
-    func userAddedNewEvent(_ newEvent: Event) {
+    func userAddedNewEvent(_ newEvent: EventDataTransferObject) {
         presenter.addNewEvent(with: newEvent)
     }
     

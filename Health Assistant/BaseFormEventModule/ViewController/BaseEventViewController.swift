@@ -104,7 +104,7 @@ class BaseEventViewController: UIViewController, BaseEventInput {
         errorMessage.text = "Required fields: Title, Doctor's Name"
     }
     
-    func eventIsCreated(with name: Event) {
+    func eventIsCreated(with name: EventDataTransferObject) {
         delegateForAddEvent?.userAddedNewEvent(name)
         self.dismiss(animated: true)
         print(name)

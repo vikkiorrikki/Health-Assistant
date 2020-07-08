@@ -60,7 +60,7 @@ class DoctorsTableViewController: UITableViewController, DoctorViewControllerInp
     func openEvents(of doctor: Doctor) {
         let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EventVC") as! EventTableViewController
         controller.delegate = self
-        controller.presenter = EventPresenter(doctor: doctor)
+        controller.presenter = EventPresenter(doctorID: doctor.id!)
         
         navigationController?.pushViewController(controller, animated: true)
     }
