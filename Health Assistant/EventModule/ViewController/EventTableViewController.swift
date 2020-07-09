@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventTableViewController: UITableViewController, EventTableInput, AddEventDelegate {
+class EventTableViewController: UITableViewController, EventTableInput {
     
     var presenter: EventPresenter!
     weak var delegate: DoctorsTableViewController?
@@ -20,7 +20,8 @@ class EventTableViewController: UITableViewController, EventTableInput, AddEvent
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        // load data
+        presenter.updateEvents()
+        print("viewWillAppear")
     }
     
     //MARK: - Input methods
@@ -37,7 +38,6 @@ class EventTableViewController: UITableViewController, EventTableInput, AddEvent
         let navBar = UINavigationController()
         
         let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddEventVC") as! BaseEventViewController
-        controller.delegateForAddEvent = self
         controller.presenter = AddEventPresenter(doctorsID: doctorsID)
         
         navBar.pushViewController(controller, animated: true)
@@ -46,7 +46,6 @@ class EventTableViewController: UITableViewController, EventTableInput, AddEvent
     
     func openEventDetails(with event: Event) {
         let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EventDetailsVC") as! EventDetailsViewController
-        controller.delegate = self
         controller.presenter = EventDetailsPresenter(event: event)
         
         navigationController?.pushViewController(controller, animated: true)
@@ -99,16 +98,4 @@ class EventTableViewController: UITableViewController, EventTableInput, AddEvent
         presenter.userDidPressAddEventButton()
     }
     
-}
-
-//MARK: - EventTableDelegate
-
-extension EventTableViewController: EditEventDelegate {
-    func userAddedNewEvent(_ newEvent: EventDataTransferObject) {
-        presenter.addNewEvent(with: newEvent)
-    }
-    
-    func updateEventTable(with editedEvent: Event) {
-        presenter.updateEventValue(with: editedEvent)
-    }
 }

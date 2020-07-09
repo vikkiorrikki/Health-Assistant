@@ -30,6 +30,9 @@ class EventPresenter {
     
     func viewIsReady() {
         eventView?.setupUI()
+    }
+    
+    func updateEvents() {
         events = storageService.loadEvents(with: doctorID)
     }
     
@@ -37,20 +40,9 @@ class EventPresenter {
         eventView?.openAddEventPage(with: doctorID)
     }
     
-    func addNewEvent(with newEvent: EventDataTransferObject) {
-        storageService.addEvent(from: newEvent)
-        events = storageService.loadEvents(with: doctorID)
-    }
-    
-    func updateEventValue(with editedEvent: Event) {
-//        event = editedEvent
-        eventView?.reloadTable()
-    }
-    
     func userDidDeleteEvent(index: IndexPath) {
         storageService.removeEvent(events[index.row])
         events = storageService.loadEvents(with: doctorID)
-        eventView?.deleteEvent(index: index)
     }
     
     func userDidSelectEventCell(index: IndexPath) {

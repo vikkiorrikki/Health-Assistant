@@ -28,3 +28,12 @@ extension Date {
     }
 }
 
+extension NSObject {
+    func getStatus() -> EventStatus {
+        guard let eventStatus = EventStatus(rawValue: self.description) else {
+            return .planned
+        }
+        return eventStatus
+    }
+}
+

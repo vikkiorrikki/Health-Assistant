@@ -9,5 +9,5 @@
 import Foundation
 
 protocol BaseEventDelegate: class {
-    func userDidSelectElement(with element: ListTableViewControllerElement, in index: IndexPath)
+    func userDidSelectElement(with element: ListTableViewControllerElement)
 }

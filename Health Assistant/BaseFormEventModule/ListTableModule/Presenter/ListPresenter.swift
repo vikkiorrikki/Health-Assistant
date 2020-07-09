@@ -12,15 +12,12 @@ class ListPresenter {
     
     weak var listView: ListTableInput?
     var arrayData: [ListTableViewControllerElement] = []
-    var listCellIndexPath: IndexPath = []
     
-    func setupData(with array: [ListTableViewControllerElement], in index: IndexPath) {
-        arrayData = array
-        listCellIndexPath = index
+    init(with data: [ListTableViewControllerElement]) {
+        arrayData = data
     }
     
-    
     func userDidSelectListCell(with indexPath: IndexPath) {
-        listView?.showSelectedElement(with: arrayData[indexPath.row], in: listCellIndexPath)
+        listView?.showSelectedElement(with: arrayData[indexPath.row])
     }
 }

@@ -12,7 +12,6 @@ protocol DoctorViewControllerInput: class {
     func setupUI()
     func showNewDoctorAlert()
     func reloadTableView()
-    func deleteDoctor(index: IndexPath)
     func openEvents(of doctor: Doctor)
 }
 

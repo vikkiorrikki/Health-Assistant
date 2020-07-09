@@ -13,8 +13,7 @@ class BaseEventViewController: UIViewController, BaseEventInput {
     //MARK: - Properties
     
     var presenter: BaseEventPresenter!
-    
-    weak var delegateForAddEvent: AddEventDelegate?
+
     weak var delegateForEditEvent: EventDetailsViewDelegate?
     
     @IBOutlet weak var tableView: UITableView!
@@ -79,7 +78,7 @@ class BaseEventViewController: UIViewController, BaseEventInput {
     func showLocationPicker(with locations: [Location], in indexPath: IndexPath) {
         let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ListVC") as! ListTableViewController
         controller.delegate = self
-        controller.setupListVC(with: locations, in: indexPath)
+        controller.presenter = ListPresenter(with: locations)
         
         navigationController?.pushViewController(controller, animated: true)
     }
@@ -87,14 +86,13 @@ class BaseEventViewController: UIViewController, BaseEventInput {
     func showStatusPicker(with statuses: [EventStatus], in indexPath: IndexPath) {
         let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ListVC") as! ListTableViewController
         controller.delegate = self
-        controller.setupListVC(with: statuses, in: indexPath)
-        controller.presenter = ListPresenter()
+        controller.presenter = ListPresenter(with: statuses)
         
         navigationController?.pushViewController(controller, animated: true)
     }
     
-    func reloadRow(indexPath: IndexPath) {
-        tableView.reloadRows(at: [indexPath], with: .automatic)
+    func reloadTable() {
+        tableView.reloadData()
     }
     
     //MARK: - Actions With Event
@@ -104,10 +102,8 @@ class BaseEventViewController: UIViewController, BaseEventInput {
         errorMessage.text = "Required fields: Title, Doctor's Name"
     }
     
-    func eventIsCreated(with name: EventDataTransferObject) {
-        delegateForAddEvent?.userAddedNewEvent(name)
+    func eventIsCreated() {
         self.dismiss(animated: true)
-        print(name)
     }
     
     func eventIsEdited(_ event: Event) {
@@ -190,13 +186,14 @@ extension BaseEventViewController: UITableViewDataSource {
 extension BaseEventViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.userDidSelectCell(at: indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 //MARK: - AddEventDelegate
 
 extension BaseEventViewController: BaseEventDelegate {
-    func userDidSelectElement(with element: ListTableViewControllerElement, in index: IndexPath) {
-        presenter.setSelectedElement(with: element, in: index)
+    func userDidSelectElement(with element: ListTableViewControllerElement) {
+        presenter.setSelectedElement(with: element)
     }
 }
 //MARK: - TextFieldDelegate

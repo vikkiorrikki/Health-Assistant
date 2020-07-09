@@ -12,7 +12,6 @@ class EventDetailsViewController: UIViewController, EventDetailsViewInput, Event
     
     //MARK: - Properties
     
-    weak var delegate: EditEventDelegate?
     var presenter: EventDetailsPresenter!
 
     //MARK: - IBOutlets
@@ -30,23 +29,16 @@ class EventDetailsViewController: UIViewController, EventDetailsViewInput, Event
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.view = self
-        presenter.viewDidLoad()
+        presenter.viewIsReady()
     }
     
     //MARK: - Input Methods
     
     func setUI(for event: Event) {
-        titleEvent.text = event.title
-        fromDate.text = "from \(event.startDate.toStringFormat())"
-        toDate.text = "to \(event.endDate.toStringFormat())"
-        doctorsName.text = event.doctorsName
         
-        if let location = event.location {
-            locationEvent.text = "\(location.elementName)"
-            locationEvent.isHidden = false
-        } else {
-            locationEvent.isHidden = true
-        }
+        fromDate.text = "from \(event.startDate?.toStringFormat())"
+        toDate.text = "to \(event.endDate?.toStringFormat())"
+        doctorsName.text = event.doctorsName
         
         if event.note != nil && event.note != "" {
             notes.text = event.note
@@ -56,14 +48,25 @@ class EventDetailsViewController: UIViewController, EventDetailsViewInput, Event
             notesTitle.isHidden = true
             notes.isHidden = true
         }
-
     }
     
-    func setTitleColor(for event: Event) {
-        if event.status == EventStatus.completed {
+    func setTitle(for event: Event) {
+        titleEvent.text = event.title
+        
+        if event.status?.getStatus() == EventStatus.completed {
             titleEvent.textColor = .systemGreen
-        } else if event.status == EventStatus.canceled {
+        } else if event.status?.getStatus() == EventStatus.canceled {
             titleEvent.textColor = .red
+        }
+    }
+    
+    func setLocation(for event: Event) {
+        if let locationId = event.locationId {
+            let location = presenter.getLocation(by: locationId)
+            locationEvent.text = "\(location.elementName)"
+            locationEvent.isHidden = false
+        } else {
+            locationEvent.isHidden = true
         }
     }
     
@@ -87,9 +90,5 @@ class EventDetailsViewController: UIViewController, EventDetailsViewInput, Event
     
     func userEditedEvent(_ event: Event) {
         presenter.updateValueForEditedEvent(event)
-    }
-
-    func editedEventIsSaved(with editedEvent: Event) {
-        delegate?.updateEventTable(with: editedEvent)
     }
 }

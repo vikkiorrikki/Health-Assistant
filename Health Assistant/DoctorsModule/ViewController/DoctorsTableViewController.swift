@@ -17,6 +17,8 @@ class DoctorsTableViewController: UITableViewController, DoctorViewControllerInp
         
         presenter.doctorsView = self
         presenter.viewIsReady()
+        
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,10 +53,6 @@ class DoctorsTableViewController: UITableViewController, DoctorViewControllerInp
     
     func reloadTableView() {
         tableView.reloadData()
-    }
-    
-    func deleteDoctor(index: IndexPath) {
-        tableView.deleteRows(at: [index], with: .fade)
     }
     
     func openEvents(of doctor: Doctor) {

@@ -10,10 +10,8 @@ import Foundation
 
 class AddEventPresenter: BaseEventPresenter {
     
-    var doctorsID: UUID
-    
     init(doctorsID: UUID) {
-//        super.init()
+        super.init()
         self.doctorsID = doctorsID
     }
     
@@ -35,10 +33,10 @@ class AddEventPresenter: BaseEventPresenter {
                 title: title!,
                 doctorsID: doctorsID,
                 doctorsName: doctorsName,
-                locationID: locationID!,
+                locationID: locationID,
                 startDate: startDate,
                 endDate: endDate,
-                status: selectedStatus!,
+                status: selectedStatus ?? EventStatus.planned,
                 note: notes)
 
 //            let newEvent = Event(
@@ -49,8 +47,11 @@ class AddEventPresenter: BaseEventPresenter {
 //                location: selectedLocation,
 //                status: selectedStatus ?? EventStatus.planned,
 //                note: notes)
-            
-            baseView?.eventIsCreated(with: newEvent)
+            print("before")
+            storageService.addEvent(from: newEvent)
+            print("in")
+            baseView?.eventIsCreated()
+            print("after")
         }
     }
     

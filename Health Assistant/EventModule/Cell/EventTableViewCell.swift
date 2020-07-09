@@ -22,7 +22,7 @@ class EventTableViewCell: UITableViewCell {
         
         guard  let eventStatus = model.status else { return }
         
-        let status = getStatus(from: eventStatus)
+        let status = eventStatus.getStatus()
         switch status {
         case .planned:
             icon.image = UIImage()
@@ -33,10 +33,10 @@ class EventTableViewCell: UITableViewCell {
         }
     }
     
-    private func getStatus(from status: NSObject) -> EventStatus {
-        guard let eventStatus = EventStatus(rawValue: status.description) else {
-            return .planned
-        }
-        return eventStatus
-    }
+//    private func getStatus(from status: NSObject) -> EventStatus {
+//        guard let eventStatus = EventStatus(rawValue: status.description) else {
+//            return .planned
+//        }
+//        return eventStatus
+//    }
 }

@@ -9,5 +9,5 @@
 import Foundation
 
 protocol ListTableInput: class {
-    func showSelectedElement(with element: ListTableViewControllerElement, in index: IndexPath)
+    func showSelectedElement(with element: ListTableViewControllerElement)
 }

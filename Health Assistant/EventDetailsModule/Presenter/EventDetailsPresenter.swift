@@ -14,6 +14,7 @@ class EventDetailsPresenter {
     
     weak var view: EventDetailsViewInput?
     private var event: Event
+    let storageService = StorageService()
     
     init(event: Event) {
         self.event = event
@@ -21,9 +22,14 @@ class EventDetailsPresenter {
     
     //MARK: - Methods
     
-    func viewDidLoad(){
-        view?.setTitleColor(for: event)
+    func viewIsReady(){
         view?.setUI(for: event)
+        view?.setTitle(for: event)
+        view?.setLocation(for: event)
+    }
+    
+    func getLocation(by locationId: UUID) -> Location {
+        return storageService.loadLocation(by: locationId)
     }
     
     func userPressedEditButton() {
@@ -32,8 +38,7 @@ class EventDetailsPresenter {
     
     func updateValueForEditedEvent(_ event: Event) {
         self.event = event
-        viewDidLoad()
-        view?.editedEventIsSaved(with: event)
+        viewIsReady()
     }
     
 }

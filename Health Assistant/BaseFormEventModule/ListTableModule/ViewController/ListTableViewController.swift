@@ -17,13 +17,9 @@ class ListTableViewController: UITableViewController, ListTableInput {
         super.viewDidLoad()
         presenter.listView = self
     }
-
-    func setupListVC(with data: [ListTableViewControllerElement], in indexPath: IndexPath) {
-        presenter.setupData(with: data, in: indexPath)
-    }
     
-    func showSelectedElement(with element: ListTableViewControllerElement, in index: IndexPath) {
-        delegate?.userDidSelectElement(with: element, in: index)
+    func showSelectedElement(with element: ListTableViewControllerElement) {
+        delegate?.userDidSelectElement(with: element)
     }
     
     // MARK: - Table view data source

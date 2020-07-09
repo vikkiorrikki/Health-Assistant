@@ -41,6 +41,7 @@ class BaseEventPresenter {
     var selectedLocation: Location?
     var selectedStatus: EventStatus?
     var locationID: UUID?
+    var doctorsID: UUID!
     
     //MARK: - Methods
     
@@ -57,25 +58,30 @@ class BaseEventPresenter {
     }
     
     private func initLocation() {
-        let location1 = Location()
-        location1.clinicName = "Saint Petersburg"
-        location1.street = "Nevskiy"
-        location1.houseNumber = 1
-        location1.id = UUID()
         
-        let location2 = Location()
-        location2.clinicName = "Moscow"
-        location2.street = "Nevskiy"
-        location2.houseNumber = 2
-        location2.id = UUID()
+        locations = storageService.loadAllLocations()
         
-        let location3 = Location()
-        location3.clinicName = "Abakan"
-        location3.street = "Nevskiy"
-        location3.houseNumber = 2
-        location3.id = UUID()
-        
-        locations = [location1, location2, location3]
+        if locations.isEmpty {
+            let location1 = Location(context: storageService.context)
+            location1.clinicName = "Saint Petersburg"
+            location1.street = "Nevskiy"
+            location1.houseNumber = 1
+            location1.id = UUID()
+            
+            let location2 = Location(context: storageService.context)
+            location2.clinicName = "Moscow"
+            location2.street = "Nevskiy"
+            location2.houseNumber = 2
+            location2.id = UUID()
+            
+            let location3 = Location(context: storageService.context)
+            location3.clinicName = "Abakan"
+            location3.street = "Nevskiy"
+            location3.houseNumber = 3
+            location3.id = UUID()
+            
+            locations = [location1, location2, location3]
+        }
     }
     
     //MARK: - Create Event
@@ -114,15 +120,15 @@ class BaseEventPresenter {
             return
         }
     }
- 
-    final func setSelectedElement(with element: ListTableViewControllerElement, in index: IndexPath) {
+    
+    final func setSelectedElement(with element: ListTableViewControllerElement) {
         if let element = element as? Location {
             selectedLocation = element
             locationID = element.id
         } else if let element = element as? EventStatus {
             selectedStatus = element
         }
-        baseView?.reloadRow(indexPath: index)
+        baseView?.reloadTable()
     }
     
     //MARK: - Change Fields

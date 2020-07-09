@@ -14,8 +14,8 @@ protocol BaseEventInput: class {
     func showDatePicker(in indexPath: IndexPath)
     func showLocationPicker(with locations: [Location], in indexPath: IndexPath)
     func showStatusPicker(with statuses: [EventStatus], in indexPath: IndexPath)
-    func reloadRow(indexPath: IndexPath)
+    func reloadTable()
     func showValidationError()
-    func eventIsCreated(with name: EventDataTransferObject)
+    func eventIsCreated()
     func eventIsEdited(_ event: Event)
 }

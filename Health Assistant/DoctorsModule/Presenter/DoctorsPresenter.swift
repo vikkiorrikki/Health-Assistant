@@ -42,8 +42,6 @@ class DoctorsPresenter: DoctorsViewControllerOutput {
     func userDidDeleteCell(index: IndexPath) {
         storageService.removeDoctor(doctors[index.row])
         doctors = storageService.loadDoctors()
-        
-        doctorsView?.deleteDoctor(index: index)
     }
     
     func userDidSelectDoctorCell(with index: IndexPath) {
