@@ -9,6 +9,7 @@
 import Foundation
 
 struct EventDataTransferObject {
+    let id: UUID
     let title: String
     let doctorsID: UUID
     let doctorsName: String?

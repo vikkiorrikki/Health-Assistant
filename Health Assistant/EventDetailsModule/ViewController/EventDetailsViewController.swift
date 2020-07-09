@@ -30,6 +30,7 @@ class EventDetailsViewController: UIViewController, EventDetailsViewInput, Event
         super.viewDidLoad()
         presenter.view = self
         presenter.viewIsReady()
+        print("EventDetailsView did load")
     }
     
     //MARK: - Input Methods
@@ -57,6 +58,8 @@ class EventDetailsViewController: UIViewController, EventDetailsViewInput, Event
             titleEvent.textColor = .systemGreen
         } else if event.status?.getStatus() == EventStatus.canceled {
             titleEvent.textColor = .red
+        } else if event.status?.getStatus() == EventStatus.planned {
+            titleEvent.textColor = .black
         }
     }
     

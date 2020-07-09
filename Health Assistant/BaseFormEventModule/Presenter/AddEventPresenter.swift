@@ -30,6 +30,7 @@ class AddEventPresenter: BaseEventPresenter {
             
         } else {
             let newEvent = EventDataTransferObject(
+                id: UUID(),
                 title: title!,
                 doctorsID: doctorsID,
                 doctorsName: doctorsName,
@@ -39,19 +40,8 @@ class AddEventPresenter: BaseEventPresenter {
                 status: selectedStatus ?? EventStatus.planned,
                 note: notes)
 
-//            let newEvent = Event(
-//                title: title!,
-//                doctorsName: doctorsName!,
-//                startDate: startDate,
-//                endDate: endDate,
-//                location: selectedLocation,
-//                status: selectedStatus ?? EventStatus.planned,
-//                note: notes)
-            print("before")
             storageService.addEvent(from: newEvent)
-            print("in")
             baseView?.eventIsCreated()
-            print("after")
         }
     }
     

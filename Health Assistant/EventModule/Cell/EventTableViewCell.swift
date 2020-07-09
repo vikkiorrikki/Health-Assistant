@@ -19,6 +19,7 @@ class EventTableViewCell: UITableViewCell {
         titleLabel.text = model.title
         dateLabel.text = model.startDate?.toStringFormat()
         locationLabel.text = model.location?.clinicName
+        print("Location \(locationLabel.text)")
         
         guard  let eventStatus = model.status else { return }
         
@@ -32,11 +33,4 @@ class EventTableViewCell: UITableViewCell {
             icon.image = UIImage(systemName: "multiply.circle")
         }
     }
-    
-//    private func getStatus(from status: NSObject) -> EventStatus {
-//        guard let eventStatus = EventStatus(rawValue: status.description) else {
-//            return .planned
-//        }
-//        return eventStatus
-//    }
 }

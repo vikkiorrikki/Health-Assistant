@@ -9,10 +9,11 @@
         <attribute name="doctorsId" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="doctorsName" attributeType="String"/>
         <attribute name="endDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="locationId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="note" optional="YES" attributeType="String"/>
         <attribute name="startDate" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="status" attributeType="Transformable"/>
+        <attribute name="status" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData"/>
         <attribute name="title" attributeType="String"/>
         <relationship name="doctor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Doctor" inverseName="events" inverseEntity="Doctor"/>
         <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="event" inverseEntity="Location"/>
@@ -26,7 +27,7 @@
     </entity>
     <elements>
         <element name="Doctor" positionX="-219.18359375" positionY="5.3359375" width="128" height="88"/>
-        <element name="Event" positionX="-34.16796875" positionY="-231.43359375" width="128" height="193"/>
+        <element name="Event" positionX="-34.16796875" positionY="-231.43359375" width="128" height="208"/>
         <element name="Location" positionX="199.71484375" positionY="-270.2421875" width="128" height="118"/>
     </elements>
 </model>

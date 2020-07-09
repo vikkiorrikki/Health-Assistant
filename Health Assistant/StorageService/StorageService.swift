@@ -21,9 +21,9 @@ class StorageService {
         }
     }
     
-//    private func initEventFromTransferObject(_ event: EventDataTransferObject) -> Event {
-//
-//    }
+    //    private func initEventFromTransferObject(_ event: EventDataTransferObject) -> Event {
+    //
+    //    }
     
     func addDoctor(with specialization: String) {
         let entity =
@@ -51,7 +51,13 @@ class StorageService {
     }
     
     func removeDoctor(_ doctor: Doctor) {
+        let events = loadEvents(with: doctor.id!)
+        for event in events {
+            context.delete(event)
+        }
+        
         context.delete(doctor)
+        
         saveToContext()
     }
     
@@ -60,6 +66,7 @@ class StorageService {
             NSEntityDescription.entity(forEntityName: "Event", in: context)!
         let event = NSManagedObject(entity: entity, insertInto: context)
         
+        event.setValue(transferEvent.id, forKey: "id")
         event.setValue(transferEvent.title, forKeyPath: "title")
         event.setValue(transferEvent.doctorsID, forKeyPath: "doctorsId")
         event.setValue(transferEvent.doctorsName, forKeyPath: "doctorsName")
@@ -73,17 +80,32 @@ class StorageService {
     }
     
     func updateEvent(from transferEvent: EventDataTransferObject) -> Event {
-        let entity =
-            NSEntityDescription.entity(forEntityName: "Event", in: context)!
-        let event = NSManagedObject(entity: entity, insertInto: context) as! Event
+        let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", transferEvent.id as CVarArg)
         
+        var events = [Event]()
+        var event = Event()
+        do {
+            events = try context.fetch(fetchRequest)
+            if let resultEvent = events.first {
+                event = resultEvent
+            } else {
+                let emptyEvent = Event(context: context)
+                emptyEvent.id = UUID()
+                return emptyEvent
+            }
+            
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+
         event.setValue(transferEvent.title, forKeyPath: "title")
         event.setValue(transferEvent.doctorsID, forKeyPath: "doctorsId")
         event.setValue(transferEvent.doctorsName, forKeyPath: "doctorsName")
         event.setValue(transferEvent.locationID, forKeyPath: "locationId")
         event.setValue(transferEvent.startDate, forKeyPath: "startDate")
         event.setValue(transferEvent.endDate, forKeyPath: "endDate")
-        event.setValue(transferEvent.status, forKeyPath: "status")
+        event.setValue(transferEvent.status.rawValue, forKeyPath: "status")
         event.setValue(transferEvent.note, forKeyPath: "note")
         
         saveToContext()

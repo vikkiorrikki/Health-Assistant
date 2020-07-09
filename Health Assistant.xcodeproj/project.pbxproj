@@ -25,6 +25,8 @@
 		F57A000E24AB588800AE227A /* ListTableInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57A000D24AB588800AE227A /* ListTableInput.swift */; };
 		F57A001024ABE81400AE227A /* EventTableInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57A000F24ABE81400AE227A /* EventTableInput.swift */; };
 		F58DE61524B62B960082F901 /* EventDetailsViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58DE61424B62B960082F901 /* EventDetailsViewDelegate.swift */; };
+		F58DE61724B7B80C0082F901 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58DE61624B7B80C0082F901 /* DateExtension.swift */; };
+		F58DE61924B7B8200082F901 /* NSObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58DE61824B7B8200082F901 /* NSObjectExtension.swift */; };
 		F5A653FC249531DD00E65F2E /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A653FB249531DD00E65F2E /* EventDetailsViewController.swift */; };
 		F5C1D6F924AE2D0B00C32614 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F5C1D6F724AE2D0B00C32614 /* DataModel.xcdatamodeld */; };
 		F5C1D6FB24AE77F800C32614 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C1D6FA24AE77F800C32614 /* StorageService.swift */; };
@@ -70,6 +72,8 @@
 		F57A000D24AB588800AE227A /* ListTableInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableInput.swift; sourceTree = "<group>"; };
 		F57A000F24ABE81400AE227A /* EventTableInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableInput.swift; sourceTree = "<group>"; };
 		F58DE61424B62B960082F901 /* EventDetailsViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsViewDelegate.swift; sourceTree = "<group>"; };
+		F58DE61624B7B80C0082F901 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		F58DE61824B7B8200082F901 /* NSObjectExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObjectExtension.swift; sourceTree = "<group>"; };
 		F5A653FB249531DD00E65F2E /* EventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
 		F5C1D6F824AE2D0B00C32614 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		F5C1D6FA24AE77F800C32614 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
@@ -223,6 +227,8 @@
 				F56334982465F2B100D7C68A /* LocationExtension.swift */,
 				F5C1D6F724AE2D0B00C32614 /* DataModel.xcdatamodeld */,
 				F52A647224B4F4BB0047D028 /* EventDataTransferObject.swift */,
+				F58DE61624B7B80C0082F901 /* DateExtension.swift */,
+				F58DE61824B7B8200082F901 /* NSObjectExtension.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -450,11 +456,13 @@
 				F57A000E24AB588800AE227A /* ListTableInput.swift in Sources */,
 				F55DEF8B24705382003052C0 /* BaseEventDelegate.swift in Sources */,
 				F5093444246C977600E33163 /* BaseEventViewController.swift in Sources */,
+				F58DE61924B7B8200082F901 /* NSObjectExtension.swift in Sources */,
 				F5E9141B2471BE69007CF322 /* SectionType.swift in Sources */,
 				F5261FDA24A2BBAE00A85F49 /* EventDetailsViewInput.swift in Sources */,
 				F5FDC0A7246DE201006484D4 /* ListTableViewController.swift in Sources */,
 				F5ECF7BB244B301E009A55ED /* AppDelegate.swift in Sources */,
 				F5021CC824648E6900E5DD08 /* DoctorsPresenter.swift in Sources */,
+				F58DE61724B7B80C0082F901 /* DateExtension.swift in Sources */,
 				F563349F2465FD6700D7C68A /* DoctorViewControllerInput.swift in Sources */,
 				F5A653FC249531DD00E65F2E /* EventDetailsViewController.swift in Sources */,
 				F5046449249E29E70067F8D9 /* AddEventPresenter.swift in Sources */,

@@ -13,14 +13,20 @@ class EditEventPresenter: BaseEventPresenter {
     init(event: Event) {
         super.init()
         
+        self.eventId = event.id
         self.title = event.title
         self.doctorsName = event.doctorsName
         self.startDate = event.startDate!
         self.endDate = event.endDate!
         self.notes = event.note
-        self.selectedLocation = event.location
         self.selectedStatus = event.status?.getStatus()
         self.doctorsID = event.doctorsId!
+        
+        guard let locationId = event.locationId else { return }
+        self.locationID = locationId
+        self.selectedLocation = storageService.loadLocation(by: locationId)
+        
+        print(event)
     }
     
     override func setButtonTitle() -> String? {
@@ -37,7 +43,10 @@ class EditEventPresenter: BaseEventPresenter {
             baseView?.showValidationError()
             
         } else {
+            guard let eventId = self.eventId else { return }
+            
             let editedTransferEvent = EventDataTransferObject(
+            id: eventId,
             title: title!,
             doctorsID: doctorsID,
             doctorsName: doctorsName,
@@ -48,7 +57,7 @@ class EditEventPresenter: BaseEventPresenter {
             note: notes)
             
             let editedEvent = storageService.updateEvent(from: editedTransferEvent)
-            baseView?.eventIsEdited(editedEvent)
+            baseView?.eventIsEdited(editedEvent) 
         }
     }
     

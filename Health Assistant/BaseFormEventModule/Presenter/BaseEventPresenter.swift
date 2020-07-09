@@ -33,6 +33,7 @@ class BaseEventPresenter {
     var locations = [Location]()
     var statuses: [EventStatus] = [.planned, .completed, .canceled]
     
+    var eventId: UUID?
     var title: String?
     var doctorsName: String?
     var startDate = Date()
