@@ -21,9 +21,16 @@ class StorageService {
         }
     }
     
-    //    private func initEventFromTransferObject(_ event: EventDataTransferObject) -> Event {
-    //
-    //    }
+    private func initAttributes(for event: Event, from transferEvent: EventDataTransferObject) {
+        event.title = transferEvent.title
+        event.doctorsId = transferEvent.doctorsID
+        event.doctorsName = transferEvent.doctorsName
+        event.locationId = transferEvent.locationID
+        event.startDate = transferEvent.startDate
+        event.endDate = transferEvent.endDate
+        event.setValue(transferEvent.status.rawValue, forKeyPath: "status")
+        event.note = transferEvent.note
+    }
     
     func addDoctor(with specialization: String) {
         let entity =
@@ -51,7 +58,7 @@ class StorageService {
     }
     
     func removeDoctor(_ doctor: Doctor) {
-        let events = loadEvents(with: doctor.id!)
+        let events = loadEvents(by: doctor.id!)
         for event in events {
             context.delete(event)
         }
@@ -62,20 +69,11 @@ class StorageService {
     }
     
     func addEvent(from transferEvent: EventDataTransferObject) {
-        let entity =
-            NSEntityDescription.entity(forEntityName: "Event", in: context)!
-        let event = NSManagedObject(entity: entity, insertInto: context)
+        let event = Event(context: context)
+        event.id = transferEvent.id
         
-        event.setValue(transferEvent.id, forKey: "id")
-        event.setValue(transferEvent.title, forKeyPath: "title")
-        event.setValue(transferEvent.doctorsID, forKeyPath: "doctorsId")
-        event.setValue(transferEvent.doctorsName, forKeyPath: "doctorsName")
-        event.setValue(transferEvent.locationID, forKeyPath: "locationId")
-        event.setValue(transferEvent.startDate, forKeyPath: "startDate")
-        event.setValue(transferEvent.endDate, forKeyPath: "endDate")
-        event.setValue(transferEvent.status.rawValue, forKeyPath: "status")
-        event.setValue(transferEvent.note, forKeyPath: "note")
-        
+        initAttributes(for: event, from: transferEvent)
+
         saveToContext()
     }
     
@@ -98,22 +96,14 @@ class StorageService {
         } catch let error as NSError {
             print(error.localizedDescription)
         }
-
-        event.setValue(transferEvent.title, forKeyPath: "title")
-        event.setValue(transferEvent.doctorsID, forKeyPath: "doctorsId")
-        event.setValue(transferEvent.doctorsName, forKeyPath: "doctorsName")
-        event.setValue(transferEvent.locationID, forKeyPath: "locationId")
-        event.setValue(transferEvent.startDate, forKeyPath: "startDate")
-        event.setValue(transferEvent.endDate, forKeyPath: "endDate")
-        event.setValue(transferEvent.status.rawValue, forKeyPath: "status")
-        event.setValue(transferEvent.note, forKeyPath: "note")
         
+        initAttributes(for: event, from: transferEvent)
         saveToContext()
         
         return event
     }
     
-    func loadEvents(with doctorID: UUID) -> [Event] {
+    func loadEvents(by doctorID: UUID) -> [Event] {
         let doctorsId = doctorID
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "doctorsId == %@", doctorsId as CVarArg)

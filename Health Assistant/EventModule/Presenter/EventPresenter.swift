@@ -33,7 +33,7 @@ class EventPresenter {
     }
     
     func updateEvents() {
-        events = storageService.loadEvents(with: doctorID)
+        events = storageService.loadEvents(by: doctorID)
     }
     
     func userDidPressAddEventButton() {
@@ -42,7 +42,7 @@ class EventPresenter {
     
     func userDidDeleteEvent(index: IndexPath) {
         storageService.removeEvent(events[index.row])
-        events = storageService.loadEvents(with: doctorID)
+        events = storageService.loadEvents(by: doctorID)
     }
     
     func userDidSelectEventCell(index: IndexPath) {
