@@ -28,10 +28,6 @@ class EventDetailsPresenter {
         view?.setLocation(for: event)
     }
     
-    func getLocation(by locationId: UUID) -> Location {
-        return storageService.loadLocation(by: locationId)
-    }
-    
     func userPressedEditButton() {
         view?.openEditEventPage(for: event)
     }

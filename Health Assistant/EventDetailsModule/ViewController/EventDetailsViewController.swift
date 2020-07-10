@@ -64,8 +64,7 @@ class EventDetailsViewController: UIViewController, EventDetailsViewInput, Event
     }
     
     func setLocation(for event: Event) {
-        if let locationId = event.locationId {
-            let location = presenter.getLocation(by: locationId)
+        if let location = event.location {
             locationEvent.text = "\(location.elementName)"
             locationEvent.isHidden = false
         } else {

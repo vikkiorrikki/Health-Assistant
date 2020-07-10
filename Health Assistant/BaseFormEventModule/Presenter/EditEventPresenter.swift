@@ -21,10 +21,8 @@ class EditEventPresenter: BaseEventPresenter {
         self.notes = event.note
         self.selectedStatus = event.status?.getStatus()
         self.doctorsID = event.doctorsId!
-        
-        guard let locationId = event.locationId else { return }
-        self.locationID = locationId
-        self.selectedLocation = storageService.loadLocation(by: locationId)
+        self.locationID = event.locationId
+        self.selectedLocation = event.location
         
         print(event)
     }
@@ -56,11 +54,12 @@ class EditEventPresenter: BaseEventPresenter {
             status: selectedStatus ?? EventStatus.planned,
             note: notes)
             
-            let editedEvent = storageService.updateEvent(from: editedTransferEvent)
-            baseView?.eventIsEdited(editedEvent) 
+            if storageService.updateEvent(from: editedTransferEvent) {
+                let editedEvent = storageService.loadEvent(by: eventId)
+                baseView?.eventIsEdited(editedEvent) 
+            } else {
+                baseView?.showErrorAlert()
+            }
         }
     }
-    
-    
-    
 }

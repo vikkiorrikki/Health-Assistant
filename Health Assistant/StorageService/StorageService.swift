@@ -21,17 +21,6 @@ class StorageService {
         }
     }
     
-    private func initAttributes(for event: Event, from transferEvent: EventDataTransferObject) {
-        event.title = transferEvent.title
-        event.doctorsId = transferEvent.doctorsID
-        event.doctorsName = transferEvent.doctorsName
-        event.locationId = transferEvent.locationID
-        event.startDate = transferEvent.startDate
-        event.endDate = transferEvent.endDate
-        event.setValue(transferEvent.status.rawValue, forKeyPath: "status")
-        event.note = transferEvent.note
-    }
-    
     func addDoctor(with specialization: String) {
         let entity =
             NSEntityDescription.entity(forEntityName: "Doctor", in: context)!
@@ -71,40 +60,57 @@ class StorageService {
     func addEvent(from transferEvent: EventDataTransferObject) {
         let event = Event(context: context)
         event.id = transferEvent.id
+        event.title = transferEvent.title
+        event.doctorsId = transferEvent.doctorsID
+        event.doctorsName = transferEvent.doctorsName
+        event.locationId = transferEvent.locationID
+        event.startDate = transferEvent.startDate
+        event.endDate = transferEvent.endDate
+        event.setValue(transferEvent.status.rawValue, forKeyPath: "status")
+        event.note = transferEvent.note
         
-        initAttributes(for: event, from: transferEvent)
+        guard let locationId = transferEvent.locationID else {
+            return
+        }
+        event.location = loadLocation(by: locationId)
 
         saveToContext()
     }
     
-    func updateEvent(from transferEvent: EventDataTransferObject) -> Event {
+    @discardableResult func updateEvent(from transferEvent: EventDataTransferObject) -> Bool {
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "id == %@", transferEvent.id as CVarArg)
-        
-        var events = [Event]()
-        var event = Event()
+
         do {
-            events = try context.fetch(fetchRequest)
-            if let resultEvent = events.first {
-                event = resultEvent
-            } else {
-                let emptyEvent = Event(context: context)
-                emptyEvent.id = UUID()
-                return emptyEvent
+            guard let event = try context.fetch(fetchRequest).first, let locationId = transferEvent.locationID else {
+                return false
             }
+            event.location = loadLocation(by: locationId)
+            
+            event.title = transferEvent.title
+            event.doctorsId = transferEvent.doctorsID
+            event.doctorsName = transferEvent.doctorsName
+            event.locationId = transferEvent.locationID
+            event.startDate = transferEvent.startDate
+            event.endDate = transferEvent.endDate
+            event.setValue(transferEvent.status.rawValue, forKeyPath: "status")
+            event.note = transferEvent.note
             
         } catch let error as NSError {
             print(error.localizedDescription)
+            return false
         }
         
-        initAttributes(for: event, from: transferEvent)
-        saveToContext()
-        
-        return event
+        do {
+            try context.save()
+            return true
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+            return false
+        }
     }
     
-    func loadEvents(by doctorID: UUID) -> [Event] {
-        let doctorsId = doctorID
+    func loadEvents(by doctorsId: UUID) -> [Event] {
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "doctorsId == %@", doctorsId as CVarArg)
         
@@ -117,6 +123,23 @@ class StorageService {
         }
         
         return events
+    }
+    
+    func loadEvent(by eventId: UUID) -> Event {
+        let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", eventId as CVarArg)
+        
+        var event = Event()
+        
+        do {
+            if let resultEvent = try context.fetch(fetchRequest).first {
+                event = resultEvent
+            }
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+        
+        return event
     }
     
     func removeEvent(_ event: Event) {
@@ -138,26 +161,15 @@ class StorageService {
         return locations
     }
     
-    func loadLocation(by locationId: UUID) -> Location {
-        let locationId = locationId
+    func loadLocation(by locationId: UUID) -> Location? {
         let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "id == %@", locationId as CVarArg)
         
-        var locations = [Location]()
-        var location = Location()
-        
         do {
-            locations = try context.fetch(fetchRequest)
-            if let resultLocation = locations.first {
-                location = resultLocation
-            } else {
-                let emptyLocation = Location(context: context)
-                emptyLocation.id = UUID()
-                return emptyLocation
-            }
+            return try context.fetch(fetchRequest).first
         } catch let error as NSError {
             print(error.localizedDescription)
+            return nil
         }
-        return location
     }
 }

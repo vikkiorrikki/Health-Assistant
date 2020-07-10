@@ -95,6 +95,12 @@ class BaseEventViewController: UIViewController, BaseEventInput {
         tableView.reloadData()
     }
     
+    func showErrorAlert() {
+        let alert = UIAlertController(title: "Error", message: "Event is not saved!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        present(alert, animated: true)
+    }
+    
     //MARK: - Actions With Event
     
     func showValidationError() {
