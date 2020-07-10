@@ -40,9 +40,11 @@ class AddEventPresenter: BaseEventPresenter {
                 status: selectedStatus ?? EventStatus.planned,
                 note: notes)
 
-            storageService.addEvent(from: newEvent)
-            baseView?.eventIsCreated()
+            if storageService.addEvent(from: newEvent) {
+                baseView?.eventIsCreated()
+            } else {
+                baseView?.showErrorAlert(with: "Event is not added!")
+            }
         }
     }
-    
 }

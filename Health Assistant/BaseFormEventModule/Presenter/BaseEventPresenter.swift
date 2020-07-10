@@ -59,10 +59,9 @@ class BaseEventPresenter {
     }
     
     private func initLocation() {
-        
-        locations = storageService.loadAllLocations()
-        
-        if locations.isEmpty {
+        if let locations = storageService.loadAllLocations() {
+            self.locations = locations
+        } else {
             let location1 = Location(context: storageService.context)
             location1.clinicName = "Saint Petersburg"
             location1.street = "Nevskiy"

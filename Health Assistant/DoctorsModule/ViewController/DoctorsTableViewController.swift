@@ -55,6 +55,12 @@ class DoctorsTableViewController: UITableViewController, DoctorViewControllerInp
         tableView.reloadData()
     }
     
+    func showErrorAlert(with message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        present(alert, animated: true)
+    }
+    
     func openEvents(of doctor: Doctor) {
         let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EventVC") as! EventTableViewController
         controller.delegate = self

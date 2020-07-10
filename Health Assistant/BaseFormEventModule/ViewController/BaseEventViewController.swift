@@ -14,6 +14,7 @@ class BaseEventViewController: UIViewController, BaseEventInput {
     
     var presenter: BaseEventPresenter!
 
+    weak var delegateForAddEvent: AddEventDelegate?
     weak var delegateForEditEvent: EventDetailsViewDelegate?
     
     @IBOutlet weak var tableView: UITableView!
@@ -95,8 +96,8 @@ class BaseEventViewController: UIViewController, BaseEventInput {
         tableView.reloadData()
     }
     
-    func showErrorAlert() {
-        let alert = UIAlertController(title: "Error", message: "Event is not saved!", preferredStyle: .alert)
+    func showErrorAlert(with message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         present(alert, animated: true)
     }
@@ -109,6 +110,7 @@ class BaseEventViewController: UIViewController, BaseEventInput {
     }
     
     func eventIsCreated() {
+        delegateForAddEvent?.showCreatedEvent()
         self.dismiss(animated: true)
     }
     

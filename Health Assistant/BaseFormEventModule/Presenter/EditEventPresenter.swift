@@ -55,10 +55,14 @@ class EditEventPresenter: BaseEventPresenter {
             note: notes)
             
             if storageService.updateEvent(from: editedTransferEvent) {
-                let editedEvent = storageService.loadEvent(by: eventId)
-                baseView?.eventIsEdited(editedEvent) 
+                
+                if let editedEvent = storageService.loadEvent(by: eventId) {
+                    baseView?.eventIsEdited(editedEvent)
+                } else {
+                    baseView?.showErrorAlert(with: "Event is not loaded!")
+                }
             } else {
-                baseView?.showErrorAlert()
+                baseView?.showErrorAlert(with: "Event is not updated!")
             }
         }
     }

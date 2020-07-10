@@ -37,8 +37,8 @@ class EventDetailsViewController: UIViewController, EventDetailsViewInput, Event
     
     func setUI(for event: Event) {
         
-        fromDate.text = "from \(event.startDate?.toStringFormat())"
-        toDate.text = "to \(event.endDate?.toStringFormat())"
+        fromDate.text = "from \(String(describing: event.startDate!.toStringFormat()))"
+        toDate.text = "to \(String(describing: event.endDate!.toStringFormat()))"
         doctorsName.text = event.doctorsName
         
         if event.note != nil && event.note != "" {

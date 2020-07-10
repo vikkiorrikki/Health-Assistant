@@ -34,10 +34,17 @@ class EventTableViewController: UITableViewController, EventTableInput {
         tableView.reloadData()
     }
     
+    func showErrorAlert(with message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        present(alert, animated: true)
+    }
+    
     func openAddEventPage(with doctorsID: UUID) {
         let navBar = UINavigationController()
         
         let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddEventVC") as! BaseEventViewController
+        controller.delegateForAddEvent = self
         controller.presenter = AddEventPresenter(doctorsID: doctorsID)
         
         navBar.pushViewController(controller, animated: true)
@@ -98,4 +105,10 @@ class EventTableViewController: UITableViewController, EventTableInput {
         presenter.userDidPressAddEventButton()
     }
     
+}
+
+extension EventTableViewController: AddEventDelegate {
+    func showCreatedEvent() {
+        presenter.updateEvents()
+    }
 }

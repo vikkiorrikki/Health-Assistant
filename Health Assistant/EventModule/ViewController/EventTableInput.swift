@@ -12,6 +12,7 @@ protocol EventTableInput: class {
     func setupUI()
     func openAddEventPage(with doctorsID: UUID)
     func reloadTable()
+    func showErrorAlert(with message: String)
     func deleteEvent(index: IndexPath)
     func openEventDetails(with event: Event)
 }

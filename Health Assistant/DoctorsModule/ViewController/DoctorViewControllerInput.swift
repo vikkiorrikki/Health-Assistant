@@ -12,6 +12,7 @@ protocol DoctorViewControllerInput: class {
     func setupUI()
     func showNewDoctorAlert()
     func reloadTableView()
+    func showErrorAlert(with message: String)
     func openEvents(of doctor: Doctor)
 }
 

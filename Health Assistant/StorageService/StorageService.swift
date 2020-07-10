@@ -13,15 +13,7 @@ class StorageService {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    private func saveToContext() {
-        do {
-            try context.save()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
-    }
-    
-    func addDoctor(with specialization: String) {
+    func addDoctor(with specialization: String) -> Bool {
         let entity =
             NSEntityDescription.entity(forEntityName: "Doctor", in: context)!
         let doctor = NSManagedObject(entity: entity, insertInto: context)
@@ -29,35 +21,46 @@ class StorageService {
         doctor.setValue(specialization, forKeyPath: "specialization")
         doctor.setValue(UUID(), forKey: "id")
         
-        saveToContext()
+        do {
+            try context.save()
+            return true
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+            return false
+        }
     }
     
-    func loadDoctors() -> [Doctor] {
+    func loadDoctors() -> [Doctor]? {
         let fetchRequest: NSFetchRequest<Doctor> = Doctor.fetchRequest()
-        
-        var doctors = [Doctor]()
-        
+
         do {
-            doctors = try context.fetch(fetchRequest)
+            return try context.fetch(fetchRequest)
         } catch let error as NSError {
             print(error.localizedDescription)
+            return nil
         }
-        
-        return doctors
     }
     
-    func removeDoctor(_ doctor: Doctor) {
-        let events = loadEvents(by: doctor.id!)
-        for event in events {
-            context.delete(event)
+    func removeDoctor(_ doctor: Doctor) -> Bool {
+        if let events = loadEvents(by: doctor.id!) {
+            for event in events {
+                context.delete(event)
+            }
+        } else {
+            print("Events are empty")
         }
-        
         context.delete(doctor)
         
-        saveToContext()
+        do {
+            try context.save()
+            return true
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+            return false
+        }
     }
     
-    func addEvent(from transferEvent: EventDataTransferObject) {
+    func addEvent(from transferEvent: EventDataTransferObject) -> Bool {
         let event = Event(context: context)
         event.id = transferEvent.id
         event.title = transferEvent.title
@@ -69,12 +72,16 @@ class StorageService {
         event.setValue(transferEvent.status.rawValue, forKeyPath: "status")
         event.note = transferEvent.note
         
-        guard let locationId = transferEvent.locationID else {
-            return
+        if let locationId = transferEvent.locationID {
+            event.location = loadLocation(by: locationId)
         }
-        event.location = loadLocation(by: locationId)
-
-        saveToContext()
+        do {
+            try context.save()
+            return true
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+            return false
+        }
     }
     
     @discardableResult func updateEvent(from transferEvent: EventDataTransferObject) -> Bool {
@@ -110,55 +117,50 @@ class StorageService {
         }
     }
     
-    func loadEvents(by doctorsId: UUID) -> [Event] {
+    func loadEvents(by doctorsId: UUID) -> [Event]? {
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "doctorsId == %@", doctorsId as CVarArg)
-        
-        var events = [Event]()
-        
+
         do {
-            events = try context.fetch(fetchRequest)
+            return try context.fetch(fetchRequest)
         } catch let error as NSError {
             print(error.localizedDescription)
+            return nil
         }
-        
-        return events
     }
     
-    func loadEvent(by eventId: UUID) -> Event {
+    func loadEvent(by eventId: UUID) -> Event? {
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "id == %@", eventId as CVarArg)
         
-        var event = Event()
-        
         do {
-            if let resultEvent = try context.fetch(fetchRequest).first {
-                event = resultEvent
-            }
+            return try context.fetch(fetchRequest).first
         } catch let error as NSError {
             print(error.localizedDescription)
+            return nil
         }
-        
-        return event
     }
     
-    func removeEvent(_ event: Event) {
+    func removeEvent(_ event: Event) -> Bool {
         context.delete(event)
-        saveToContext()
+        do {
+            try context.save()
+            return true
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+            return false
+        }
     }
     
-    func loadAllLocations() -> [Location] {
+    func loadAllLocations() -> [Location]? {
         let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
         
-        var locations = [Location]()
-        
         do {
-            locations = try context.fetch(fetchRequest)
+            return try context.fetch(fetchRequest)
         } catch let error as NSError {
             print(error.localizedDescription)
+            return nil
         }
-        
-        return locations
     }
     
     func loadLocation(by locationId: UUID) -> Location? {

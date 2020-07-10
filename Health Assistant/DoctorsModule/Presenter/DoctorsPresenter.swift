@@ -25,7 +25,11 @@ class DoctorsPresenter: DoctorsViewControllerOutput {
     
     func viewIsReady() {
         doctorsView?.setupUI()
-        doctors = storageService.loadDoctors()
+        if let doctors = storageService.loadDoctors() {
+            self.doctors = doctors
+        } else {
+            doctorsView?.showErrorAlert(with: "Doctors are not loaded!")
+        }
     }
     
     func userDidPressAddButton() {
@@ -35,13 +39,29 @@ class DoctorsPresenter: DoctorsViewControllerOutput {
     func userDidCreateDoctor(specialization: String?) {
         guard let specialization = specialization else { return }
         
-        storageService.addDoctor(with: specialization)
-        doctors = storageService.loadDoctors()
+        if storageService.addDoctor(with: specialization) {
+            if let doctors = storageService.loadDoctors() {
+                self.doctors = doctors
+            } else {
+                doctorsView?.showErrorAlert(with: "Doctors are not loaded!")
+            }
+        } else {
+            doctorsView?.showErrorAlert(with: "Doctor is not added!")
+        }
+        
     }
     
     func userDidDeleteCell(index: IndexPath) {
-        storageService.removeDoctor(doctors[index.row])
-        doctors = storageService.loadDoctors()
+        if storageService.removeDoctor(doctors[index.row]) {
+            if let doctors = storageService.loadDoctors() {
+                self.doctors = doctors
+            } else {
+                doctorsView?.showErrorAlert(with: "Doctors are not loaded!")
+            }
+        } else {
+            doctorsView?.showErrorAlert(with: "Doctor is not removed!")
+        }
+        
     }
     
     func userDidSelectDoctorCell(with index: IndexPath) {

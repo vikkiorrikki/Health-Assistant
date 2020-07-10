@@ -33,7 +33,11 @@ class EventPresenter {
     }
     
     func updateEvents() {
-        events = storageService.loadEvents(by: doctorID)
+        if let events = storageService.loadEvents(by: doctorID) {
+            self.events = events
+        } else {
+            eventView?.showErrorAlert(with: "Events are not loaded!")
+        }
     }
     
     func userDidPressAddEventButton() {
@@ -41,8 +45,16 @@ class EventPresenter {
     }
     
     func userDidDeleteEvent(index: IndexPath) {
-        storageService.removeEvent(events[index.row])
-        events = storageService.loadEvents(by: doctorID)
+        if storageService.removeEvent(events[index.row]) {
+            if let events = storageService.loadEvents(by: doctorID) {
+                self.events = events
+            } else {
+                eventView?.showErrorAlert(with: "Events are not loaded!")
+            }
+        } else {
+            eventView?.showErrorAlert(with: "Event is not removed!")
+        }
+        
     }
     
     func userDidSelectEventCell(index: IndexPath) {
