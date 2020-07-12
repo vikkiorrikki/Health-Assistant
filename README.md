@@ -4,6 +4,6 @@ Simple Health Assistant app for managing your visits to different categories of 
 First tab - Calendar with Events to Docotors.
 Second tab - List of categories of doctors. Inside each category user can create own set of Events.
 
-Use MVP. Will be moved to CoreData. 
+MVP, CoreData. 
 
-Designe you can see in Design folder.
+Design you can see in Design folder.
