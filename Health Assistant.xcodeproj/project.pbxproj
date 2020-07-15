@@ -3,15 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		58A7B0E012AEB96E435E12FC /* Pods_Health_Assistant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01D3E48ECE5D6E7D63C343EE /* Pods_Health_Assistant.framework */; };
 		F5021CC824648E6900E5DD08 /* DoctorsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5021CC724648E6900E5DD08 /* DoctorsPresenter.swift */; };
 		F5046449249E29E70067F8D9 /* AddEventPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5046448249E29E70067F8D9 /* AddEventPresenter.swift */; };
 		F5093444246C977600E33163 /* BaseEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5093443246C977600E33163 /* BaseEventViewController.swift */; };
 		F5261FDA24A2BBAE00A85F49 /* EventDetailsViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5261FD924A2BBAE00A85F49 /* EventDetailsViewInput.swift */; };
 		F52A647324B4F4BB0047D028 /* EventDataTransferObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52A647224B4F4BB0047D028 /* EventDataTransferObject.swift */; };
+		F532764024BEF4A1005E330F /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F532763F24BEF4A1005E330F /* CalendarViewController.swift */; };
 		F54437A92498151B00FB354E /* EditEventPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54437A82498151B00FB354E /* EditEventPresenter.swift */; };
 		F54F494024B8D86F009FC68C /* AddEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54F493F24B8D86F009FC68C /* AddEventDelegate.swift */; };
 		F55DEF8B24705382003052C0 /* BaseEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55DEF8A24705382003052C0 /* BaseEventDelegate.swift */; };
@@ -55,11 +57,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01D3E48ECE5D6E7D63C343EE /* Pods_Health_Assistant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Health_Assistant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB399A6F58EC3715282AB0E5 /* Pods-Health Assistant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Health Assistant.debug.xcconfig"; path = "Target Support Files/Pods-Health Assistant/Pods-Health Assistant.debug.xcconfig"; sourceTree = "<group>"; };
+		CEBE82928C4FF73987C4101E /* Pods-Health Assistant.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Health Assistant.release.xcconfig"; path = "Target Support Files/Pods-Health Assistant/Pods-Health Assistant.release.xcconfig"; sourceTree = "<group>"; };
 		F5021CC724648E6900E5DD08 /* DoctorsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsPresenter.swift; sourceTree = "<group>"; };
 		F5046448249E29E70067F8D9 /* AddEventPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventPresenter.swift; sourceTree = "<group>"; };
 		F5093443246C977600E33163 /* BaseEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEventViewController.swift; sourceTree = "<group>"; };
 		F5261FD924A2BBAE00A85F49 /* EventDetailsViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewInput.swift; sourceTree = "<group>"; };
 		F52A647224B4F4BB0047D028 /* EventDataTransferObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDataTransferObject.swift; sourceTree = "<group>"; };
+		F532763F24BEF4A1005E330F /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		F54437A82498151B00FB354E /* EditEventPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEventPresenter.swift; sourceTree = "<group>"; };
 		F54F493F24B8D86F009FC68C /* AddEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventDelegate.swift; sourceTree = "<group>"; };
 		F55DEF8A24705382003052C0 /* BaseEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEventDelegate.swift; sourceTree = "<group>"; };
@@ -109,12 +115,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58A7B0E012AEB96E435E12FC /* Pods_Health_Assistant.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		074AF07CEF17F8C363A70B76 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BB399A6F58EC3715282AB0E5 /* Pods-Health Assistant.debug.xcconfig */,
+				CEBE82928C4FF73987C4101E /* Pods-Health Assistant.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		D5812492D5080ABCDA7F830C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				01D3E48ECE5D6E7D63C343EE /* Pods_Health_Assistant.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F509343F246C74EE00E33163 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +173,14 @@
 				F56334A02465FDF700D7C68A /* EventPresenter.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		F532764124BEF4A8005E330F /* CalendarModule */ = {
+			isa = PBXGroup;
+			children = (
+				F532763F24BEF4A1005E330F /* CalendarViewController.swift */,
+			);
+			path = CalendarModule;
 			sourceTree = "<group>";
 		};
 		F558DDE82486D7D6006004F9 /* Cell */ = {
@@ -328,6 +360,8 @@
 				F5AD139E24B4DFAA000FDD07 /* CoreData Entities */,
 				F5ECF7B9244B301E009A55ED /* Health Assistant */,
 				F5ECF7B8244B301E009A55ED /* Products */,
+				074AF07CEF17F8C363A70B76 /* Pods */,
+				D5812492D5080ABCDA7F830C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -350,6 +384,7 @@
 				F56334922465EFE300D7C68A /* EventModule */,
 				F5833763246CADEC000E7569 /* BaseFormEventModule */,
 				F5A653FD2496BC3F00E65F2E /* EventDetailsModule */,
+				F532764124BEF4A8005E330F /* CalendarModule */,
 				F5ECF7C2244B301E009A55ED /* Main.storyboard */,
 				F5ECF7C5244B3021009A55ED /* Assets.xcassets */,
 				F5ECF7C7244B3021009A55ED /* LaunchScreen.storyboard */,
@@ -383,9 +418,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F5ECF7CD244B3021009A55ED /* Build configuration list for PBXNativeTarget "Health Assistant" */;
 			buildPhases = (
+				D283AC493B3B34498809C6AE /* [CP] Check Pods Manifest.lock */,
 				F5ECF7B3244B301E009A55ED /* Sources */,
 				F5ECF7B4244B301E009A55ED /* Frameworks */,
 				F5ECF7B5244B301E009A55ED /* Resources */,
+				D8B34272B491B976F55B3AB4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -446,6 +483,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		D283AC493B3B34498809C6AE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Health Assistant-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D8B34272B491B976F55B3AB4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Health Assistant/Pods-Health Assistant-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Health Assistant/Pods-Health Assistant-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Health Assistant/Pods-Health Assistant-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F5ECF7B3244B301E009A55ED /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -472,6 +551,7 @@
 				F5046449249E29E70067F8D9 /* AddEventPresenter.swift in Sources */,
 				F5E914182471BCF8007CF322 /* BaseEventPresenter.swift in Sources */,
 				F52A647324B4F4BB0047D028 /* EventDataTransferObject.swift in Sources */,
+				F532764024BEF4A1005E330F /* CalendarViewController.swift in Sources */,
 				F5ECF7D3244B3FAB009A55ED /* EventTableViewController.swift in Sources */,
 				F56334A12465FDF700D7C68A /* EventPresenter.swift in Sources */,
 				F57A001024ABE81400AE227A /* EventTableInput.swift in Sources */,
@@ -630,6 +710,7 @@
 		};
 		F5ECF7CE244B3021009A55ED /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB399A6F58EC3715282AB0E5 /* Pods-Health Assistant.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -648,6 +729,7 @@
 		};
 		F5ECF7CF244B3021009A55ED /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CEBE82928C4FF73987C4101E /* Pods-Health Assistant.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
