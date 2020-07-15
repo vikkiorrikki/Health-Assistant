@@ -41,6 +41,18 @@ class StorageService {
         }
     }
     
+    func loadDoctor(by doctorId: UUID) -> Doctor? {
+        let fetchRequest: NSFetchRequest<Doctor> = Doctor.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", doctorId as CVarArg)
+        
+        do {
+            return try context.fetch(fetchRequest).first
+        } catch let error as NSError {
+            print(error.localizedDescription)
+            return nil
+        }
+    }
+    
     func removeDoctor(_ doctor: Doctor) -> Bool {
         if let events = loadEvents(by: doctor.id!) {
             for event in events {
@@ -65,6 +77,7 @@ class StorageService {
         event.id = transferEvent.id
         event.title = transferEvent.title
         event.doctorsId = transferEvent.doctorsID
+        event.doctor = loadDoctor(by: transferEvent.doctorsID)
         event.doctorsName = transferEvent.doctorsName
         event.locationId = transferEvent.locationID
         event.startDate = transferEvent.startDate
@@ -92,12 +105,12 @@ class StorageService {
             guard let event = try context.fetch(fetchRequest).first, let locationId = transferEvent.locationID else {
                 return false
             }
+            event.locationId = locationId
             event.location = loadLocation(by: locationId)
             
-            event.title = transferEvent.title
             event.doctorsId = transferEvent.doctorsID
+            event.title = transferEvent.title
             event.doctorsName = transferEvent.doctorsName
-            event.locationId = transferEvent.locationID
             event.startDate = transferEvent.startDate
             event.endDate = transferEvent.endDate
             event.setValue(transferEvent.status.rawValue, forKeyPath: "status")
@@ -120,6 +133,31 @@ class StorageService {
     func loadEvents(by doctorsId: UUID) -> [Event]? {
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "doctorsId == %@", doctorsId as CVarArg)
+
+        do {
+            return try context.fetch(fetchRequest)
+        } catch let error as NSError {
+            print(error.localizedDescription)
+            return nil
+        }
+    }
+    
+    func loadAllEvents() -> [Event]? {
+        let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
+
+        do {
+            return try context.fetch(fetchRequest)
+        } catch let error as NSError {
+            print(error.localizedDescription)
+            return nil
+        }
+    }
+
+    func loadEvents(in startDate: Date) -> [Event]? {
+        let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
+        let startofMonth = startDate.startOfMonth()
+        let endOfMonth = startDate.endOfMonth()
+        fetchRequest.predicate = NSPredicate(format: "startDate >= %@ and startDate < %@", startofMonth as CVarArg, endOfMonth as CVarArg)
 
         do {
             return try context.fetch(fetchRequest)

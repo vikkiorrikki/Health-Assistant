@@ -28,6 +28,14 @@ class EventPresenter {
         self.doctorID = doctorID
     }
     
+    func getDoctorName() -> String? {
+        guard let doctorName = storageService.loadDoctor(by: doctorID)?.specialization
+            else {
+                return nil
+        }
+        return doctorName
+    }
+    
     func viewIsReady() {
         eventView?.setupUI()
     }

@@ -36,6 +36,7 @@
 		F5C1D6FF24AE7B4500C32614 /* BaseEventInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C1D6FE24AE7B4500C32614 /* BaseEventInput.swift */; };
 		F5C706B624A2B03C00735597 /* EventDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C706B524A2B03C00735597 /* EventDetailsPresenter.swift */; };
 		F5C99E7C246354D900191585 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C99E7B246354D900191585 /* EventTableViewCell.swift */; };
+		F5CECDCE24BF941600DEF3A5 /* CalendarEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CECDCD24BF941600DEF3A5 /* CalendarEventTableViewCell.swift */; };
 		F5E914182471BCF8007CF322 /* BaseEventPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E914172471BCF8007CF322 /* BaseEventPresenter.swift */; };
 		F5E9141B2471BE69007CF322 /* SectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E9141A2471BE69007CF322 /* SectionType.swift */; };
 		F5E9141D2471BE77007CF322 /* CellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E9141C2471BE77007CF322 /* CellType.swift */; };
@@ -88,6 +89,7 @@
 		F5C1D6FE24AE7B4500C32614 /* BaseEventInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEventInput.swift; sourceTree = "<group>"; };
 		F5C706B524A2B03C00735597 /* EventDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsPresenter.swift; sourceTree = "<group>"; };
 		F5C99E7B246354D900191585 /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
+		F5CECDCD24BF941600DEF3A5 /* CalendarEventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventTableViewCell.swift; sourceTree = "<group>"; };
 		F5E914172471BCF8007CF322 /* BaseEventPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEventPresenter.swift; sourceTree = "<group>"; };
 		F5E9141A2471BE69007CF322 /* SectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionType.swift; sourceTree = "<group>"; };
 		F5E9141C2471BE77007CF322 /* CellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellType.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				F532763F24BEF4A1005E330F /* CalendarViewController.swift */,
+				F5CECDCD24BF941600DEF3A5 /* CalendarEventTableViewCell.swift */,
 			);
 			path = CalendarModule;
 			sourceTree = "<group>";
@@ -542,6 +545,7 @@
 				F5E9141B2471BE69007CF322 /* SectionType.swift in Sources */,
 				F5261FDA24A2BBAE00A85F49 /* EventDetailsViewInput.swift in Sources */,
 				F54F494024B8D86F009FC68C /* AddEventDelegate.swift in Sources */,
+				F5CECDCE24BF941600DEF3A5 /* CalendarEventTableViewCell.swift in Sources */,
 				F5FDC0A7246DE201006484D4 /* ListTableViewController.swift in Sources */,
 				F5ECF7BB244B301E009A55ED /* AppDelegate.swift in Sources */,
 				F5021CC824648E6900E5DD08 /* DoctorsPresenter.swift in Sources */,

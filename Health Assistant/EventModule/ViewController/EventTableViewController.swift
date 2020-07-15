@@ -13,8 +13,12 @@ class EventTableViewController: UITableViewController, EventTableInput {
     var presenter: EventPresenter!
     weak var delegate: DoctorsTableViewController?
     
+    @IBOutlet weak var navBar: UINavigationItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        navBar.title = presenter.getDoctorName()
+        
         presenter.eventView = self
         presenter.viewIsReady()
     }
