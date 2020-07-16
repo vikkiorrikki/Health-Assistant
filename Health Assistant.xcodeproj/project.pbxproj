@@ -37,6 +37,8 @@
 		F5C706B624A2B03C00735597 /* EventDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C706B524A2B03C00735597 /* EventDetailsPresenter.swift */; };
 		F5C99E7C246354D900191585 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C99E7B246354D900191585 /* EventTableViewCell.swift */; };
 		F5CECDCE24BF941600DEF3A5 /* CalendarEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CECDCD24BF941600DEF3A5 /* CalendarEventTableViewCell.swift */; };
+		F5CECDD124C079C100DEF3A5 /* CalendarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CECDD024C079C100DEF3A5 /* CalendarPresenter.swift */; };
+		F5CECDD424C079F300DEF3A5 /* CalendarInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5CECDD324C079F300DEF3A5 /* CalendarInput.swift */; };
 		F5E914182471BCF8007CF322 /* BaseEventPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E914172471BCF8007CF322 /* BaseEventPresenter.swift */; };
 		F5E9141B2471BE69007CF322 /* SectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E9141A2471BE69007CF322 /* SectionType.swift */; };
 		F5E9141D2471BE77007CF322 /* CellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E9141C2471BE77007CF322 /* CellType.swift */; };
@@ -90,6 +92,8 @@
 		F5C706B524A2B03C00735597 /* EventDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsPresenter.swift; sourceTree = "<group>"; };
 		F5C99E7B246354D900191585 /* EventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		F5CECDCD24BF941600DEF3A5 /* CalendarEventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventTableViewCell.swift; sourceTree = "<group>"; };
+		F5CECDD024C079C100DEF3A5 /* CalendarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPresenter.swift; sourceTree = "<group>"; };
+		F5CECDD324C079F300DEF3A5 /* CalendarInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarInput.swift; sourceTree = "<group>"; };
 		F5E914172471BCF8007CF322 /* BaseEventPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEventPresenter.swift; sourceTree = "<group>"; };
 		F5E9141A2471BE69007CF322 /* SectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionType.swift; sourceTree = "<group>"; };
 		F5E9141C2471BE77007CF322 /* CellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellType.swift; sourceTree = "<group>"; };
@@ -180,8 +184,8 @@
 		F532764124BEF4A8005E330F /* CalendarModule */ = {
 			isa = PBXGroup;
 			children = (
-				F532763F24BEF4A1005E330F /* CalendarViewController.swift */,
-				F5CECDCD24BF941600DEF3A5 /* CalendarEventTableViewCell.swift */,
+				F5CECDCF24C079A700DEF3A5 /* ViewController */,
+				F5CECDD224C079C900DEF3A5 /* Presenter */,
 			);
 			path = CalendarModule;
 			sourceTree = "<group>";
@@ -343,6 +347,24 @@
 				F5261FD924A2BBAE00A85F49 /* EventDetailsViewInput.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		F5CECDCF24C079A700DEF3A5 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F532763F24BEF4A1005E330F /* CalendarViewController.swift */,
+				F5CECDCD24BF941600DEF3A5 /* CalendarEventTableViewCell.swift */,
+				F5CECDD324C079F300DEF3A5 /* CalendarInput.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		F5CECDD224C079C900DEF3A5 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				F5CECDD024C079C100DEF3A5 /* CalendarPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		F5E914192471BCFE007CF322 /* Presenter */ = {
@@ -549,6 +571,7 @@
 				F5FDC0A7246DE201006484D4 /* ListTableViewController.swift in Sources */,
 				F5ECF7BB244B301E009A55ED /* AppDelegate.swift in Sources */,
 				F5021CC824648E6900E5DD08 /* DoctorsPresenter.swift in Sources */,
+				F5CECDD124C079C100DEF3A5 /* CalendarPresenter.swift in Sources */,
 				F58DE61724B7B80C0082F901 /* DateExtension.swift in Sources */,
 				F563349F2465FD6700D7C68A /* DoctorViewControllerInput.swift in Sources */,
 				F5A653FC249531DD00E65F2E /* EventDetailsViewController.swift in Sources */,
@@ -570,6 +593,7 @@
 				F5C1D6FB24AE77F800C32614 /* StorageService.swift in Sources */,
 				F58DE61524B62B960082F901 /* EventDetailsViewDelegate.swift in Sources */,
 				F5E9141D2471BE77007CF322 /* CellType.swift in Sources */,
+				F5CECDD424C079F300DEF3A5 /* CalendarInput.swift in Sources */,
 				F563349D2465FD3900D7C68A /* DoctorsViewControllerOutput.swift in Sources */,
 				F5ECF7BD244B301E009A55ED /* SceneDelegate.swift in Sources */,
 				F55DEF8E2470565F003052C0 /* TextViewCell.swift in Sources */,

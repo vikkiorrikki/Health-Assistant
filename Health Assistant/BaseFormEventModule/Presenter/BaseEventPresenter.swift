@@ -46,7 +46,7 @@ class BaseEventPresenter {
     
     //MARK: - Methods
     
-    final func viewDidLoad() {
+    final func viewIsReady() {
         guard let buttonTitle = setButtonTitle(), let navigationTitle = setNavigationTitle()
             else {
                 return

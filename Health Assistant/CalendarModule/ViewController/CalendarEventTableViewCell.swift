@@ -16,15 +16,12 @@ class CalendarEventTableViewCell: UITableViewCell {
     @IBOutlet weak var specializationDoctor: UILabel!
     @IBOutlet weak var eventLocation: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    func updateCell(with event: Event) {
+        eventName.text = event.title
+        startDate.text = event.startDate?.toTimeFormat()
+        endDate.text = event.endDate?.toTimeFormat()
+        eventLocation.text = event.location?.clinicName
+        specializationDoctor.text = event.doctor?.specialization
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+    
 }

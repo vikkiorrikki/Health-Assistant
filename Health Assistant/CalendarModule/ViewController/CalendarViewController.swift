@@ -9,25 +9,40 @@
 import UIKit
 import CVCalendar
 
-class CalendarViewController: UIViewController, CVCalendarMenuViewDelegate, CVCalendarViewDelegate {
+class CalendarViewController: UIViewController, CVCalendarMenuViewDelegate, CVCalendarViewDelegate, CalendarInput {
+    
+    //MARK: - Properties
+    
+    let presenter = CalendarPresenter()
     
     @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var menuView: CVCalendarMenuView!
     @IBOutlet weak var calendarView: CVCalendarView!
     @IBOutlet weak var eventsTableView: UITableView!
     
-    let storageService = StorageService()
-    var events = [Event]() {
-        didSet {
-            eventsTableView.reloadData()
-        }
-    }
-    var amountEvents = 0
-    let date = Date()
+    //MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        presenter.calendarView = self
+        presenter.viewIsReady()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter.updateEvents(for: Date())
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        menuView.commitMenuViewUpdate()
+        calendarView.commitCalendarViewUpdate()
+    }
+    
+    //MARK: - Input Methods
+    
+    func setupUI() {
         menuView.menuViewDelegate = self
         calendarView.calendarDelegate = self
         calendarView.calendarAppearanceDelegate = self
@@ -37,22 +52,13 @@ class CalendarViewController: UIViewController, CVCalendarMenuViewDelegate, CVCa
         eventsTableView.dataSource = self
         eventsTableView.delegate = self
         eventsTableView.tableFooterView = UIView()
-        
-        events = storageService.loadEvents(in: date)!
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        events = storageService.loadEvents(in: date)!
+    func reloadTableView() {
+        eventsTableView.reloadData()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-        menuView.commitMenuViewUpdate()
-        calendarView.commitCalendarViewUpdate()
-    }
+    //MARK: - CalendarViewDelegate
     
     func presentationMode() -> CalendarMode {
         return .monthView
@@ -66,7 +72,7 @@ class CalendarViewController: UIViewController, CVCalendarMenuViewDelegate, CVCa
         navItem.title = date.commonDescription
         
         if let date = date.convertedDate() {
-            events = storageService.loadEvents(in: date)!
+            presenter.updateEvents(for: date)
         }
     }
     
@@ -74,21 +80,12 @@ class CalendarViewController: UIViewController, CVCalendarMenuViewDelegate, CVCa
 
 extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return events.count
+        return presenter.events.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CalendarEventCell", for: indexPath) as! CalendarEventTableViewCell
-        cell.eventName.text = events[indexPath.row].title
-        cell.startDate.text = events[indexPath.row].startDate?.toTimeFormat()
-        cell.endDate.text = events[indexPath.row].endDate?.toTimeFormat()
-        cell.eventLocation.text = events[indexPath.row].location?.clinicName
-        cell.specializationDoctor.text = events[indexPath.row].doctor?.specialization
-        
+        cell.updateCell(with: presenter.events[indexPath.row])
         return cell
     }
-    
-    
 }
-
-

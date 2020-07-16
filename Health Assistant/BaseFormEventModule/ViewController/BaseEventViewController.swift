@@ -31,7 +31,7 @@ class BaseEventViewController: UIViewController, BaseEventInput {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.baseView = self
-        presenter.viewDidLoad()
+        presenter.viewIsReady()
     }
     
     //MARK: - IBActions
