@@ -45,8 +45,6 @@ class CalendarViewController: UIViewController, CVCalendarMenuViewDelegate, CVCa
     func setupUI() {
         menuView.menuViewDelegate = self
         calendarView.calendarDelegate = self
-        calendarView.calendarAppearanceDelegate = self
-        calendarView.animatorDelegate = self
         navItem.title = CVDate(date: Date()).commonDescription
         
         eventsTableView.dataSource = self
@@ -76,6 +74,27 @@ class CalendarViewController: UIViewController, CVCalendarMenuViewDelegate, CVCa
         }
     }
     
+    func topMarker(shouldDisplayOnDayView dayView: DayView) -> Bool {
+        return true
+    }
+    
+    func dotMarker(shouldShowOnDayView dayView: DayView) -> Bool {
+        print("dotMarker")
+        if let date = dayView.date.convertedDate() {
+           return presenter.isEvents(in: date)
+        }
+        return false
+    }
+    
+    func dotMarker(colorOnDayView dayView: DayView) -> [UIColor] {
+        return [.black]
+    }
+//    func dotMarker(moveOffsetOnDayView dayView: DayView) -> CGFloat {
+//        return CGFloat(20)
+//    }
+    func dotMarker(shouldMoveOnHighlightingOnDayView dayView: DayView) -> Bool {
+        return false
+    }
 }
 
 extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {

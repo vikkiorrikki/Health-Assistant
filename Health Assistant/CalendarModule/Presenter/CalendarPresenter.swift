@@ -26,4 +26,13 @@ class CalendarPresenter {
     func updateEvents(for date: Date) {
         events = storageService.loadEvents(in: date)!
     }
+    
+    func isEvents(in date: Date) -> Bool {
+        let events = storageService.loadEvents(in: date)
+        if events?.count != 0 {
+            return true
+        } else {
+            return false
+        }
+    }
 }
