@@ -47,7 +47,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TTB-iy-WuF">
-                                <rect key="frame" x="0.0" y="438" width="414" height="375"/>
+                                <rect key="frame" x="0.0" y="443" width="414" height="370"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CalendarEventCell" rowHeight="75" id="8GI-J2-clL" customClass="CalendarEventTableViewCell" customModule="Health_Assistant" customModuleProvider="target">
@@ -155,6 +155,7 @@
                                                     <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </stackView>
                                             </subviews>
+                                            <color key="backgroundColor" red="0.90588235289999997" green="0.64313725489999995" blue="0.89411764709999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
                                                 <constraint firstItem="Zrs-3q-3Dl" firstAttribute="top" secondItem="rWs-OV-cgh" secondAttribute="top" id="IGf-xw-fFI"/>
                                                 <constraint firstItem="Zrs-3q-3Dl" firstAttribute="leading" secondItem="rWs-OV-cgh" secondAttribute="leading" id="cju-Rr-OUe"/>
@@ -175,7 +176,7 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="TTB-iy-WuF" firstAttribute="top" secondItem="QhL-vj-KZl" secondAttribute="bottom" id="Ejb-or-76Q"/>
+                            <constraint firstItem="TTB-iy-WuF" firstAttribute="top" secondItem="QhL-vj-KZl" secondAttribute="bottom" constant="5" id="Ejb-or-76Q"/>
                             <constraint firstItem="QhL-vj-KZl" firstAttribute="trailing" secondItem="PQr-Ze-W5v" secondAttribute="trailing" id="Tyl-4e-Pjj"/>
                             <constraint firstItem="TTB-iy-WuF" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" id="VEX-sS-PUn"/>
                             <constraint firstItem="TTB-iy-WuF" firstAttribute="trailing" secondItem="PQr-Ze-W5v" secondAttribute="trailing" id="VyC-Wk-LOD"/>

@@ -56,6 +56,13 @@ class CalendarViewController: UIViewController, CVCalendarMenuViewDelegate, CVCa
         eventsTableView.reloadData()
     }
     
+    func openEventDetails(of event: Event) {
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EventDetailsVC") as! EventDetailsViewController
+        controller.presenter = EventDetailsPresenter(event: event)
+        
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
     //MARK: - CalendarViewDelegate
     
     func presentationMode() -> CalendarMode {
@@ -106,5 +113,10 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CalendarEventCell", for: indexPath) as! CalendarEventTableViewCell
         cell.updateCell(with: presenter.events[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter.userDidSelectCalendarEventCell(with: indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

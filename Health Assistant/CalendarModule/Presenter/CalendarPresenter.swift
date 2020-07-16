@@ -35,4 +35,9 @@ class CalendarPresenter {
             return false
         }
     }
+    
+    func userDidSelectCalendarEventCell(with indexPath: IndexPath) {
+        let event = events[indexPath.row]
+        calendarView?.openEventDetails(of: event)
+    }
 }
