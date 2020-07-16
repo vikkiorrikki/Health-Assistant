@@ -36,6 +36,7 @@ class CalendarViewController: UIViewController, CVCalendarMenuViewDelegate, CVCa
         
         eventsTableView.dataSource = self
         eventsTableView.delegate = self
+        eventsTableView.tableFooterView = UIView()
         
         events = storageService.loadEvents(in: date)!
     }
@@ -63,6 +64,10 @@ class CalendarViewController: UIViewController, CVCalendarMenuViewDelegate, CVCa
 
     func presentedDateUpdated(_ date: CVDate) { //update current month label in nav bar
         navItem.title = date.commonDescription
+        
+        if let date = date.convertedDate() {
+            events = storageService.loadEvents(in: date)!
+        }
     }
     
 }

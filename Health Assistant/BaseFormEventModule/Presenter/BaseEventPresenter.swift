@@ -147,6 +147,16 @@ class BaseEventPresenter {
     final func setNewDate(with date: Date, tag: DateCellTag) {
         if tag == .start {
             startDate = date
+            
+//            var dateComponents = DateComponents()
+//            dateComponents.year = Calendar.current.component(.year, from: startDate)
+//            dateComponents.month = Calendar.current.component(.month, from: startDate)
+//            dateComponents.day = Calendar.current.component(.day, from: startDate)
+//            dateComponents.hour = Calendar.current.component(.hour, from: endDate)
+//            dateComponents.minute = Calendar.current.component(.minute, from: endDate)
+//
+//            endDate = Calendar.current.date(from: dateComponents)!
+            
         } else if tag == .end {
             endDate = date
         }

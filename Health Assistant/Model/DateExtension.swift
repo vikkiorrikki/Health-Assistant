@@ -27,6 +27,17 @@ extension Date {
         return Calendar.current.date(byAdding: comp, to: startOfMonth())!
     }
     
+    func startOfDay() -> Date {
+        return Calendar.current.startOfDay(for: self)
+    }
+    
+    func endOfDay() -> Date {
+        var components = DateComponents()
+        components.day = 1
+        components.second = -1
+        return Calendar.current.date(byAdding: components, to: startOfDay())!
+    }
+    
     func toTimeFormat() -> String{
         let formatter = DateFormatter()
         formatter.timeStyle = .short

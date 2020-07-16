@@ -102,12 +102,9 @@ class StorageService {
         fetchRequest.predicate = NSPredicate(format: "id == %@", transferEvent.id as CVarArg)
 
         do {
-            guard let event = try context.fetch(fetchRequest).first, let locationId = transferEvent.locationID else {
+            guard let event = try context.fetch(fetchRequest).first else {
                 return false
             }
-            event.locationId = locationId
-            event.location = loadLocation(by: locationId)
-            
             event.doctorsId = transferEvent.doctorsID
             event.title = transferEvent.title
             event.doctorsName = transferEvent.doctorsName
@@ -116,6 +113,10 @@ class StorageService {
             event.setValue(transferEvent.status.rawValue, forKeyPath: "status")
             event.note = transferEvent.note
             
+            if let locationId = transferEvent.locationID {
+                event.locationId = locationId
+                event.location = loadLocation(by: locationId)
+            }
         } catch let error as NSError {
             print(error.localizedDescription)
             return false
@@ -133,6 +134,9 @@ class StorageService {
     func loadEvents(by doctorsId: UUID) -> [Event]? {
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "doctorsId == %@", doctorsId as CVarArg)
+        
+        let sort = NSSortDescriptor(key: #keyPath(Event.startDate), ascending: true)
+        fetchRequest.sortDescriptors = [sort]
 
         do {
             return try context.fetch(fetchRequest)
@@ -155,9 +159,9 @@ class StorageService {
 
     func loadEvents(in startDate: Date) -> [Event]? {
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
-        let startofMonth = startDate.startOfMonth()
-        let endOfMonth = startDate.endOfMonth()
-        fetchRequest.predicate = NSPredicate(format: "startDate >= %@ and startDate < %@", startofMonth as CVarArg, endOfMonth as CVarArg)
+        let startOfDay = startDate.startOfDay()
+        let endOfDay = startDate.endOfDay()
+        fetchRequest.predicate = NSPredicate(format: "startDate >= %@ and startDate < %@", startOfDay as CVarArg, endOfDay as CVarArg)
 
         do {
             return try context.fetch(fetchRequest)
