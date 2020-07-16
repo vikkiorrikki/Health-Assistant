@@ -44,5 +44,6 @@ class DateTableViewCell: UITableViewCell {
         dateTag = tag
         momentLabel.text = text
         dateLabel.text = date.toStringFormat()
+        datePicker.date = date
     }
 }

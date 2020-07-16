@@ -9,11 +9,12 @@
 import UIKit
 import CVCalendar
 
-class CalendarViewController: UIViewController, CVCalendarMenuViewDelegate, CVCalendarViewDelegate, CalendarInput {
+class CalendarViewController: UIViewController, CVCalendarMenuViewDelegate, CalendarInput {
     
     //MARK: - Properties
     
     let presenter = CalendarPresenter()
+    var lastShownDate = Date()
     
     @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var menuView: CVCalendarMenuView!
@@ -24,18 +25,17 @@ class CalendarViewController: UIViewController, CVCalendarMenuViewDelegate, CVCa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.calendarView = self
+        presenter.calendarVC = self
         presenter.viewIsReady()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter.updateEvents(for: Date())
+        presenter.updateEvents(for: lastShownDate)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
         menuView.commitMenuViewUpdate()
         calendarView.commitCalendarViewUpdate()
     }
@@ -43,9 +43,10 @@ class CalendarViewController: UIViewController, CVCalendarMenuViewDelegate, CVCa
     //MARK: - Input Methods
     
     func setupUI() {
+        navItem.title = CVDate(date: Date()).commonDescription
+        
         menuView.menuViewDelegate = self
         calendarView.calendarDelegate = self
-        navItem.title = CVDate(date: Date()).commonDescription
         
         eventsTableView.dataSource = self
         eventsTableView.delegate = self
@@ -62,9 +63,11 @@ class CalendarViewController: UIViewController, CVCalendarMenuViewDelegate, CVCa
         
         navigationController?.pushViewController(controller, animated: true)
     }
+}
     
-    //MARK: - CalendarViewDelegate
-    
+//MARK: - CalendarViewDelegate
+
+extension CalendarViewController: CVCalendarViewDelegate {
     func presentationMode() -> CalendarMode {
         return .monthView
     }
@@ -75,6 +78,7 @@ class CalendarViewController: UIViewController, CVCalendarMenuViewDelegate, CVCa
 
     func presentedDateUpdated(_ date: CVDate) { //update current month label in nav bar
         navItem.title = date.commonDescription
+        lastShownDate = date.convertedDate()!
         
         if let date = date.convertedDate() {
             presenter.updateEvents(for: date)
@@ -86,7 +90,6 @@ class CalendarViewController: UIViewController, CVCalendarMenuViewDelegate, CVCa
     }
     
     func dotMarker(shouldShowOnDayView dayView: DayView) -> Bool {
-        print("dotMarker")
         if let date = dayView.date.convertedDate() {
            return presenter.isEvents(in: date)
         }
@@ -103,6 +106,8 @@ class CalendarViewController: UIViewController, CVCalendarMenuViewDelegate, CVCa
         return false
     }
 }
+
+//MARK: - UITableViewDelegate
 
 extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

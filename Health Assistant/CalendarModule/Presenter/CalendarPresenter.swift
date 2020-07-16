@@ -9,18 +9,17 @@
 import Foundation
 
 class CalendarPresenter {
-    weak var calendarView: CalendarInput?
+    weak var calendarVC: CalendarInput?
     
     let storageService = StorageService()
     var events = [Event]() {
         didSet {
-            calendarView?.reloadTableView()
+            calendarVC?.reloadTableView()
         }
     }
     
     func viewIsReady() {
-        calendarView?.setupUI()
-        updateEvents(for: Date())
+        calendarVC?.setupUI()
     }
     
     func updateEvents(for date: Date) {
@@ -38,6 +37,6 @@ class CalendarPresenter {
     
     func userDidSelectCalendarEventCell(with indexPath: IndexPath) {
         let event = events[indexPath.row]
-        calendarView?.openEventDetails(of: event)
+        calendarVC?.openEventDetails(of: event)
     }
 }
