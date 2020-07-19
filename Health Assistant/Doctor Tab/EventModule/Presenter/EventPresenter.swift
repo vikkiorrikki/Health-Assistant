@@ -62,7 +62,6 @@ class EventPresenter {
         } else {
             eventView?.showErrorAlert(with: "Event is not removed!")
         }
-        
     }
     
     func userDidSelectEventCell(index: IndexPath) {

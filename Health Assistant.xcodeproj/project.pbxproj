@@ -405,11 +405,8 @@
 				F5ECF7BC244B301E009A55ED /* SceneDelegate.swift */,
 				F563349B2465F38300D7C68A /* Model */,
 				F57A001524AE13BD00AE227A /* StorageService */,
-				F56334932465F07E00D7C68A /* DoctorsModule */,
-				F56334922465EFE300D7C68A /* EventModule */,
-				F5833763246CADEC000E7569 /* BaseFormEventModule */,
-				F5A653FD2496BC3F00E65F2E /* EventDetailsModule */,
-				F532764124BEF4A8005E330F /* CalendarModule */,
+				F5F8168924C1BE82008D3093 /* Doctor Tab */,
+				F5F8168A24C1BE94008D3093 /* Calendar Tab */,
 				F5ECF7C2244B301E009A55ED /* Main.storyboard */,
 				F5ECF7C5244B3021009A55ED /* Assets.xcassets */,
 				F5ECF7C7244B3021009A55ED /* LaunchScreen.storyboard */,
@@ -434,6 +431,25 @@
 				F5EDDB31247338950085B352 /* ListPresenter.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		F5F8168924C1BE82008D3093 /* Doctor Tab */ = {
+			isa = PBXGroup;
+			children = (
+				F56334932465F07E00D7C68A /* DoctorsModule */,
+				F56334922465EFE300D7C68A /* EventModule */,
+				F5833763246CADEC000E7569 /* BaseFormEventModule */,
+				F5A653FD2496BC3F00E65F2E /* EventDetailsModule */,
+			);
+			path = "Doctor Tab";
+			sourceTree = "<group>";
+		};
+		F5F8168A24C1BE94008D3093 /* Calendar Tab */ = {
+			isa = PBXGroup;
+			children = (
+				F532764124BEF4A8005E330F /* CalendarModule */,
+			);
+			path = "Calendar Tab";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

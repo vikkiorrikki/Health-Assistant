@@ -17,6 +17,7 @@ class CalendarPresenter {
             calendarVC?.reloadTableView()
         }
     }
+    var lastShownDate = Date()
     
     func viewIsReady() {
         calendarVC?.setupUI()
@@ -38,5 +39,18 @@ class CalendarPresenter {
     func userDidSelectCalendarEventCell(with indexPath: IndexPath) {
         let event = events[indexPath.row]
         calendarVC?.openEventDetails(of: event)
+    }
+    
+    func userDidDeleteEventinCalendar(index: IndexPath) {
+        let startDate = events[index.row].startDate
+        if storageService.removeEvent(events[index.row]) {
+            if let events = storageService.loadEvents(in: startDate!) {
+                self.events = events
+            } else {
+                calendarVC?.showErrorAlert(with: "Events are not loaded!")
+            }
+        } else {
+            calendarVC?.showErrorAlert(with: "Event is not removed!")
+        }
     }
 }

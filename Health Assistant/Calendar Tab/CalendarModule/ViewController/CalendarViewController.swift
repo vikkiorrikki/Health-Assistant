@@ -9,12 +9,11 @@
 import UIKit
 import CVCalendar
 
-class CalendarViewController: UIViewController, CVCalendarMenuViewDelegate, CalendarInput {
+class CalendarViewController: UIViewController, CalendarInput {
     
     //MARK: - Properties
     
     let presenter = CalendarPresenter()
-    var lastShownDate = Date()
     
     @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var menuView: CVCalendarMenuView!
@@ -31,7 +30,7 @@ class CalendarViewController: UIViewController, CVCalendarMenuViewDelegate, Cale
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter.updateEvents(for: lastShownDate)
+        presenter.updateEvents(for: presenter.lastShownDate)
     }
     
     override func viewDidLayoutSubviews() {
@@ -63,11 +62,17 @@ class CalendarViewController: UIViewController, CVCalendarMenuViewDelegate, Cale
         
         navigationController?.pushViewController(controller, animated: true)
     }
-}
     
+    func showErrorAlert(with message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        present(alert, animated: true)
+    }
+}
+
 //MARK: - CalendarViewDelegate
 
-extension CalendarViewController: CVCalendarViewDelegate {
+extension CalendarViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
     func presentationMode() -> CalendarMode {
         return .monthView
     }
@@ -75,10 +80,10 @@ extension CalendarViewController: CVCalendarViewDelegate {
     func firstWeekday() -> Weekday {
         return .monday
     }
-
+    
     func presentedDateUpdated(_ date: CVDate) { //update current month label in nav bar
         navItem.title = date.commonDescription
-        lastShownDate = date.convertedDate()!
+        presenter.lastShownDate = date.convertedDate()!
         
         if let date = date.convertedDate() {
             presenter.updateEvents(for: date)
@@ -91,7 +96,7 @@ extension CalendarViewController: CVCalendarViewDelegate {
     
     func dotMarker(shouldShowOnDayView dayView: DayView) -> Bool {
         if let date = dayView.date.convertedDate() {
-           return presenter.isEvents(in: date)
+            return presenter.isEvents(in: date)
         }
         return false
     }
@@ -99,9 +104,7 @@ extension CalendarViewController: CVCalendarViewDelegate {
     func dotMarker(colorOnDayView dayView: DayView) -> [UIColor] {
         return [.black]
     }
-//    func dotMarker(moveOffsetOnDayView dayView: DayView) -> CGFloat {
-//        return CGFloat(20)
-//    }
+    
     func dotMarker(shouldMoveOnHighlightingOnDayView dayView: DayView) -> Bool {
         return false
     }
@@ -109,7 +112,7 @@ extension CalendarViewController: CVCalendarViewDelegate {
 
 //MARK: - UITableViewDelegate
 
-extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
+extension CalendarViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.events.count
     }
@@ -123,5 +126,21 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.userDidSelectCalendarEventCell(with: indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension CalendarViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            let alert = UIAlertController(title: "Are you sure you want to remove Event?", message: nil, preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { action in
+                self.presenter.userDidDeleteEventinCalendar(index: indexPath)
+            }))
+            
+            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
+        }
     }
 }

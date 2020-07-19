@@ -11,5 +11,6 @@ import Foundation
 protocol CalendarInput: class {
     func setupUI()
     func reloadTableView()
-    func openEventDetails(of event: Event) 
+    func openEventDetails(of event: Event)
+    func showErrorAlert(with message: String) 
 }
