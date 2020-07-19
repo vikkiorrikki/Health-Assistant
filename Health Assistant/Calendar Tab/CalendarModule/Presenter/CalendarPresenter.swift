@@ -25,6 +25,7 @@ class CalendarPresenter {
     
     func updateEvents(for date: Date) {
         events = storageService.loadEvents(in: date)!
+        calendarVC?.updateCalendar()
     }
     
     func isEvents(in date: Date) -> Bool {
@@ -46,6 +47,7 @@ class CalendarPresenter {
         if storageService.removeEvent(events[index.row]) {
             if let events = storageService.loadEvents(in: startDate!) {
                 self.events = events
+                calendarVC?.updateCalendar()
             } else {
                 calendarVC?.showErrorAlert(with: "Events are not loaded!")
             }

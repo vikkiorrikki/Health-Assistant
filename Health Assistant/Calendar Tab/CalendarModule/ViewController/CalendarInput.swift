@@ -12,5 +12,6 @@ protocol CalendarInput: class {
     func setupUI()
     func reloadTableView()
     func openEventDetails(of event: Event)
-    func showErrorAlert(with message: String) 
+    func showErrorAlert(with message: String)
+    func updateCalendar()
 }

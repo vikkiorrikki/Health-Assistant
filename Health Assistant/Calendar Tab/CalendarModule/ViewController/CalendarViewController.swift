@@ -68,6 +68,10 @@ class CalendarViewController: UIViewController, CalendarInput {
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         present(alert, animated: true)
     }
+    
+    func updateCalendar() {
+        calendarView.contentController.refreshPresentedMonth()
+    }
 }
 
 //MARK: - CalendarViewDelegate
