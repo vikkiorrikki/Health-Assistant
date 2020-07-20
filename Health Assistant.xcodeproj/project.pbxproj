@@ -50,6 +50,7 @@
 		F5ECF7D1244B32CB009A55ED /* DoctorsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ECF7D0244B32CB009A55ED /* DoctorsTableViewController.swift */; };
 		F5ECF7D3244B3FAB009A55ED /* EventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ECF7D2244B3FAB009A55ED /* EventTableViewController.swift */; };
 		F5EDDB32247338950085B352 /* ListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EDDB31247338950085B352 /* ListPresenter.swift */; };
+		F5F8168C24C4DBFE008D3093 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F8168B24C4DBFE008D3093 /* MapViewController.swift */; };
 		F5FDC099246DC316006484D4 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FDC097246DC316006484D4 /* TextFieldTableViewCell.swift */; };
 		F5FDC09A246DC316006484D4 /* TextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5FDC098246DC316006484D4 /* TextFieldTableViewCell.xib */; };
 		F5FDC09D246DC32D006484D4 /* DateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FDC09B246DC32D006484D4 /* DateTableViewCell.swift */; };
@@ -107,6 +108,7 @@
 		F5ECF7D0244B32CB009A55ED /* DoctorsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsTableViewController.swift; sourceTree = "<group>"; };
 		F5ECF7D2244B3FAB009A55ED /* EventTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewController.swift; sourceTree = "<group>"; };
 		F5EDDB31247338950085B352 /* ListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPresenter.swift; sourceTree = "<group>"; };
+		F5F8168B24C4DBFE008D3093 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		F5FDC097246DC316006484D4 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		F5FDC098246DC316006484D4 /* TextFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldTableViewCell.xib; sourceTree = "<group>"; };
 		F5FDC09B246DC32D006484D4 /* DateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableViewCell.swift; sourceTree = "<group>"; };
@@ -324,13 +326,6 @@
 			path = EventDetailsModule;
 			sourceTree = "<group>";
 		};
-		F5AD139E24B4DFAA000FDD07 /* CoreData Entities */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "CoreData Entities";
-			sourceTree = "<group>";
-		};
 		F5C706B324A2AFFE00735597 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -382,7 +377,6 @@
 		F5ECF7AE244B301E009A55ED = {
 			isa = PBXGroup;
 			children = (
-				F5AD139E24B4DFAA000FDD07 /* CoreData Entities */,
 				F5ECF7B9244B301E009A55ED /* Health Assistant */,
 				F5ECF7B8244B301E009A55ED /* Products */,
 				074AF07CEF17F8C363A70B76 /* Pods */,
@@ -405,8 +399,9 @@
 				F5ECF7BC244B301E009A55ED /* SceneDelegate.swift */,
 				F563349B2465F38300D7C68A /* Model */,
 				F57A001524AE13BD00AE227A /* StorageService */,
-				F5F8168924C1BE82008D3093 /* Doctor Tab */,
 				F5F8168A24C1BE94008D3093 /* Calendar Tab */,
+				F5F8168924C1BE82008D3093 /* Doctor Tab */,
+				F5F8168D24C4DC08008D3093 /* Map Tab */,
 				F5ECF7C2244B301E009A55ED /* Main.storyboard */,
 				F5ECF7C5244B3021009A55ED /* Assets.xcassets */,
 				F5ECF7C7244B3021009A55ED /* LaunchScreen.storyboard */,
@@ -452,6 +447,14 @@
 			path = "Calendar Tab";
 			sourceTree = "<group>";
 		};
+		F5F8168D24C4DC08008D3093 /* Map Tab */ = {
+			isa = PBXGroup;
+			children = (
+				F5F8168B24C4DBFE008D3093 /* MapViewController.swift */,
+			);
+			path = "Map Tab";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -464,6 +467,7 @@
 				F5ECF7B4244B301E009A55ED /* Frameworks */,
 				F5ECF7B5244B301E009A55ED /* Resources */,
 				D8B34272B491B976F55B3AB4 /* [CP] Embed Pods Frameworks */,
+				47FB8A17AE96CB1B66FAA79E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -525,6 +529,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		47FB8A17AE96CB1B66FAA79E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Health Assistant/Pods-Health Assistant-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Health Assistant/Pods-Health Assistant-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Health Assistant/Pods-Health Assistant-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		D283AC493B3B34498809C6AE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -582,6 +603,7 @@
 				F58DE61924B7B8200082F901 /* NSObjectExtension.swift in Sources */,
 				F5E9141B2471BE69007CF322 /* SectionType.swift in Sources */,
 				F5261FDA24A2BBAE00A85F49 /* EventDetailsViewInput.swift in Sources */,
+				F5F8168C24C4DBFE008D3093 /* MapViewController.swift in Sources */,
 				F54F494024B8D86F009FC68C /* AddEventDelegate.swift in Sources */,
 				F5CECDCE24BF941600DEF3A5 /* CalendarEventTableViewCell.swift in Sources */,
 				F5FDC0A7246DE201006484D4 /* ListTableViewController.swift in Sources */,
