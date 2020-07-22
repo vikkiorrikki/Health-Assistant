@@ -207,23 +207,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="570-A2-HhA" customClass="YMKMapView">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Ml8-UX-lqT">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            </view>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="O1u-W8-tvY" firstAttribute="bottom" secondItem="570-A2-HhA" secondAttribute="bottom" id="4DK-N0-cbd"/>
-                            <constraint firstItem="570-A2-HhA" firstAttribute="leading" secondItem="O1u-W8-tvY" secondAttribute="leading" id="5i8-Vb-2gv"/>
-                            <constraint firstItem="570-A2-HhA" firstAttribute="top" secondItem="O1u-W8-tvY" secondAttribute="top" id="GWU-YT-K5U"/>
-                            <constraint firstItem="O1u-W8-tvY" firstAttribute="trailing" secondItem="570-A2-HhA" secondAttribute="trailing" id="OHX-4J-MKv"/>
+                            <constraint firstItem="Ml8-UX-lqT" firstAttribute="leading" secondItem="O1u-W8-tvY" secondAttribute="leading" id="2Qa-7O-Bok"/>
+                            <constraint firstItem="O1u-W8-tvY" firstAttribute="trailing" secondItem="Ml8-UX-lqT" secondAttribute="trailing" id="HRd-mR-cmS"/>
+                            <constraint firstItem="Ml8-UX-lqT" firstAttribute="top" secondItem="O1u-W8-tvY" secondAttribute="top" id="fee-x4-GGl"/>
+                            <constraint firstItem="O1u-W8-tvY" firstAttribute="bottom" secondItem="Ml8-UX-lqT" secondAttribute="bottom" id="mgR-qj-SYR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Map" id="fgL-ji-Fpk"/>
+                    <navigationItem key="navigationItem" title="Map" id="ePB-l1-onZ"/>
                     <connections>
-                        <outlet property="mapView" destination="570-A2-HhA" id="w1M-4Y-WwR"/>
+                        <outlet property="mapView" destination="Ml8-UX-lqT" id="oBK-W5-V6y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
