@@ -9,12 +9,6 @@
 import UIKit
 import MapKit
 
-struct Stadium {
-    var name: String
-    var lattitude: CLLocationDegrees
-    var longtitude: CLLocationDegrees
-}
-
 class MapViewController: UIViewController{
     
     @IBOutlet weak var mapView: MKMapView!
@@ -29,11 +23,12 @@ class MapViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
+        
         networkService.delegate = self
         networkService.fetchClinics()
+        
 //        mapView.userTrackingMode = .follow
         checkLocationServices()
-        print("viewDidLoad")
     }
     
     func checkLocationServices() {
@@ -66,11 +61,13 @@ class MapViewController: UIViewController{
             for clinic in clinics {
                 let annotations = MKPointAnnotation()
                 annotations.title = clinic.name
+                annotations.subtitle = clinic.description
                 annotations.coordinate = CLLocationCoordinate2D(latitude:
                     clinic.latitude, longitude: clinic.longitude)
-//                self.mapView.showAnnotations([annotations], animated: true)
+                
+                self.mapView.showAnnotations([annotations], animated: true)
                 self.mapView.addAnnotation(annotations)
-                self.mapView.selectAnnotation(annotations, animated: true)
+//                self.mapView.selectAnnotation(annotations, animated: true)
             }
         }
     }
@@ -79,6 +76,17 @@ class MapViewController: UIViewController{
 //MARK: - MKMapViewDelegate
 
 extension MapViewController: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        guard let annotation = view.annotation else { return }
+        let placeName = (annotation.title)!
+        let placeInfo = (annotation.subtitle)!
+
+        let ac = UIAlertController(title: placeName, message: placeInfo, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
+    }
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard !(annotation is MKUserLocation) //current annotation is not user location
             else {
@@ -90,6 +98,8 @@ extension MapViewController: MKMapViewDelegate {
         if annotationView == nil {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
             annotationView?.canShowCallout = true
+            let btn = UIButton(type: .detailDisclosure)
+            annotationView?.rightCalloutAccessoryView = btn
         }
         
         return annotationView
