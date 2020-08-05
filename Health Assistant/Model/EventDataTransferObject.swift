@@ -13,7 +13,7 @@ struct EventDataTransferObject {
     let title: String
     let doctorsID: UUID
     let doctorsName: String?
-    let locationID: UUID?
+    let locationID: Int64?
     let startDate: Date
     let endDate: Date
     let status: EventStatus

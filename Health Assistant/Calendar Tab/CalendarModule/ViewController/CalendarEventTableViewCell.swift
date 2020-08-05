@@ -20,7 +20,7 @@ class CalendarEventTableViewCell: UITableViewCell {
         eventName.text = event.title
         startDate.text = event.startDate?.toTimeFormat()
         endDate.text = event.endDate?.toTimeFormat()
-        eventLocation.text = event.location?.clinicName
+        eventLocation.text = event.location?.definition
         specializationDoctor.text = event.doctor?.specialization
     }
     

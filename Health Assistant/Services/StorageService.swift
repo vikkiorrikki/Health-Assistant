@@ -32,7 +32,7 @@ class StorageService {
     
     func loadDoctors() -> [Doctor]? {
         let fetchRequest: NSFetchRequest<Doctor> = Doctor.fetchRequest()
-
+        
         do {
             return try context.fetch(fetchRequest)
         } catch let error as NSError {
@@ -74,20 +74,22 @@ class StorageService {
     
     func addEvent(from transferEvent: EventDataTransferObject) -> Bool {
         let event = Event(context: context)
+        
         event.id = transferEvent.id
         event.title = transferEvent.title
         event.doctorsId = transferEvent.doctorsID
         event.doctor = loadDoctor(by: transferEvent.doctorsID)
         event.doctorsName = transferEvent.doctorsName
-        event.locationId = transferEvent.locationID
         event.startDate = transferEvent.startDate
         event.endDate = transferEvent.endDate
         event.setValue(transferEvent.status.rawValue, forKeyPath: "status")
         event.note = transferEvent.note
         
         if let locationId = transferEvent.locationID {
-            event.location = loadLocation(by: locationId)
+            event.locationId = locationId
+            event.location = self.loadLocation(by: locationId)
         }
+        
         do {
             try context.save()
             return true
@@ -100,7 +102,7 @@ class StorageService {
     @discardableResult func updateEvent(from transferEvent: EventDataTransferObject) -> Bool {
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "id == %@", transferEvent.id as CVarArg)
-
+        
         do {
             guard let event = try context.fetch(fetchRequest).first else {
                 return false
@@ -137,7 +139,7 @@ class StorageService {
         
         let sort = NSSortDescriptor(key: #keyPath(Event.startDate), ascending: true)
         fetchRequest.sortDescriptors = [sort]
-
+        
         do {
             return try context.fetch(fetchRequest)
         } catch let error as NSError {
@@ -148,7 +150,7 @@ class StorageService {
     
     func loadAllEvents() -> [Event]? {
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
-
+        
         do {
             return try context.fetch(fetchRequest)
         } catch let error as NSError {
@@ -156,13 +158,13 @@ class StorageService {
             return nil
         }
     }
-
+    
     func loadEvents(in startDate: Date) -> [Event]? {
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
         let startOfDay = startDate.startOfDay()
         let endOfDay = startDate.endOfDay()
         fetchRequest.predicate = NSPredicate(format: "startDate >= %@ and startDate < %@", startOfDay as CVarArg, endOfDay as CVarArg)
-
+        
         do {
             return try context.fetch(fetchRequest)
         } catch let error as NSError {
@@ -194,6 +196,48 @@ class StorageService {
         }
     }
     
+    func addLocation(from transferLocations: [LocationDataTransferObject]) -> Bool {
+        guard let locations = loadAllLocations() else { return false }
+        
+        if locations.isEmpty {
+            for transferLocation in transferLocations {
+                let location = Location(context: context)
+                location.id = transferLocation.id
+                location.name = transferLocation.name
+                location.latitude = transferLocation.latitude
+                location.longitude = transferLocation.longitude
+                location.definition = transferLocation.description
+            }
+        } else {
+            for transferLocation in transferLocations {
+                if loadLocation(by: transferLocation.id) == nil {
+                    let location = Location(context: context)
+                    location.id = transferLocation.id
+                    location.name = transferLocation.name
+                    location.latitude = transferLocation.latitude
+                    location.longitude = transferLocation.longitude
+                    location.definition = transferLocation.description
+                    
+                    do {
+                        try context.save()
+                        return true
+                    } catch let error as NSError {
+                        print("Could not save. \(error), \(error.userInfo)")
+                        return false
+                    }
+                }
+            }
+        }
+        do {
+            try context.save()
+            return true
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+            return false
+        }
+//        return false //???
+    }
+    
     func loadAllLocations() -> [Location]? {
         let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
         
@@ -205,9 +249,9 @@ class StorageService {
         }
     }
     
-    func loadLocation(by locationId: UUID) -> Location? {
+    func loadLocation(by locationId: Int64) -> Location? {
         let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "id == %@", locationId as CVarArg)
+        fetchRequest.predicate = NSPredicate(format: "id == %ld", locationId)
         
         do {
             return try context.fetch(fetchRequest).first

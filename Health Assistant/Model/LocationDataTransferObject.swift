@@ -1,5 +1,5 @@
 //
-//  MapDelegate.swift
+//  MapLocation.swift
 //  Health Assistant
 //
 //  Created by Виктория Саклакова on 22.07.2020.
@@ -8,7 +8,10 @@
 
 import Foundation
 
-protocol MapDelegate {
-    func didFailWithError(error: Error)
-    func didUpdateClinics(with clinics: [Clinic])
+struct LocationDataTransferObject {
+    let id: Int64
+    let name: String
+    let longitude: Double
+    let latitude: Double
+    let description: String
 }

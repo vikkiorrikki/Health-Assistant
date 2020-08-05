@@ -11,16 +11,17 @@
 		F5021CC824648E6900E5DD08 /* DoctorsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5021CC724648E6900E5DD08 /* DoctorsPresenter.swift */; };
 		F5046449249E29E70067F8D9 /* AddEventPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5046448249E29E70067F8D9 /* AddEventPresenter.swift */; };
 		F5093444246C977600E33163 /* BaseEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5093443246C977600E33163 /* BaseEventViewController.swift */; };
+		F521E9F824D9FC7F001E0148 /* LocationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F521E9F724D9FC7F001E0148 /* LocationExtension.swift */; };
 		F5261FDA24A2BBAE00A85F49 /* EventDetailsViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5261FD924A2BBAE00A85F49 /* EventDetailsViewInput.swift */; };
 		F52A647324B4F4BB0047D028 /* EventDataTransferObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52A647224B4F4BB0047D028 /* EventDataTransferObject.swift */; };
 		F532764024BEF4A1005E330F /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F532763F24BEF4A1005E330F /* CalendarViewController.swift */; };
 		F54437A92498151B00FB354E /* EditEventPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54437A82498151B00FB354E /* EditEventPresenter.swift */; };
+		F54BA4A024D83DC500B77532 /* LocationsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54BA49F24D83DC500B77532 /* LocationsRepository.swift */; };
 		F54F494024B8D86F009FC68C /* AddEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54F493F24B8D86F009FC68C /* AddEventDelegate.swift */; };
 		F55DEF8B24705382003052C0 /* BaseEventDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55DEF8A24705382003052C0 /* BaseEventDelegate.swift */; };
 		F55DEF8E2470565F003052C0 /* TextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55DEF8C2470565F003052C0 /* TextViewCell.swift */; };
 		F55DEF8F2470565F003052C0 /* TextViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F55DEF8D2470565F003052C0 /* TextViewCell.xib */; };
 		F56334972465F1C900D7C68A /* EventStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56334962465F1C900D7C68A /* EventStatus.swift */; };
-		F56334992465F2B100D7C68A /* LocationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56334982465F2B100D7C68A /* LocationExtension.swift */; };
 		F563349D2465FD3900D7C68A /* DoctorsViewControllerOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563349C2465FD3900D7C68A /* DoctorsViewControllerOutput.swift */; };
 		F563349F2465FD6700D7C68A /* DoctorViewControllerInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F563349E2465FD6700D7C68A /* DoctorViewControllerInput.swift */; };
 		F56334A12465FDF700D7C68A /* EventPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56334A02465FDF700D7C68A /* EventPresenter.swift */; };
@@ -33,9 +34,8 @@
 		F58DF6B524C8A3F800802636 /* ClinicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58DF6B424C8A3F800802636 /* ClinicData.swift */; };
 		F5A653FC249531DD00E65F2E /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A653FB249531DD00E65F2E /* EventDetailsViewController.swift */; };
 		F5BBCFB224C886BC00FFE949 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BBCFB124C886BC00FFE949 /* NetworkService.swift */; };
-		F5BBCFB424C8877000FFE949 /* Clinic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BBCFB324C8877000FFE949 /* Clinic.swift */; };
+		F5BBCFB424C8877000FFE949 /* LocationDataTransferObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BBCFB324C8877000FFE949 /* LocationDataTransferObject.swift */; };
 		F5BBCFB624C88A1B00FFE949 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BBCFB524C88A1B00FFE949 /* StringExtension.swift */; };
-		F5BBCFB824C88A8D00FFE949 /* MapDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BBCFB724C88A8D00FFE949 /* MapDelegate.swift */; };
 		F5C1D6F924AE2D0B00C32614 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F5C1D6F724AE2D0B00C32614 /* DataModel.xcdatamodeld */; };
 		F5C1D6FB24AE77F800C32614 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C1D6FA24AE77F800C32614 /* StorageService.swift */; };
 		F5C1D6FF24AE7B4500C32614 /* BaseEventInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C1D6FE24AE7B4500C32614 /* BaseEventInput.swift */; };
@@ -72,16 +72,17 @@
 		F5021CC724648E6900E5DD08 /* DoctorsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsPresenter.swift; sourceTree = "<group>"; };
 		F5046448249E29E70067F8D9 /* AddEventPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventPresenter.swift; sourceTree = "<group>"; };
 		F5093443246C977600E33163 /* BaseEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEventViewController.swift; sourceTree = "<group>"; };
+		F521E9F724D9FC7F001E0148 /* LocationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationExtension.swift; sourceTree = "<group>"; };
 		F5261FD924A2BBAE00A85F49 /* EventDetailsViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewInput.swift; sourceTree = "<group>"; };
 		F52A647224B4F4BB0047D028 /* EventDataTransferObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDataTransferObject.swift; sourceTree = "<group>"; };
 		F532763F24BEF4A1005E330F /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		F54437A82498151B00FB354E /* EditEventPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEventPresenter.swift; sourceTree = "<group>"; };
+		F54BA49F24D83DC500B77532 /* LocationsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsRepository.swift; sourceTree = "<group>"; };
 		F54F493F24B8D86F009FC68C /* AddEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventDelegate.swift; sourceTree = "<group>"; };
 		F55DEF8A24705382003052C0 /* BaseEventDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEventDelegate.swift; sourceTree = "<group>"; };
 		F55DEF8C2470565F003052C0 /* TextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
 		F55DEF8D2470565F003052C0 /* TextViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextViewCell.xib; sourceTree = "<group>"; };
 		F56334962465F1C900D7C68A /* EventStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStatus.swift; sourceTree = "<group>"; };
-		F56334982465F2B100D7C68A /* LocationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationExtension.swift; sourceTree = "<group>"; };
 		F563349C2465FD3900D7C68A /* DoctorsViewControllerOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorsViewControllerOutput.swift; sourceTree = "<group>"; };
 		F563349E2465FD6700D7C68A /* DoctorViewControllerInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorViewControllerInput.swift; sourceTree = "<group>"; };
 		F56334A02465FDF700D7C68A /* EventPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPresenter.swift; sourceTree = "<group>"; };
@@ -94,9 +95,8 @@
 		F58DF6B424C8A3F800802636 /* ClinicData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicData.swift; sourceTree = "<group>"; };
 		F5A653FB249531DD00E65F2E /* EventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
 		F5BBCFB124C886BC00FFE949 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		F5BBCFB324C8877000FFE949 /* Clinic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clinic.swift; sourceTree = "<group>"; };
+		F5BBCFB324C8877000FFE949 /* LocationDataTransferObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataTransferObject.swift; sourceTree = "<group>"; };
 		F5BBCFB524C88A1B00FFE949 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
-		F5BBCFB724C88A8D00FFE949 /* MapDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDelegate.swift; sourceTree = "<group>"; };
 		F5C1D6F824AE2D0B00C32614 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		F5C1D6FA24AE77F800C32614 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		F5C1D6FE24AE7B4500C32614 /* BaseEventInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEventInput.swift; sourceTree = "<group>"; };
@@ -277,10 +277,11 @@
 		F563349B2465F38300D7C68A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F521E9F724D9FC7F001E0148 /* LocationExtension.swift */,
 				F56334962465F1C900D7C68A /* EventStatus.swift */,
-				F56334982465F2B100D7C68A /* LocationExtension.swift */,
 				F5C1D6F724AE2D0B00C32614 /* DataModel.xcdatamodeld */,
 				F52A647224B4F4BB0047D028 /* EventDataTransferObject.swift */,
+				F5BBCFB324C8877000FFE949 /* LocationDataTransferObject.swift */,
 				F58DE61624B7B80C0082F901 /* DateExtension.swift */,
 				F58DE61824B7B8200082F901 /* NSObjectExtension.swift */,
 				F5BBCFB524C88A1B00FFE949 /* StringExtension.swift */,
@@ -293,8 +294,8 @@
 			children = (
 				F5C1D6FA24AE77F800C32614 /* StorageService.swift */,
 				F5BBCFB124C886BC00FFE949 /* NetworkService.swift */,
-				F5BBCFB324C8877000FFE949 /* Clinic.swift */,
 				F58DF6B424C8A3F800802636 /* ClinicData.swift */,
+				F54BA49F24D83DC500B77532 /* LocationsRepository.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -465,7 +466,6 @@
 			isa = PBXGroup;
 			children = (
 				F5F8168B24C4DBFE008D3093 /* MapViewController.swift */,
-				F5BBCFB724C88A8D00FFE949 /* MapDelegate.swift */,
 			);
 			path = "Map Tab";
 			sourceTree = "<group>";
@@ -591,8 +591,8 @@
 			files = (
 				F5C1D6F924AE2D0B00C32614 /* DataModel.xcdatamodeld in Sources */,
 				F5FDC09D246DC32D006484D4 /* DateTableViewCell.swift in Sources */,
+				F54BA4A024D83DC500B77532 /* LocationsRepository.swift in Sources */,
 				F5C706B624A2B03C00735597 /* EventDetailsPresenter.swift in Sources */,
-				F5BBCFB824C88A8D00FFE949 /* MapDelegate.swift in Sources */,
 				F5FDC0A1246DC34B006484D4 /* ListTableViewCell.swift in Sources */,
 				F56334972465F1C900D7C68A /* EventStatus.swift in Sources */,
 				F57A000E24AB588800AE227A /* ListTableInput.swift in Sources */,
@@ -613,6 +613,7 @@
 				F563349F2465FD6700D7C68A /* DoctorViewControllerInput.swift in Sources */,
 				F5A653FC249531DD00E65F2E /* EventDetailsViewController.swift in Sources */,
 				F5046449249E29E70067F8D9 /* AddEventPresenter.swift in Sources */,
+				F521E9F824D9FC7F001E0148 /* LocationExtension.swift in Sources */,
 				F5BBCFB224C886BC00FFE949 /* NetworkService.swift in Sources */,
 				F5E914182471BCF8007CF322 /* BaseEventPresenter.swift in Sources */,
 				F52A647324B4F4BB0047D028 /* EventDataTransferObject.swift in Sources */,
@@ -622,8 +623,7 @@
 				F57A001024ABE81400AE227A /* EventTableInput.swift in Sources */,
 				F54437A92498151B00FB354E /* EditEventPresenter.swift in Sources */,
 				F5C1D6FF24AE7B4500C32614 /* BaseEventInput.swift in Sources */,
-				F5BBCFB424C8877000FFE949 /* Clinic.swift in Sources */,
-				F56334992465F2B100D7C68A /* LocationExtension.swift in Sources */,
+				F5BBCFB424C8877000FFE949 /* LocationDataTransferObject.swift in Sources */,
 				F57A000C24AB582600AE227A /* ListTableViewControllerElement.swift in Sources */,
 				F5ECF7D1244B32CB009A55ED /* DoctorsTableViewController.swift in Sources */,
 				F5FDC099246DC316006484D4 /* TextFieldTableViewCell.swift in Sources */,

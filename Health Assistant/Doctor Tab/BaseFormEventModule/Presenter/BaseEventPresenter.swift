@@ -14,6 +14,7 @@ class BaseEventPresenter {
     
     weak var baseView: BaseEventInput?
     let storageService = StorageService()
+    let locationRepository = LocationsRepository()
     
     var data: [SectionType: [CellType]] {
         [
@@ -24,13 +25,13 @@ class BaseEventPresenter {
                 [.date(text: "Starts", date: startDate, tag: .start),
                  .date(text: "Ends", date: endDate, tag: .end)],
             .listPickers:
-                [.listPicker(text: "Location", value: selectedLocation?.clinicName ?? "Select"),
+                [.listPicker(text: "Location", value: selectedLocation?.definition ?? "Select"),
                  .listPicker(text: "Status", value: selectedStatus?.rawValue.capitalized ?? EventStatus.planned.rawValue.capitalized)],
             .note: [.textView(notes)]
         ]
     }
     
-    var locations = [Location]()
+    var locations: [Location]?
     var statuses: [EventStatus] = [.planned, .completed, .canceled]
     
     var eventId: UUID?
@@ -41,7 +42,7 @@ class BaseEventPresenter {
     var notes: String?
     var selectedLocation: Location?
     var selectedStatus: EventStatus?
-    var locationID: UUID?
+    var locationID: Int64?
     var doctorsID: UUID!
     
     //MARK: - Methods
@@ -59,33 +60,26 @@ class BaseEventPresenter {
     }
     
     private func initLocation() {
-        
-        if let locations = storageService.loadAllLocations() {
+        if let locations = self.locationRepository.getCachedLocations() {
             self.locations = locations
         }
-        
-        if locations.isEmpty {
-            let location1 = Location(context: storageService.context)
-                location1.clinicName = "Saint Petersburg"
-                location1.street = "Nevskiy"
-                location1.houseNumber = 1
-                location1.id = UUID()
-                
-                let location2 = Location(context: storageService.context)
-                location2.clinicName = "Moscow"
-                location2.street = "Nevskiy"
-                location2.houseNumber = 2
-                location2.id = UUID()
-                
-                let location3 = Location(context: storageService.context)
-                location3.clinicName = "Abakan"
-                location3.street = "Nevskiy"
-                location3.houseNumber = 3
-                location3.id = UUID()
-                
-                locations = [location1, location2, location3]
+        if self.locations!.isEmpty {
+            DispatchQueue.global(qos: .utility).async {
+                self.locationRepository.fetchLocations {[weak self] (locations, error) in
+                    if let error = error {
+                        DispatchQueue.main.async {
+                            self?.baseView?.showErrorAlert(with: "\(error)")
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self?.locations = locations!
+                        }
+                    }
+                }
             }
         }
+        
+    }
     
     //MARK: - Create Event
     
@@ -115,7 +109,7 @@ class BaseEventPresenter {
             baseView?.showDatePicker(in: indexPath)
         case .listPickers:
             if indexPath.row == 0 {
-                baseView?.showLocationPicker(with: locations, in: indexPath)
+                baseView?.showLocationPicker(with: locations ?? [Location](), in: indexPath)
             } else if indexPath.row == 1 {
                 baseView?.showStatusPicker(with: statuses, in: indexPath)
             }

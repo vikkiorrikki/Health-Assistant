@@ -24,4 +24,9 @@ struct Geometry: Codable {
 struct Properties: Codable {
     let name: String
     let description: String
+    let CompanyMetaData: CompanyMetaData
+}
+
+struct CompanyMetaData: Codable {
+    let id: String
 }

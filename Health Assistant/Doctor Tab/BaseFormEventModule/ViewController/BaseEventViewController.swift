@@ -31,7 +31,10 @@ class BaseEventViewController: UIViewController, BaseEventInput {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.baseView = self
-        presenter.viewIsReady()
+//        DispatchQueue.main.async {
+            self.presenter.viewIsReady()
+//        }
+        
     }
     
     //MARK: - IBActions

@@ -18,7 +18,7 @@ class EventTableViewCell: UITableViewCell {
     func setupCell(with model: Event) {
         titleLabel.text = model.title
         dateLabel.text = model.startDate?.toStringFormat()
-        locationLabel.text = model.location?.clinicName
+        locationLabel.text = model.location?.definition
         print("Location \(locationLabel.text)")
         
         guard  let eventStatus = model.status else { return }

@@ -16,19 +16,29 @@ class MapViewController: UIViewController{
     let locationManager = CLLocationManager()
     let annotationIdentifier = "annotationIdentifier"
     
-    let networkService = NetworkService()
-    
-    var clinics = [Clinic]()
+    let repository = LocationsRepository()
+    var locations = [Location]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-        
-        networkService.delegate = self
-        networkService.fetchClinics()
-        
-//        mapView.userTrackingMode = .follow
+        mapView.userTrackingMode = .follow
         checkLocationServices()
+
+        if let cachedLocations = repository.getCachedLocations() {
+            showClinicsOnMap(cachedLocations)
+        }
+        
+        repository.fetchLocations {[weak self] (locations, error) in
+            if let clinics = locations {
+                // SUCCESS
+                self?.showClinicsOnMap(clinics)
+            }
+            if let error = error {
+                // FAILURE
+                self?.failedLoadingClinics(error: error)
+            }
+        }
     }
     
     func checkLocationServices() {
@@ -56,12 +66,12 @@ class MapViewController: UIViewController{
         }
     }
     
-    func fetchClinicsOnMap(_ clinics: [Clinic]) {
+    func showClinicsOnMap(_ clinics: [Location]) {
         DispatchQueue.main.async {
             for clinic in clinics {
                 let annotations = MKPointAnnotation()
                 annotations.title = clinic.name
-                annotations.subtitle = clinic.description
+                annotations.subtitle = clinic.definition
                 annotations.coordinate = CLLocationCoordinate2D(latitude:
                     clinic.latitude, longitude: clinic.longitude)
                 
@@ -70,6 +80,14 @@ class MapViewController: UIViewController{
 //                self.mapView.selectAnnotation(annotations, animated: true)
             }
         }
+    }
+    
+    func updateLocations(_ locations: [Location]) {
+        showClinicsOnMap(locations)
+    }
+
+    func failedLoadingClinics(error: Error) {
+        print(error)
     }
 }
 
@@ -103,18 +121,5 @@ extension MapViewController: MKMapViewDelegate {
         }
         
         return annotationView
-    }
-}
-
-//MARK: - MapDelegate
-
-extension MapViewController: MapDelegate {
-    func didUpdateClinics(with clinics: [Clinic]) {
-        self.clinics = clinics
-        fetchClinicsOnMap(clinics)
-    }
-    
-    func didFailWithError(error: Error) {
-        print(error)
     }
 }
